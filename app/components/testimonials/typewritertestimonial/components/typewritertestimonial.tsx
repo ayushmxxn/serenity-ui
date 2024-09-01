@@ -1,9 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from 'react-typewriter-effect';
-
-
 
 type Testimonial = {
   image?: string;
@@ -22,36 +20,53 @@ const TypewriterTestimonial: React.FC<TestimonialsProps> = ({ testimonials }) =>
   const [audioPlayer, setAudioPlayer] = useState<HTMLAudioElement | null>(null);
   const [hasBeenHovered, setHasBeenHovered] = useState<boolean[]>(new Array(testimonials.length).fill(false));
 
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-    const audio = new Audio(`/audio/${testimonials[index].audio}`);
-    audio.play();
-    setAudioPlayer(audio);
+  useEffect(() => {
+   
+    if (typeof window !== 'undefined') {
+      const handleMouseEnter = (index: number) => {
+        setHoveredIndex(index);
+        const audio = new Audio(`/audio/${testimonials[index].audio}`);
+        audio.play();
+        setAudioPlayer(audio);
 
-    setHasBeenHovered(prev => {
-      const updated = [...prev];
-      updated[index] = true;
-      return updated;
-    });
-  };
+        setHasBeenHovered(prev => {
+          const updated = [...prev];
+          updated[index] = true;
+          return updated;
+        });
+      };
 
-  const handleMouseLeave = () => {
-    if (audioPlayer) {
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
+      const handleMouseLeave = () => {
+        if (audioPlayer) {
+          audioPlayer.pause();
+          audioPlayer.currentTime = 0;
+        }
+        setHoveredIndex(null);
+        setAudioPlayer(null);
+      };
+
+   
+      document.querySelectorAll('.testimonial-item').forEach((element, index) => {
+        element.addEventListener('mouseenter', () => handleMouseEnter(index));
+        element.addEventListener('mouseleave', handleMouseLeave);
+      });
+
+      return () => {
+       
+        document.querySelectorAll('.testimonial-item').forEach((element, index) => {
+          element.removeEventListener('mouseenter', () => handleMouseEnter(index));
+          element.removeEventListener('mouseleave', handleMouseLeave);
+        });
+      };
     }
-    setHoveredIndex(null);
-    setAudioPlayer(null);
-  };
+  }, [audioPlayer, testimonials]);
 
   return (
     <div className="flex justify-center items-center gap-4 flex-wrap">
       {testimonials.map((testimonial, index) => (
         <motion.div
           key={index}
-          className="relative flex flex-col items-center"
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
+          className="relative flex flex-col items-center testimonial-item"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
