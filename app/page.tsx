@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google';
 import { Spotlight } from '@/components/ui/spotlight';
 import { CgComponents } from "react-icons/cg";
 
+
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const inter = Inter({ subsets: ['latin'], weight: '500' });
@@ -24,7 +25,7 @@ function Home() {
 
   return (
     <div className={`${inter.className} h-screen bg-black`}>
-      <HomeNav />   
+      <HomeNav />  
       <div className="flex flex-col p-5 pt-12 md:pt-32">
         <div className='hidden lg:flex'>
           <Spotlight fill="gray"/>

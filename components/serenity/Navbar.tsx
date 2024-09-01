@@ -9,6 +9,7 @@ import Search from './Search';
 import HamburgurNavbar from './HamburgerNavbar';
 import { Inter } from 'next/font/google';
 import CommandSearch from './CommandSearch';
+import SponsorButton from './SponserButton';
 
 const inter = Inter({ subsets: ['latin'], weight: '500' });
 
@@ -48,6 +49,7 @@ function Navbar() {
           <Link href={'https://twitter.com/ayushmxxn'} target='_blank'>
             <RiTwitterXLine className="text-white" size={18} />
           </Link>
+           <SponsorButton/>
         </div>
         <HamburgurNavbar/>
       </div>
