@@ -96,13 +96,13 @@ import { motion } from 'framer-motion';
 ];
 
 
-// Soure code 
 const sourcecode = `
 'use client'
 import Image from 'next/image';
 import React, { useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { useMediaQuery } from '@react-hook/media-query';
+import SerenityLogo from '@/app/images/serenitylogotransparent.svg'
 
 interface Testimonial {
   image?: string;
@@ -126,20 +126,45 @@ function BookTestimonial3D({ testimonials }: BookTestimonial3DProps) {
   const handleFlip = (pageNum: number) => {
     (book.current as any)?.pageFlip()?.flip(pageNum);
     (book.current as any)?.pageFlip()?.flipNext(false);
-
   }
 
   return (
     <div className="w-full text-black h-500px flex justify-center items-center py-10">
-      <HTMLFlipBook ref={book} width={300} height={450} showCover={true} usePortrait={smallerDevice} onFlip={(e) => console.log(e.data)} onChangeState={(e) => console.log(e.data)}>
+      <HTMLFlipBook
+      ref={book}
+      width={300}
+      height={450}
+      showCover={true}
+      usePortrait={smallerDevice}
+      onFlip={(e) => console.log(e.data)}
+      onChangeState={(e) => console.log(e.data)}
+      className={''}
+      style={{}}
+      startPage={0}
+      size={'fixed'}
+      minWidth={0}
+      maxWidth={0}
+      minHeight={0}
+      maxHeight={0}
+      drawShadow={true}
+      flippingTime={1000}
+      startZIndex={0}
+      autoSize={false}
+      maxShadowOpacity={0}
+      mobileScrollSupport={true}
+      clickEventForward={true}
+      useMouseEvents={true}
+      swipeDistance={0}
+      showPageCorners={true}
+      disableFlipByClick={false}>
       {/* Cover Page */}
       <div className="relative bg-black border rounded-lg p-8 text-white flex flex-col items-center justify-center shadow-lg shadow-gray-600 cursor-grab">
       {/* Company Logo */}
-      <div className="flex justify-center items-center mb-4">
-        <Image src={'https://via.placeholder.com/150'} alt="Serenity UI Logo" width={100} height={100} />
+      <div className="flex justify-center items-center ">
+        <Image src={SerenityLogo} alt="Serenity UI Logo" width={100} height={100} />
       </div>
       {/* Company Name */}
-      <h1 className="text-4xl mb-36 text-center relative z-10">Serenity <span className="text-[#BFCAD3]">UI</span></h1>
+      <h1 className="text-4xl mb-36 text-center relative z-10">Serenity UI</h1>
       <div className="w-full h-1 bg-white mb-6 relative z-10"></div>
       <div className='text-center'>
         <span className="text-lg text-white text-center hover:text-gray-300 transition-colors duration-300 relative z-10">
@@ -271,7 +296,7 @@ const propsData = [
     { name: 'rating', type: 'number', description: 'Specifies the Star rating given by a person.'},
   ]
 
-function UsernameTestimonialPage() {
+function BookTestimonialPage() {
   
   
   const [activeTab, setActiveTab] = useState('Preview');
@@ -430,4 +455,4 @@ const [copiedStep, setCopiedStep] = useState<number | null>(null);
   )
 }
 
-export default UsernameTestimonialPage;
+export default BookTestimonialPage;
