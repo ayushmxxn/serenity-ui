@@ -16,7 +16,7 @@ function Footer() {
       </span>
     </Link>
     . The source code is available on
-    <Link href={'/'} target='_blank'>
+    <Link href={'https://github.com/ayushmxxn/serenity-ui'} target='_blank'>
       <span className="ml-1 underline underline-offset-4 text-zinc-300 hover:text-white transition duration-300">
         Github
       </span>
