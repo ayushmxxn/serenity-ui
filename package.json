@@ -9,18 +9,41 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@react-hook/media-query": "^1.1.1",
+    "@splinetool/react-spline": "^4.0.0",
+    "@tabler/icons-react": "^3.12.0",
+    "@tsparticles/engine": "^3.5.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.5.0",
+    "framer-motion": "^11.2.12",
+    "input-otp": "^1.2.4",
+    "lucide-react": "^0.436.0",
+    "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "react-icons": "^5.2.1",
+    "react-intersection-observer": "^9.10.3",
+    "react-pageflip": "^2.0.3",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-typewriter-effect": "^1.1.0",
+    "react-use-measure": "^2.1.1",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-modal": "^3.16.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@types/three": "^0.166.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "typescript": "^5"
   }
 }
