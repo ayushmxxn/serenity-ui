@@ -32,7 +32,7 @@ function BookTestimonial3D({ testimonials }: BookTestimonial3DProps) {
 
   return (
     <div className="w-full text-black h-500px flex justify-center items-center py-10">
-      <HTMLFlipBook ref={book} width={300} height={450} showCover={true} usePortrait={smallerDevice} onFlip={(e) => console.log(e.data)} onChangeState={(e) => console.log(e.data)}>
+      <HTMLFlipBook ref={book} width={300} height={450} showCover={true} usePortrait={smallerDevice} onFlip={(e) => console.log(e.data)} onChangeState={(e) => console.log(e.data)}  className={''} style={{}} startPage={0} size={'fixed'} minWidth={0} maxWidth={0} minHeight={0} maxHeight={0} drawShadow={false} flippingTime={0} startZIndex={0} autoSize={false} maxShadowOpacity={0} mobileScrollSupport={false} clickEventForward={false} useMouseEvents={false} swipeDistance={0} showPageCorners={false} disableFlipByClick={false}>
       {/* Cover Page */}
       <div className="relative bg-black border rounded-lg p-8 text-white flex flex-col items-center justify-center shadow-lg shadow-gray-600 cursor-grab">
       {/* Company Logo */}
