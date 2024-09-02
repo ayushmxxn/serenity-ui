@@ -4,11 +4,34 @@ import SerenitySearch from "@/components/serenity/SerenitySearch";
 import { CgComponents } from "react-icons/cg";
 import Footer from "@/components/serenity/Footer";
 import { Analytics } from "@vercel/analytics/react"
-import Head from "next/head";
+
 
 export const metadata: Metadata = {
   title: "Serenity UI",
-  description: "Beautifully crafted UI components to elevate your web projects",
+  description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+  authors: [{ name: "Ayushmaan Singh" }],
+  openGraph: {
+    title: "Serenity UI",
+    description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+    url: "https://www.serenity-ui.com/",
+    siteName: "Serenity UI",
+    images: [
+      {
+        url: "https://i.ibb.co/HthN5FV/Screenshot-2024-09-01-223237.png",
+        width: 1200,
+        height: 630,
+        alt: "Serenity UI Screenshot",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Serenity UI",
+    description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+    images: ["https://i.ibb.co/HthN5FV/Screenshot-2024-09-01-223237.png"],
+  },
 };
 
 
@@ -69,7 +92,6 @@ const pages = [
 ];
 
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -77,26 +99,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <title>Serenity UI</title>
-        <meta name="title" content="Serenity UI" />
-        <meta name="description" content="Beautifully crafted UI components to elevate your web projects. Fully customizable and open source." />
-        <meta name="author" content="Ayushmaan Singh" />
-        <link rel="canonical" href="https://www.serenity-ui.com/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.serenity-ui.com/" />
-        <meta property="og:title" content="Serenity UI" />
-        <meta property="og:description" content="Beautifully crafted UI components to elevate your web projects. Fully customizable and open source." />
-        <meta property="og:image" content="https://i.postimg.cc/SRsZL86B/Screenshot-2024-09-01-223237.png" />
-        <meta property="og:image:alt" content="Serenity UI Screenshot" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.serenity-ui.com/" />
-        <meta property="twitter:title" content="Serenity UI" />
-        <meta property="twitter:description" content="Beautifully crafted UI components to elevate your web projects. Fully customizable and open source." />
-        <meta property="twitter:image" content="https://i.postimg.cc/SRsZL86B/Screenshot-2024-09-01-223237.png" />
-        <meta property="twitter:image:alt" content="Serenity UI Screenshot" />
-        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; img-src *; script-src 'self'; style-src 'self' 'unsafe-inline';" />
-      </Head>
       <body>
         <div className="hidden sm:flex">
           <SerenitySearch pages={pages} mode="dark" />

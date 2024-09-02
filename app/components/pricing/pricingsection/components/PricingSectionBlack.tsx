@@ -17,7 +17,7 @@ function PricingSectionBlack() {
         'Limited storage capacity',
         'Monthly usage reports',
       ],
-      link: 'https://i.imgur.com/VRtqhGC.png',
+      link: 'https://i.ibb.co/7jw7WhD/40tdzqz.jpg',
     },
     {
       name: 'Business Plan',
@@ -29,7 +29,7 @@ function PricingSectionBlack() {
         'More storage and bandwidth',
         'Detailed analytics',
       ],
-      link: 'https://i.imgur.com/VRtqhGC.png',
+      link: 'https://i.ibb.co/425nwLp/pZggwqa.jpg',
     },
     {
       name: 'Enterprise Plan',
@@ -41,7 +41,7 @@ function PricingSectionBlack() {
         'Unlimited storage and bandwidth',
         'Advanced analytics and reporting',
       ],
-      link: 'https://i.imgur.com/VRtqhGC.png',
+      link: 'https://i.ibb.co/n89tN5R/sDSxe9b.png',
     },
   ];
 
