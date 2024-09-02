@@ -7,12 +7,12 @@ import { Analytics } from "@vercel/analytics/react"
 
 
 export const metadata: Metadata = {
-  title: "Serenity UI",
-  description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+  title: "Serenity UI - Beautifully crafted UI components to elevate your web projects.",
+  description: "Collection of customizable and open source components made with Next.js, Tailwind, Typescript, and Framer motion.",
   authors: [{ name: "Ayushmaan Singh" }],
   openGraph: {
     title: "Serenity UI",
-    description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+    description: "Collection of customizable and open source components made with Next.js, Tailwind, Typescript, and Framer motion.",
     url: "https://www.serenity-ui.com/",
     siteName: "Serenity UI",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Serenity UI",
-    description: "Beautifully crafted UI components to elevate your web projects. Fully customizable and open source.",
+    description: "Collection of customizable and open source components made with Next.js, Tailwind, Typescript, and Framer motion.",
     images: ["https://i.ibb.co/HthN5FV/Screenshot-2024-09-01-223237.png"],
   },
 };
