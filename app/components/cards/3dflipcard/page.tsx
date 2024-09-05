@@ -299,10 +299,10 @@ function FlipCard3DPage() {
         <div>
           <div className='absolute sm:ml-3'>
                   <pre className='bg-[#18181B] p-3 rounded-md overflow-auto text-sm sm:text-base w-[350px] sm:w-[600px] border border-zinc-700'>
-                    <code className='text-zinc-300'>npx @ayushmxxn/serenity-ui@latest add 3dflipcard</code>
+                    <code className='text-zinc-300'>npx @ayushmxxn/serenity-ui@latest add flipcard3d</code>
                   </pre>
                   <button
-                    onClick={() => copyToClipboard('npx @ayushmxxn/serenity-ui@latest add 3dflipcard', 1)}
+                    onClick={() => copyToClipboard('npx @ayushmxxn/serenity-ui@latest add flipcard3d', 1)}
                     className='absolute right-0 top-2 p-2 w-10 h-auto bg-[#18181B] rounded border-r border-zinc-700'
                     aria-label='Copy command'
                   >
