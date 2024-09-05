@@ -30,7 +30,7 @@ function Home() {
     setNotificationVisible(true);
     setTimeout(() => {
       setNotificationVisible(false);
-    }, 50000); 
+    }, 5000); 
   };
 
 
