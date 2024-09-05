@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { TbBrandNextjs } from 'react-icons/tb';
 import { SiReact } from 'react-icons/si';
@@ -15,9 +15,33 @@ const techItems = [
   { href: 'https://www.framer.com/motion/', label: 'Framer Motion', icon: TbBrandFramerMotion },
 ];
 
+
+
 const TechUsed = () => {
+
+  const [iconSize, setIconSize] = useState(30);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIconSize(20);
+      } else {
+        setIconSize(30);
+      }
+    };
+
+    
+    handleResize();
+
+    
+    window.addEventListener('resize', handleResize);
+
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="flex justify-center items-center mt-32 sm:mt-0">
+    <div className="flex justify-center items-center">
       <motion.div
         className="flex text-sm justify-center items-center gap-6 flex-wrap"
         initial="visible"
@@ -37,7 +61,7 @@ const TechUsed = () => {
             className="relative"
           >
             <Link href={href} target="_blank" className="text-white flex items-center">
-              <Icon size={30} className="hover:text-zinc-300 transition-colors duration-300" />
+              <Icon size={iconSize} className="hover:text-zinc-300 transition-colors duration-300" />
               <motion.span
                 className="ml-1"
                 initial={{ opacity: 1, x: 0 }}

@@ -16,7 +16,7 @@ const componentsList = [
   { name: 'Authentication', url: '/components/authentication', subComponents: ['Signup Form', 'SignUp Form V2', 'SignIn Form', 'Forgot Password', 'Email', 'Otp', 'Create New Password', 'Password Changed'] },
   { name: 'Carousels', url: '/components/carousels', subComponents: ['Image Carousel', 'Video Carousel'] },
   { name: 'Navbars', url: '/components/navbars', subComponents: ['Tubelight Navbar'] },
-  { name: 'Cards', url: '/components/cards', subComponents: [ 'Spotlight Card', 'Swipe Card', 'Project Cards', 'Glow Card']},
+  { name: 'Cards', url: '/components/cards', subComponents: [ 'Spotlight Card', 'Swipe Card', 'Project Cards', 'Glow Card', '3D Flip Card']},
 
 ];
 

@@ -20,7 +20,6 @@ export default function RootLayout({
       <div className="hidden md:flex">
         <Spotlight fill="gray"/>
       </div>
-      
         <Navbar/>
         <div className="flex">
             <SideBar/>

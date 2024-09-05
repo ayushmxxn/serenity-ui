@@ -19,6 +19,7 @@ import CodeBlockThumbnail from '@/app/images/thumbnails/CodeBlockThumbnail.png';
 import ImageGallaryThumbnail from '@/app/images/thumbnails///ImageGallaryThumbnail.png';
 import InputsThumbnail from '@/app/images/thumbnails/InputsThumbnail.png';
 import VideoCarousel from '@/app/images/thumbnails/VideoCarousel.png';
+import FlipCard3D from '@/app/images/thumbnails/FlipCard3DThumbnail.png';
 import Link from "next/link";
 import { Inter } from "next/font/google";
 
@@ -81,6 +82,12 @@ const ShowcaseCardContent = [
       description: "Techstack component displaying a list of technologies you are good at with an interactive hover effect.",
       imageUrl: TechStackThumbnail,
       projectUrl: "/components/techstack"
+    },
+    {
+      title: "3D Flip Card",
+      description: "A 3D card stack with cool 3D hover effects. Make your stuff look cool",
+      imageUrl: FlipCard3D,
+      projectUrl: "/components/cards/3dflipcard"
     },
     {
       title: "Spotlight Card",

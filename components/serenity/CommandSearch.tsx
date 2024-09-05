@@ -59,6 +59,7 @@ const InstallationIcon = () => {
   { title: 'Image Gallery', url: '/components/imagegallery', icon: <CgComponents />},
   { title: 'NewsLetter', url: '/components/newsletter', icon: <CgComponents /> },
   { title: 'Glow Card', url: '/components/cards/glowcard', icon: <CgComponents /> },
+  { title: '3D Flip card', url: '/components/cards/3dflipcard', icon: <CgComponents /> },
   { title: 'Cookie', url: '/components/cookie', icon: <CgComponents /> },
   { title: 'WaitList', url: '/components/waitlist', icon: <CgComponents /> },
   { title: 'TechStack', url: '/components/techstack', icon: <CgComponents /> },
