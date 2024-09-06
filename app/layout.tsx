@@ -82,6 +82,7 @@ const pages = [
   { title: 'NewsLetter', url: '/components/newsletter', icon: <CgComponents /> },
   { title: 'Glow card', url: '/components/cards/glowcard', icon: <CgComponents /> },
   { title: '3D Flip card', url: '/components/cards/3dflipcard', icon: <CgComponents /> },
+  { title: 'Drawer', url: '/components/drawer', icon: <CgComponents /> },
   { title: 'Cookie', url: '/components/cookie', icon: <CgComponents /> },
   { title: 'WaitList', url: '/components/waitlist', icon: <CgComponents /> },
   { title: 'TechStack', url: '/components/techstack', icon: <CgComponents /> },

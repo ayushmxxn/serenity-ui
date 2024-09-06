@@ -89,13 +89,6 @@ function Home() {
         <div className="justify-center lg:justify-start xl:justify-start 2xl:justify-start flex items-start pt-24 pb-5 lg:pl-5 xl:pl-5 lg:pt-10 xl:pb-5">
           <TechUsed />
         </div>
-        {/* <NewComponent
-        imageUrl= {FlipCard3D}
-        link='/components/cards/3dflipcard'
-        message="New component is out! ✨"
-        visible={notificationVisible}
-        onClose={() => setNotificationVisible(false)}
-      /> */}
       </div>
     </div>
   );
