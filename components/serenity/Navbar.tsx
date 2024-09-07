@@ -9,7 +9,9 @@ import Search from './Search';
 import HamburgurNavbar from './HamburgerNavbar';
 import { Inter } from 'next/font/google';
 import CommandSearch from './CommandSearch';
-import SponsorButton from './SponserButton';
+import BuyMeCoffeeButton from './SponserButton';
+
+
 
 const inter = Inter({ subsets: ['latin'], weight: '500' });
 
@@ -39,7 +41,7 @@ function Navbar() {
           <CommandSearch/>
          </div>
         {/* Hide on smaller screens */}
-        <div className="hidden sm:flex space-x-5 mr-2">
+        <div className="hidden sm:flex space-x-5 mr-2 justify-center items-center">
           <Link href={'https://github.com/ayushmxxn'} target='_blank'>
             <FaGithub className="text-white" size={18} />
           </Link>
@@ -49,7 +51,7 @@ function Navbar() {
           <Link href={'https://twitter.com/ayushmxxn'} target='_blank'>
             <RiTwitterXLine className="text-white" size={18} />
           </Link>
-           <SponsorButton/>
+           <BuyMeCoffeeButton />
         </div>
         <HamburgurNavbar/>
       </div>

@@ -8,6 +8,8 @@ import Logo from '@/app/images/serenitylogotransparent.svg';
 import Search from './Search';
 import HamburgurNavbar from './HamburgerNavbar';
 import CommandSearch from './CommandSearch';
+import BuyMeCoffeeButton from './SponserButton';
+
 
 const HomeNav: React.FC = () => {
   return (
@@ -34,7 +36,7 @@ const HomeNav: React.FC = () => {
         {/* Command Search */}
         <CommandSearch />
         {/* Socials (Hide on smaller screens) */}
-        <div className='hidden sm:flex space-x-5 mr-2'>
+        <div className='hidden sm:flex space-x-5 mr-2 justify-center items-center'>
           <Link href='https://github.com/ayushmxxn' target='_blank' rel='noopener noreferrer'>
             <FaGithub className='text-white' size={18} />
           </Link>
@@ -44,6 +46,7 @@ const HomeNav: React.FC = () => {
           <Link href='https://twitter.com/ayushmxxn' target='_blank' rel='noopener noreferrer'>
             <RiTwitterXLine className='text-white' size={18} />
           </Link>
+          <BuyMeCoffeeButton/> 
         </div>
         {/* Hamburger for Displaying Socials on Mobile Devices */}
         <HamburgurNavbar />
