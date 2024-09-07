@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaDiscord } from 'react-icons/fa';
 import { RiTwitterXLine } from "react-icons/ri";
+import BuyMeACoffeeButton from './SponserButton';
 
 const HamburgurNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,16 +57,6 @@ const itemVariants = {
       <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
-          <motion.div
-            className="fixed inset-0"
-            onClick={() => setIsOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-
           {/* Sidebar */}
           <motion.div
             className="fixed top-0 right-0  h-auto space-y-5  backdrop-blu z-30 mt-[72px] p-4  flex flex-col"
@@ -113,20 +104,23 @@ const itemVariants = {
               </span>
              
             </motion.a>
+            <motion.a
+              href="https://discord.com"
+              className="flex items-center space-x-2 text-white hover:text-gray-300"
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.2 }} // Delay for staggered effect
+            >
+              <span className=''>
+                <BuyMeACoffeeButton/>
+              </span>
+             
+            </motion.a>
           </motion.div>
         </>
       )}
     </AnimatePresence>
-    {/* Overlay */}
-      {isOpen && (
-        <motion.div
-          key="overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-30 bg-black md:hidden"
-        />
-      )}
     </>
   );
 };

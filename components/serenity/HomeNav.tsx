@@ -11,6 +11,7 @@ import CommandSearch from './CommandSearch';
 import BuyMeCoffeeButton from './SponserButton';
 
 
+
 const HomeNav: React.FC = () => {
   return (
     <div className='navbar-container fixed top-0 left-0 right-0 bg-black border border-zinc-900 backdrop-blur-lg h-auto py-4 px-3 text-sm z-30 sm:mt-5 sm:mx-8 sm:rounded-full sm:py-3 flex justify-between items-center'>
