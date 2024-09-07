@@ -6,8 +6,6 @@ import HomeNav from '@/components/serenity/HomeNav';
 import { Inter } from 'next/font/google';
 import { Spotlight } from '@/components/ui/spotlight';
 import { CgComponents } from "react-icons/cg";
-import NewComponent from '@/components/serenity/NewComponent';
-import FlipCard3D from '@/app/images/thumbnails/FlipCard3DThumbnail.png';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
@@ -15,7 +13,7 @@ const inter = Inter({ subsets: ['latin'], weight: '500' });
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
-   const [notificationVisible, setNotificationVisible] = useState(false);
+   
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,18 +23,6 @@ function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-
-  const showNotification = () => {
-    setNotificationVisible(true);
-    setTimeout(() => {
-      setNotificationVisible(false);
-    }, 5000); 
-  };
-
-
-  useEffect(() => {
-    showNotification();
-  }, []);
 
   return (
     <div className={`${inter.className} bg-black`}>
