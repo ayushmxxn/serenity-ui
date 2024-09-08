@@ -54,6 +54,7 @@ const InstallationIcon = () => {
 const pages = [
   { title: 'Introduction', url: '/docs/introduction' , icon: <IntroductionIcon/> },
   { title: 'Installation', url: '/docs/installation' , icon: <InstallationIcon/> },
+  { title: 'Carousel 360', url: '/components/carousels/carousel360' , icon: <CgComponents /> },
   { title: 'Voice Testimonial', url: '/components/testimonials/voicetestimonial', icon: <CgComponents />},
   { title: 'Star Rating Testimonial', url: '/components/testimonials/starratingtestimonial', icon: <CgComponents />  },
   { title: 'Username Testimonial', url: '/components/testimonials/usernametestimonial', icon: <CgComponents />  },

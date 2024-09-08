@@ -8,7 +8,6 @@ import Logo from '@/app/images/serenitylogotransparent.svg';
 import Search from './Search';
 import HamburgurNavbar from './HamburgerNavbar';
 import CommandSearch from './CommandSearch';
-import BuyMeCoffeeButton from './SponserButton';
 
 
 
@@ -47,7 +46,6 @@ const HomeNav: React.FC = () => {
           <Link href='https://twitter.com/ayushmxxn' target='_blank' rel='noopener noreferrer'>
             <RiTwitterXLine className='text-white' size={18} />
           </Link>
-          <BuyMeCoffeeButton/> 
         </div>
         {/* Hamburger for Displaying Socials on Mobile Devices */}
         <HamburgurNavbar />

@@ -14,7 +14,7 @@ const componentsList = [
   { name: 'Testimonials', url: '/components/testimonials', subComponents: ['Voice Testimonial', 'Star Rating Testimonial', 'Username Testimonial', '3D Book Testimonial', 'Typewriter Testimonial'] },
   { name: 'Pricing', url: '/components/pricing', subComponents: ['Pricing Section'] },
   { name: 'Authentication', url: '/components/authentication', subComponents: ['Signup Form', 'SignUp Form V2', 'SignIn Form', 'Forgot Password', 'Email', 'Otp', 'Create New Password', 'Password Changed'] },
-  { name: 'Carousels', url: '/components/carousels', subComponents: ['Image Carousel', 'Video Carousel'] },
+  { name: 'Carousels', url: '/components/carousels', subComponents: ['Image Carousel', 'Video Carousel', 'Carousel 360'] },
   { name: 'Navbars', url: '/components/navbars', subComponents: ['Tubelight Navbar'] },
   { name: 'Cards', url: '/components/cards', subComponents: [ 'Spotlight Card', 'Swipe Card', 'Project Cards', 'Glow Card', '3D Flip Card']},
 
