@@ -3,8 +3,8 @@ import "./globals.css";
 import SerenitySearch from "@/components/serenity/SerenitySearch";
 import { CgComponents } from "react-icons/cg";
 import Footer from "@/components/serenity/Footer";
-import { Analytics } from "@vercel/analytics/react"
-
+import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Serenity UI - Beautifully crafted UI components to elevate your web projects.",
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     images: ["https://i.ibb.co/HthN5FV/Screenshot-2024-09-01-223237.png"],
   },
 };
-
 
 const IntroductionIcon = () => {
   return (
@@ -102,6 +101,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-VZQ745LCF2"></Script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-VZQ745LCF2');
+            `,
+          }}
+        />
+      </head>
       <body>
         <div className="hidden sm:flex">
           <SerenitySearch pages={pages} mode="dark" />
