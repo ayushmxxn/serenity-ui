@@ -110,7 +110,7 @@ const FlipCard3D: React.FC<CardStack3DProps> = ({ images }) => {
   };
 
   return (
-    <div className={`flex justify-center h-screen bg-white items-center py-32`}>
+    <div className={`flex justify-center h-screen items-center py-32`}>
       <div
         className="relative w-80 h-48 perspective-1000"
         onMouseEnter={() => setIsHovered(true)}

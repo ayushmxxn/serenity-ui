@@ -120,7 +120,7 @@ export default function RootLayout({
         </div>
         {children}
         <Analytics />
-        <Footer />
+        <Footer/>
       </body>
     </html>
   );

@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
 import { Inter } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 const poppin = Inter({ subsets: ["latin"], weight: "500" });
 
 function Footer() {
   return (
-    <div className={`${poppin.className}`}>
+    <div className={`${GeistSans.className} font-medium`}>
       <div className="p-5 text-center bg-zinc-950 border-t border-zinc-900 shadow-lg ">
   <div className="text-sm text-zinc-400">
     Built by

@@ -1,12 +1,14 @@
 'use client'
 import React, { useState } from 'react';
-import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CgComponents } from "react-icons/cg";
+import { GeistSans } from 'geist/font/sans';
 
-const inter = Inter({ subsets: ['latin'], weight: '500' });
+
+
+
 
 
 // For Sidebar
@@ -62,7 +64,7 @@ const SideBar: React.FC = () => {
 
   return (
     <aside
-      className={`${inter.className} bg-zinc-950 backdrop-blur-lg w-64 pt-24 pb-8 border-r border-zinc-900 text-white hidden md:flex flex-col h-screen`}
+      className={`${GeistSans.className} bg-zinc-950 backdrop-blur-lg w-64 pt-24 pb-8 border-r border-zinc-900 text-white hidden md:flex flex-col h-screen`}
       style={{
         position: 'sticky',
         top: 0,

@@ -38,7 +38,7 @@ function Home() {
             <span className="text-3xl md:text-4xl lg:text-5xl font-bold py-2 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-300 bg-opacity-50 sm:px-20 lg:px-0 xl:px-0 2xl:px-0">
               Beautifully crafted UI components to elevate your web projects
             </span>
-            <p className="text-sm sm:text-lg mt-4 text-[#ABAFB4] sm:px-40 lg:px-0 xl:px-0 2xl:px-0">
+            <p className={`text-sm sm:text-lg mt-4 text-[#ABAFB4] sm:px-40 lg:px-0 xl:px-0 2xl:px-0`}>
               Accelerate Your Workflow with Ready-to-Use Components. Fully Customizable and open source.
             </p>
             <div className="flex justify-center lg:justify-start items-center gap-5 mt-8">
