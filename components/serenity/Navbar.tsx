@@ -9,7 +9,6 @@ import Search from './Search';
 import HamburgurNavbar from './HamburgerNavbar';
 import { Inter } from 'next/font/google';
 import CommandSearch from './CommandSearch';
-import BuyMeCoffeeButton from './SponserButton';
 
 
 
@@ -24,12 +23,17 @@ function Navbar() {
           <span className={`hidden sm:flex  sm:text-lg pr-20 pl-1`}>Serenity UI</span>
         </Link>
         
-        <div className='hidden md:block'>
-          <span className='flex items-center gap-8 text-[#ABAFB4]'>
-            <Link href={'/docs/introduction'}><span className='hover:text-zinc-300'>Docs</span></Link>
-            <Link prefetch href={'/components'}><span className='hover:text-zinc-300'>Components</span></Link>
-          </span>
-        </div>
+        <div className='items-center flex space-x-6 text-[#ABAFB4]'>
+            <Link href='/components' passHref>
+              <span className='hover:text-zinc-300 cursor-pointer hidden sm:flex ml-10 md:ml-0'>Components</span>
+            </Link>
+            <Link href='/templates' prefetch passHref>
+              <div className='flex items-center space-x-2'>
+                <span className='hover:text-zinc-300 cursor-pointer'>Templates</span>
+                <span className='text-xs  border border-green-400 text-green-400 rounded-full px-2 py-[2px]'>New</span>
+              </div>
+            </Link>
+          </div>
       </span>
       <div className='flex justify-center items-center gap-1'>
         {/* Searchbar */}
@@ -51,7 +55,6 @@ function Navbar() {
           <Link href={'https://twitter.com/ayushmxxn'} target='_blank'>
             <RiTwitterXLine className="text-white" size={18} />
           </Link>
-           <BuyMeCoffeeButton />
         </div>
         <HamburgurNavbar/>
       </div>
