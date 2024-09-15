@@ -731,3 +731,41 @@ body {
 
 
 
+/* Shine effect animation */
+.card-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: shine 4s infinite;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-200%) translateY(-200%) rotate(45deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(200%) translateY(200%) rotate(45deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(400%) translateY(400%) rotate(45deg);
+  }
+}
+
+
+
