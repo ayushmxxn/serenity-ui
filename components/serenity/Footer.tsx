@@ -1,9 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Inter } from 'next/font/google';
 import { GeistSans } from 'geist/font/sans';
-
-const poppin = Inter({ subsets: ["latin"], weight: "500" });
 
 function Footer() {
   return (
