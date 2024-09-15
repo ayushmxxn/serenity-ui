@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaDiscord } from 'react-icons/fa';
 import { RiTwitterXLine } from "react-icons/ri";
-import BuyMeACoffeeButton from './SponserButton';
 
 const HamburgurNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -112,10 +111,6 @@ const itemVariants = {
               animate="visible"
               transition={{ delay: 0.2 }} // Delay for staggered effect
             >
-              <span className=''>
-                <BuyMeACoffeeButton/>
-              </span>
-             
             </motion.a>
           </motion.div>
         </>
