@@ -114,14 +114,17 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <div className="hidden sm:flex">
           <SerenitySearch pages={pages} mode="dark" />
         </div>
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
         <Analytics />
-        <Footer/>
       </body>
     </html>
   );
 }
+
