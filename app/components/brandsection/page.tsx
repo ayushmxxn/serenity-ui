@@ -241,7 +241,7 @@ function BrandsSectionPage() {
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>Brand Section</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>Video Carousel with automatic playback and manual navigation controls, <br /> providing an engaging way to present video content.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-xl'>BrandSection component is designed to display a horizontally scrolling list of brands in a visually engaging manner.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
