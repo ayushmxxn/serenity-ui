@@ -6,6 +6,7 @@ import HomeNav from '@/components/serenity/HomeNav';
 import { Inter } from 'next/font/google';
 import { Spotlight } from '@/components/ui/spotlight';
 import { CgComponents } from "react-icons/cg";
+import ChatWidget from '@/components/serenity/ChatWidget';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
@@ -74,6 +75,7 @@ function Home() {
     
         <div className="justify-center lg:justify-start xl:justify-start 2xl:justify-start flex items-start pt-24 pb-5 lg:pl-5 xl:pl-5 lg:pt-10 xl:pb-5">
           <TechUsed />
+          <ChatWidget/>
         </div>
       </div>
     </div>
