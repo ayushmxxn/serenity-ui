@@ -30,6 +30,7 @@ const additionalComponentsList = [
   { name: 'Image Gallery', url: '/components/imagegallery', subComponents: []},
   { name: 'Film Roll', url: '/components/filmroll', subComponents: []},
   { name: 'Drawer', url: '/components/drawer', subComponents: []},
+  { name: 'Footer', url: '/components/footer', subComponents: []},
   { name: 'NewsLetter', url: '/components/newsletter', subComponents: [] },
   { name: 'Cookie', url: '/components/cookie', subComponents: [] },
   { name: 'WaitList', url: '/components/waitlist', subComponents: [] },
