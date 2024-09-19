@@ -58,7 +58,7 @@ const FooterLink = ({ href, children, target, rel }) => (
 );
 
 const FooterColumn = ({ title, links }) => (
-  <div className="flex flex-col space-y-2">
+  <div className="flex flex-col space-y-2 mx-4">
     <h3 className="text-gray-800 font-semibold mb-1">{title}</h3>
     {links.map((link, index) => (
       <FooterLink key={index} href={link.href}>
@@ -75,22 +75,27 @@ const Footer = () => {
     <footer className="bg-white text-gray-800 py-8 px-6 border-t border-gray-200">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between mb-8">
-          <div className="mb-6 md:mb-0">
-            <h2 className="text-xl font-bold mb-4">{brandName}</h2>
+          {/* Brand Name */}
+          <div className="mb-6 md:mb-0 flex-shrink-0">
+            <h2 className="text-xl font-bold">{brandName}</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 lg:gap-14 xl:gap-16 mb-3">
+
+          {/* Footer Columns */}
+          <div className="flex flex-wrap justify-end flex-grow">
             {columns.map((column, index) => (
               <FooterColumn key={index} title={column.title} links={column.links} />
             ))}
           </div>
         </div>
 
-        {/* Centered Brand Name, Year, and Icons */}
+        {/* Footer Bottom Section */}
         <div className="border-t border-gray-200 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:justify-between">
+          <div className="flex items-center justify-between">
+            {/* Copyright Text */}
             <div className="text-sm text-gray-600">
               © {new Date().getFullYear()} {brandName}, Inc.
             </div>
+            {/* Social Icons */}
             <div className="flex space-x-4 md:space-x-6">
               {socialLinks.map((social, index) => (
                 <FooterLink key={index} href={social.href} target="_blank" rel="noopener noreferrer">
