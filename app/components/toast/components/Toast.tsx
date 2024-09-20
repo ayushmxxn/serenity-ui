@@ -1,152 +1,136 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Inter } from 'next/font/google';
+'use client';
+import React, { useState, useEffect, createContext, useContext, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CircleCheck, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 
-const inter = Inter({ subsets: ["latin"], weight: "500" });
+type ToastType = 'success' | 'error' | 'warning' | 'info';
+type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';
 
-type icon = 'success' | 'error' | 'warning' | 'info';
-type position = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-type variant = 'default' | 'colored'
-type mode = 'light' | 'dark'
-
-interface ToastProps {
-  title?: string;
-  body?: string;
-  icon?: icon | string; 
-  mode?: mode; 
-  variant?: variant;
-  position?: position;
-  timer?: number;
-  loader?: number;
+interface Toast {
+  id: number;
+  message: string;
+  type: ToastType;
 }
 
-function Toast({ title , body  , timer , loader,  icon, position, variant, mode} : ToastProps) {
-  const [hidden, setHidden] = useState(false);
-   const [isMobile, setIsMobile] = useState(false);
-  
+interface ToastContextType {
+  showToast: (message: string, type?: ToastType, position?: ToastPosition) => void;
+}
+
+const ToastContext = createContext<ToastContextType | undefined>(undefined);
+
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [toasts, setToasts] = useState<{ toast: Toast; position: ToastPosition }[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-    }, loader || 3000); // 3 seconds loader 
-    return () => clearTimeout(timer);
-  }, [loader]);
-
-
-
-  // Checking for mobile device
-   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 400);
-    };
-
-    handleResize(); // Checking on mount
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
+    setIsMounted(true);
   }, []);
 
-  const handleClose = () => {
-    setHidden(true);
-  };
+  const showToast = useCallback((message: string, type: ToastType = 'info', position: ToastPosition = 'bottom-right') => {
+    const id = Date.now();
+    setToasts(prev => [...prev, { toast: { id, message, type }, position }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(({ toast }) => toast.id !== id));
+    }, 5000);
+  }, []);
 
-  if (hidden) {
-    return null; 
+  if (!isMounted) {
+    return null;
   }
-  
-
-   const animation = 
-    isMobile && (position === 'top-right' || position === 'top-left') 
-    ? 'toast-center-top'
-    : isMobile && (position === 'bottom-right' || position === 'bottom-left') 
-    ? 'toast-center-bottom'
-    : position === 'top-right'
-    ? 'toast-top-right'
-    : position === 'top-left'
-    ? 'toast-top-left'
-    : position === 'bottom-right'
-    ? 'toast-bottom-right'
-    : position === 'bottom-left'
-    ? 'toast-bottom-left'
-    : 'toast-center-right'; // Default
-
 
   return (
-    <div className='flex justify-center items-center h-96'>
-    <div className={` 
-    ${position === 'bottom-right' &&  'absolute bottom-10 right-10'
-    || 
-    position === 'top-right' &&  'absolute top-10 right-10' 
-    ||
-    position === 'bottom-left' &&  'absolute bottom-10 left-10' 
-    ||
-    position === 'top-left' &&  'absolute top-10 left-10' 
-   }
-   ${mode === 'dark'? 'bg-black border border-zinc-400' : 'bg-white'}
-     z-50 shadow-md h-auto max-w-80 w-80 pb-1
-    ${animation}
-    `}>
-      <motion.div
-        className={`
-          ${variant === 'colored' && icon === 'success' && 'bg-green-500'
-            ||
-            variant === 'colored' && icon === 'error' && 'bg-red-500'
-            ||
-            variant === 'colored' && icon === 'warning' && 'bg-yellow-500'
-            ||
-            variant === 'colored' && icon === 'info' && 'bg-blue-500'
-            ||
-            variant === 'colored' && 'bg-green-500'
-            ||
-            variant === 'default' && 'bg-zinc-600'
-          }
-            h-1 relative top-0 `}
-        initial={{ width: 0 }}
-        animate={{ width: '100%' }}
-        transition={{ duration: timer || 3 }}
-      />
-      <div className="flex items-start p-2 pt-3">
-        {icon === 'success' && (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${mode === 'dark' ? (variant === 'colored' ? 'text-green-500' : 'text-slate-200') : 'text-black'} ${variant === 'colored' && 'text-green-500'}`}>
-                <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-            </svg>
-        )}
-        {icon === 'error' && (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${mode === 'dark' ? (variant === 'colored' ? 'text-red-500' : 'text-slate-200') : 'text-black'} ${variant === 'colored' && 'text-red-500'}`}>
-                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
-            </svg>
-        )}
-        {icon === 'warning' && (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${mode === 'dark' ? (variant === 'colored' ? 'text-yellow-500' : 'text-slate-200') : 'text-black'} ${variant === 'colored' && 'text-yellow-500'}`}>
-                <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
-            </svg>
-
-        )}
-        {icon === 'info' && (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${mode === 'dark' ? (variant === 'colored' ? 'text-blue-500' : 'text-slate-200') : 'text-black'} ${variant === 'colored' && 'text-blue-500'}`}>
-                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
-            </svg>
-        )}
-        {!icon && (
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-5 ${mode === 'dark' ? (variant === 'colored' ? 'text-green-500' : 'text-slate-200') : 'text-black'} ${variant === 'colored' && 'text-green-500'}`}>
-              <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-          </svg>
-        )}
-        <div className="ml-2">
-	         <p className={`${inter.className} font-medium text-sm text-black ${mode === 'dark' && 'text-zinc-100'}`}>{title || 'Title'}</p> 
-          <div className='max-w-60 flex flex-col ' style={{ maxHeight: '150px', overflowY: 'auto' }}>
-            <p className={`${inter.className}  text-sm ${mode === 'dark'? 'text-zinc-300' : 'text-zinc-700'}`} style={{ overflowWrap: 'break-word' }}>{body || 'Message Body'}</p>
-          </div>
-        </div>
-        <button className="focus:outline-none" onClick={handleClose}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`w-4 h-4 relative left-40 ${mode === 'dark'? 'text-zinc-300' : 'text-zinc-600'}`}>
-            <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59 5.59-5.59Z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    </div>
+    <ToastContext.Provider value={{ showToast }}>
+      {children}
+      {['top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'].map((position) => (
+        <ToastContainer key={position} toasts={toasts.filter(t => t.position === position)} position={position as ToastPosition} />
+      ))}
+    </ToastContext.Provider>
   );
+};
+
+export const useToast = () => {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+};
+
+interface ToastContainerProps {
+  toasts: { toast: Toast; position: ToastPosition }[];
+  position: ToastPosition;
 }
 
-export default Toast;
+const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, position }) => {
+  const isMobile = window.innerWidth <= 640; 
+  const adjustedPosition = isMobile ? (position.startsWith('top') ? 'top' : 'bottom') : position;
+
+  const getPositionClasses = () => {
+    switch (adjustedPosition) {
+      case 'top-left':
+        return 'top-4 left-4';
+      case 'top-right':
+        return 'top-4 right-4';
+      case 'bottom-left':
+        return 'bottom-4 left-4';
+      case 'bottom-right':
+        return 'bottom-4 right-4';
+      case 'top':
+        return 'top-4 left-1/2 transform -translate-x-1/2';
+      case 'bottom':
+        return 'bottom-4 left-1/2 transform -translate-x-1/2';
+      case 'center':
+        return 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2';
+      default:
+        return '';
+    }
+  };
+
+  const getInitialY = () => {
+    if (adjustedPosition.startsWith('top')) {
+      return -50; 
+    } else if (adjustedPosition === 'center') {
+      return 0; 
+    } else {
+      return 50; 
+    }
+  };
+
+  return (
+    <div className={`fixed ${getPositionClasses()} w-full max-w-full sm:max-w-sm px-4 sm:px-0 space-y-2`}>
+      <AnimatePresence>
+        {toasts.map(({ toast }) => (
+          <motion.div
+            key={toast.id}
+            initial={{ opacity: 0, y: getInitialY() }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: getInitialY() }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+          >
+            <ToastComponent {...toast} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const ToastComponent: React.FC<Toast> = ({ message, type }) => {
+  const typeConfig = {
+    success: { icon: CircleCheck, bgColor: 'bg-green-50', textColor: 'text-green-800', borderColor: 'border-green-200' },
+    error: { icon: AlertCircle, bgColor: 'bg-red-50', textColor: 'text-red-800', borderColor: 'border-red-200' },
+    warning: { icon: AlertTriangle, bgColor: 'bg-yellow-50', textColor: 'text-yellow-800', borderColor: 'border-yellow-200' },
+    info: { icon: Info, bgColor: 'bg-blue-50', textColor: 'text-blue-800', borderColor: 'border-blue-200' }
+  };
+
+  const { icon: Icon, bgColor, textColor, borderColor } = typeConfig[type];
+
+  return (
+    <div className={`${bgColor} ${borderColor} border rounded-lg shadow-lg p-4 flex items-center justify-between max-w-full`}>
+      <div className="flex items-center space-x-3">
+        <Icon className={`${textColor} w-5 h-5`} />
+        <p className={`${textColor} font-medium`}>{message}</p>
+      </div>
+    </div>
+  );
+};
