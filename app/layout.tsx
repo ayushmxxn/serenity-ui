@@ -5,6 +5,7 @@ import { CgComponents } from "react-icons/cg";
 import Footer from "@/components/serenity/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import { ToastProvider } from "./components/toast/components/Toast";
 
 export const metadata: Metadata = {
   title: "Serenity UI - Beautifully crafted UI components to elevate your web projects.",
@@ -116,7 +117,9 @@ export default function RootLayout({
           }}
         />
       </head>
+      
       <body className="flex flex-col min-h-screen">
+        {/* <ToastProvider> */}
         <div className="hidden sm:flex">
           <SerenitySearch pages={pages} mode="dark" />
         </div>
@@ -125,6 +128,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <Analytics />
+        {/* </ToastProvider> */}
       </body>
     </html>
   );
