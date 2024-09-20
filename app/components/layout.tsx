@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import SideBar from "@/components/serenity/SideBar";
 import Navbar from "@/components/serenity/Navbar";
 import { Spotlight } from "@/components/ui/spotlight";
+import { ToastProvider } from "./toast/components/Toast";
 
 const poppin = Poppins({ subsets: ["latin"], weight: "500" });
 
@@ -16,17 +17,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`${poppin.className}`}>
-      <div className="hidden md:flex">
-        <Spotlight fill="gray"/>
-      </div>
-        <Navbar/>
-        <div className="flex">
-            <SideBar/>
-            <div className="bg-black w-full">
-              {children}
-            </div>
+    <ToastProvider>
+      <div className={`${poppin.className}`}>
+        <div className="hidden md:flex">
+          <Spotlight fill="gray" />
         </div>
-    </div>
+        <Navbar />
+        <div className="flex">
+          <SideBar />
+          <div className="bg-black w-full">
+            {children}
+          </div>
+        </div>
+      </div>
+    </ToastProvider>
   );
 }
