@@ -119,7 +119,6 @@ export default function RootLayout({
       </head>
       
       <body className="flex flex-col min-h-screen">
-        {/* <ToastProvider> */}
         <div className="hidden sm:flex">
           <SerenitySearch pages={pages} mode="dark" />
         </div>
@@ -128,7 +127,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <Analytics />
-        {/* </ToastProvider> */}
       </body>
     </html>
   );
