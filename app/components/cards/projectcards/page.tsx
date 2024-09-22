@@ -381,7 +381,7 @@ export default page;
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>Project Cards</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>Project Card Component that you can use in your portfolio websites <br /> to showcase what you have built.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2xl:max-w-xl'>Project Card Component that you can use in your portfolio websites to showcase what you have built.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
@@ -415,7 +415,7 @@ export default page;
             </div>
           </div>
         </div>
-        <div className='bg-black border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div className='black-grid-embed'>

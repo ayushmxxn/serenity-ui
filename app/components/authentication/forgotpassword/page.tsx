@@ -107,7 +107,7 @@ function ForgotPasswordPage() {
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>Forgot Password</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>This Password Reset Form provides a user interface for resetting a forgotten <br /> password. Users can input their email address to receive a password reset code.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2xl:max-w-xl'>This Password Reset Form provides a user interface for resetting a forgotten password.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
@@ -179,7 +179,7 @@ function ForgotPasswordPage() {
           </div>
           
         </div>
-        <div className='bg-black  border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black  border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div className='black-grid-embed'>

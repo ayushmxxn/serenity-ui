@@ -123,7 +123,7 @@ function CreateNewPasswordPage() {
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>Create New Password</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>This Form provides a way for users to reset their password, ensuring a secure <br /> and straightforward process. Supports both light and dark themes</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2xl:max-w-xl'>This Form provides a way for users to reset their password. Supports both light and dark themes</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
@@ -195,7 +195,7 @@ function CreateNewPasswordPage() {
           </div>
           
         </div>
-        <div className='bg-black  border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black  border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div className='black-grid-embed'>

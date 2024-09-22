@@ -9,7 +9,7 @@ function Installation() {
     <div className={`text-white backdrop-blur-md w-full h-full pt-28 p-5 relative`}>
       <span className={`text-4xl font-extrabold pl-4`}>Installation</span>
       <div>
-        <p className={`sm:text-base lg:mr-[600px] mt-5 pl-4 text-zinc-400 `}>
+        <p className={`sm:text-base max-w-md mt-5 pl-4 text-zinc-400 `}>
           Follow these simple steps to integrate Serenity UI into your project.
         </p>
       </div>

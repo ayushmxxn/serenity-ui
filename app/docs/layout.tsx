@@ -16,16 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`${inter.className}`}>
+    <div className={`${inter.className} flex flex-col min-h-screen`}>
       <div className="hidden md:flex">
         <Spotlight fill="gray"/>
       </div>
         <Navbar/>
         <div className="flex">
             <SideBar/>
-            <div className="bg-black w-full">
+            <main className="bg-black flex-grow w-full">
               {children}
-            </div>
+            </main>
         </div>
     </div>
   );

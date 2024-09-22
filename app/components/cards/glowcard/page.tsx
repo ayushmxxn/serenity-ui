@@ -282,7 +282,7 @@ function GlowCardPage() {
           </button>
           </div>
         </div>
-        <div className='bg-black border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div className='black-grid-embed'>

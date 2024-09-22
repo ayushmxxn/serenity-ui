@@ -194,7 +194,7 @@ function TechStackPage() {
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>TechStack</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>Techstack component displaying a list of technologies you <br /> are good at with a interactive hover effect.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg'>Techstack component displaying a list of technologies you are good at with a interactive hover effect.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>

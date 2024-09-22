@@ -104,7 +104,7 @@ const CodeStepper: FC = () => {
   };
 
   return (
-    <div className="relative max-w-5xl mx-auto my-10  lg:px-8">
+    <div className="relative  mx-auto my-10  lg:px-8">
       <div className="relative">
         {/* Vertical Line */}
         <div className="absolute top-0 left-4 w-1 bg-zinc-900 h-full z-10"></div>

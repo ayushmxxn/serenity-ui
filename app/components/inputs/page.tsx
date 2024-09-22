@@ -11,8 +11,8 @@ function Page() {
     <div className={`bg-black w-full min-h-screen flex flex-col items-start p-6 pt-24`}>
       <div className='max-w-screen-lg'>
         <h1 className={`text-4xl font-semibold `}>Inputs</h1>
-        <p className={`text-base text-gray-400 mt-4`}>
-          Copy-Paste these inputs into your projects and make them <br /> look cool.
+        <p className={`text-base text-gray-400 mt-4 max-w-md`}>
+          Copy-Paste these inputs into your projects and make them look cool.
         </p>
       </div>
       <div className='w-full max-w-screen-lg mt-8'>

@@ -345,7 +345,7 @@ const [copiedStep, setCopiedStep] = useState<number | null>(null);
     <div className='bg-black/80 text-white backdrop-blur-md w-full  pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>3D Book Testimonial</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>This Book Testimonial is a unique way to showcase testimonials. Allowing Users <br /> to flip through pages of a book.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2x:max-w-xl'>This Book Testimonial is a unique way to showcase testimonials. Allowing Users to flip through pages of a book.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
@@ -370,7 +370,7 @@ const [copiedStep, setCopiedStep] = useState<number | null>(null);
           </button>
           </div>
         </div>
-        <div className='bg-black border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div className='black-grid-embed'>

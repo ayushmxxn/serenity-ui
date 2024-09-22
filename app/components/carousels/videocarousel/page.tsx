@@ -249,7 +249,7 @@ function ImageCarouselPage() {
     <div className='bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5'>
       <span className='text-4xl font-semibold pl-1'>Video Carousel</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>Video Carousel with automatic playback and manual navigation controls, <br /> providing an engaging way to present video content.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-xl'>Video Carousel with automatic playback and manual navigation controls, providing an engaging way to present video content.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
@@ -274,7 +274,7 @@ function ImageCarouselPage() {
           </button>
           </div>
         </div>
-        <div className='bg-black  border rounded-lg border-zinc-800 w-full max-w-[63rem] h-auto mt-2'>
+        <div className='bg-black  border rounded-lg border-zinc-800 w-full h-auto mt-2'>
           <div>
             {activeTab === 'Preview' && (
               <div>

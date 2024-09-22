@@ -741,7 +741,7 @@ function VoiceTestimonailPage() {
     <div className={`bg-black/80 text-white backdrop-blur-md w-full pt-24 overflow-auto p-5`}>
       <span className='text-4xl font-semibold pl-1'>Voice Testimonial</span>
       <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400'>This VoiceTestimonial component displays <br /> user testimonials with audio playback and animated visual effects.</p>
+        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2xl:max-w-xl'>This VoiceTestimonial component displays user testimonials with audio playback and animated visual effects.</p>
       </div>
       <div className='flex flex-col items-start mt-10'>
         <div className='flex justify-between items-center w-full'>
