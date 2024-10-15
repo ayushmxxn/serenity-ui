@@ -33,6 +33,7 @@ const InstallationIcon = () => {
   { title: 'Introduction', url: '/docs/introduction' , icon: <IntroductionIcon/> },
   { title: 'Installation', url: '/docs/installation' , icon: <InstallationIcon/> },
   { title: 'Carousel 360', url: '/components/carousels/carousel360' , icon: <CgComponents /> },
+  { title: 'Feature Section', url: '/components/featuresection' , icon: <CgComponents /> },
   { title: 'Film Roll', url: '/components/filmroll' , icon: <CgComponents /> },
   { title: 'Voice Testimonial', url: '/components/testimonials/voicetestimonial', icon: <CgComponents />},
   { title: 'Star Rating Testimonial', url: '/components/testimonials/starratingtestimonial', icon: <CgComponents />  },

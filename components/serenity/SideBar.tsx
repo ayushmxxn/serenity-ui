@@ -25,6 +25,7 @@ const componentsList = [
 const additionalComponentsList = [
   { name: 'Inputs', url: '/components/inputs', subComponents: [] },
   { name: 'Dock', url: '/components/dock', subComponents: [] },
+  { name: 'Feature Section', url: '/components/featuresection', subComponents: [] },
   { name: 'Shortcut Modal', url: '/components/shortcutmodal', subComponents: []},
   { name: 'Code Block', url: '/components/codeblock', subComponents: []},
   { name: 'Image Gallery', url: '/components/imagegallery', subComponents: []},
