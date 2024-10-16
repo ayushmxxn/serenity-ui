@@ -54,7 +54,6 @@ const FeatureSection = () => {
                 animate={{ opacity: index === currentFeature ? 1 : 0.3 }}
                 transition={{ duration: 0.5 }}
               >
-                {/* Stepper Circle */}
                 <motion.div
                   className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center ${
                     index === currentFeature ? 'bg-blue-500 scale-110' : 'bg-gray-500'
@@ -72,9 +71,7 @@ const FeatureSection = () => {
                   )}
                 </motion.div>
 
-                {/* Step Content */}
                 <div className="flex-1">
-                  {/* Adjusted font size for mobile */}
                   <h3 className="text-xl font-semibold text-gray-200">{feature.step}</h3>
                   <p className="text-sm md:text-base text-gray-400">{feature.content}</p>
                 </div>
