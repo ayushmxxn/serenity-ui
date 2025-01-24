@@ -26,10 +26,10 @@ function Home() {
 
 
   return (
+    <>
     <div className={`${inter.className} bg-black`}>
       <HomeNav />
-      <div className="flex flex-col p-5 pt-28 md:pt-24 lg:pt-32">
-
+      <div className="flex flex-col p-5 ">
         <div className='hidden lg:flex'>
           <Spotlight fill="gray" />
         </div>
@@ -75,10 +75,14 @@ function Home() {
 
         <div className="justify-center lg:justify-start xl:justify-start 2xl:justify-start flex items-start pt-24 pb-5 lg:pl-5 xl:pl-5 lg:pt-10 xl:pb-5">
           <TechUsed />
-          <ChatWidget />
+          <div className='hidden lg:block'>
+            <ChatWidget />
+          </div>
         </div>
       </div>
     </div>
+    </>
+    
   );
 }
 
