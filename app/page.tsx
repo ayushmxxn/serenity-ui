@@ -75,9 +75,7 @@ function Home() {
 
         <div className="justify-center lg:justify-start xl:justify-start 2xl:justify-start flex items-start pt-24 pb-5 lg:pl-5 xl:pl-5 lg:pt-10 xl:pb-5">
           <TechUsed />
-          <div className='hidden lg:block'>
-            <ChatWidget />
-          </div>
+          <ChatWidget />
         </div>
       </div>
     </div>
