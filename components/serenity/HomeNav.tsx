@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { RiTwitterXLine } from 'react-icons/ri';
-import { SiDiscord } from 'react-icons/si';
-import Image from 'next/image';
-import Logo from '@/app/images/serenitylogotransparent.svg';
-import Search from './Search';
-import HamburgurNavbar from './HamburgerNavbar';
-import CommandSearch from './CommandSearch';
+import Link from "next/link";
+import React from "react";
+import { FaGithub } from "react-icons/fa";
+import { RiTwitterXLine } from "react-icons/ri";
+import { SiDiscord } from "react-icons/si";
+import Image from "next/image";
+import Logo from "@/app/images/serenitylogotransparent.svg";
+import Search from "./Search";
+import HamburgurNavbar from "./HamburgerNavbar";
+import CommandSearch from "./CommandSearch";
 
 const HomeNav: React.FC = () => {
   return (
@@ -29,14 +29,14 @@ const HomeNav: React.FC = () => {
             />
           </svg>
           <p className="leading-tight text-center">
-            Looking for someone to build a landing page for you?{' '}
+            Need a landing page for $100?{" "}
             <Link
               href="https://twitter.com/messages/compose?recipient_id=1475215762490941441"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span className="underline cursor-pointer text-white hover:text-purple-200">
-                DM me
+                DM me.
               </span>
             </Link>
           </p>
@@ -46,19 +46,33 @@ const HomeNav: React.FC = () => {
       {/* Main Navbar */}
       <div className="navbar-container bg-black border border-zinc-900 backdrop-blur-lg py-4 px-3 text-sm z-30 flex justify-between items-center">
         <div className="flex items-center">
-          <Image src={Logo} alt="Serenity Logo" width={40} height={20} className="rounded-full" />
+          <Image
+            src={Logo}
+            alt="Serenity Logo"
+            width={40}
+            height={20}
+            className="rounded-full"
+          />
           <Link href="/">
-            <p className="hidden sm:flex text-lg text-white ml-1">Serenity UI</p>
+            <p className="hidden sm:flex text-lg text-white ml-1">
+              Serenity UI
+            </p>
           </Link>
           <div className="">
             <div className="items-center flex space-x-6 text-[#ABAFB4]">
               <Link href="/components" passHref>
-                <span className="hover:text-zinc-300 cursor-pointer hidden sm:flex ml-10">Components</span>
+                <span className="hover:text-zinc-300 cursor-pointer hidden sm:flex ml-10">
+                  Components
+                </span>
               </Link>
               <Link href="/templates" prefetch passHref>
                 <div className="flex items-center space-x-2">
-                  <span className="hover:text-zinc-300 cursor-pointer">Templates</span>
-                  <span className="text-xs border border-green-400 text-green-400 rounded-full px-2 py-[2px]">New</span>
+                  <span className="hover:text-zinc-300 cursor-pointer">
+                    Templates
+                  </span>
+                  <span className="text-xs border border-green-400 text-green-400 rounded-full px-2 py-[2px]">
+                    New
+                  </span>
                 </div>
               </Link>
             </div>
@@ -73,10 +87,18 @@ const HomeNav: React.FC = () => {
           <CommandSearch />
           {/* Socials (Hide on smaller screens) */}
           <div className="hidden sm:flex space-x-5 mr-2 justify-center items-center">
-            <Link href="https://github.com/ayushmxxn" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://github.com/ayushmxxn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGithub className="text-white" size={18} />
             </Link>
-            <Link href="https://discord.gg/kzk6uWey3g" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://discord.gg/kzk6uWey3g"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <SiDiscord className="text-white" size={18} />
             </Link>
             <Link
