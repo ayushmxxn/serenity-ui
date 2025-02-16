@@ -12,7 +12,7 @@ import CommandSearch from "./CommandSearch";
 const HomeNav: React.FC = () => {
   return (
     <>
-      <div className="announcement-banner bg-indigo-600 sm:bg-purple-600 text-white text-sm py-2 px-4 flex justify-center items-center text-center [box-shadow:0_-20px_80px_-40px_#ffffff3f_inset,0_0_20px_-5px_rgba(255,255,255,0.1)]">
+      {/* <div className="announcement-banner bg-indigo-600 sm:bg-purple-600 text-white text-sm py-2 px-4 flex justify-center items-center text-center [box-shadow:0_-20px_80px_-40px_#ffffff3f_inset,0_0_20px_-5px_rgba(255,255,255,0.1)]">
         <div className="flex items-center space-x-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const HomeNav: React.FC = () => {
             </Link>
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Navbar */}
       <div className="navbar-container bg-black border border-zinc-900 backdrop-blur-lg py-4 px-3 text-sm z-30 flex justify-between items-center sm:m-6 sm:rounded-full">
