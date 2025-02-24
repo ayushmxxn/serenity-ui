@@ -362,7 +362,7 @@ const ProductCard: React.FC = () => {
                     className="flex px-5 items-center justify-start gap-2 text-purple-400 hover:text-purple-300 transition-colors p-2 rounded-lg border border-purple-400/20 hover:border-purple-400/30 bg-purple-400/5 backdrop-blur-sm w-fit"
                   >
                     <span className="font-medium">
-                      Join my affiliate program and earn 20% on every sale!
+                      Join our affiliate program and earn 20% on every sale!
                     </span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </motion.div>

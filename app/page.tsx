@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import { Spotlight } from "@/components/ui/spotlight";
 import { CgComponents } from "react-icons/cg";
 import ChatWidget from "@/components/serenity/ChatWidget";
+import NotificationPopup from "@/components/serenity/NotificationPopup";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -88,6 +89,7 @@ function Home() {
             <TechUsed />
             <ChatWidget />
           </div>
+          <NotificationPopup />
         </div>
       </div>
     </>

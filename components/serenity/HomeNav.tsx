@@ -77,7 +77,7 @@ const HomeNav: React.FC = () => {
                   <span className="hover:text-zinc-300 cursor-pointer">
                     Become affiliate
                   </span>
-                  <span className="text-xs border border-purple-400 text-purple-400 rounded-full px-2 py-[2px]">
+                  <span className="text-xs border border-purple-400 text-purple-400 rounded-full px-2 py-[2px] hidden lg:block">
                     Earn 20% on each sale
                   </span>
                 </div>
