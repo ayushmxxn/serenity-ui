@@ -70,11 +70,18 @@ const HomeNav: React.FC = () => {
                   <span className="hover:text-zinc-300 cursor-pointer">
                     Templates
                   </span>
-                  <span className="text-xs border border-green-400 text-green-400 rounded-full px-2 py-[2px]">
-                    New
-                  </span>
                 </div>
               </Link>
+              <a href="https://ayushmxxn.gumroad.com/affiliates" target="blank">
+                <div className="flex items-center space-x-2">
+                  <span className="hover:text-zinc-300 cursor-pointer">
+                    Become affiliate
+                  </span>
+                  <span className="text-xs border border-purple-400 text-purple-400 rounded-full px-2 py-[2px]">
+                    Earn 20% on each sale
+                  </span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
