@@ -329,7 +329,7 @@ const ProductCard: React.FC = () => {
                           $79
                         </span>
                         <span className="font-semibold text-gray-900">
-                          Buy Now $69
+                          Buy Now $49
                         </span>
                       </span>
                       <ArrowRight className="w-4 h-4 text-gray-900 ml-2 group-hover:translate-x-1 transition-transform" />
