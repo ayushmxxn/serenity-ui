@@ -95,7 +95,7 @@ const NotificationPopup = () => {
                     <span className="text-neutral-500 line-through mr-2 text-sm">
                       $79
                     </span>
-                    Buy Now $39
+                    Buy Now $29
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
