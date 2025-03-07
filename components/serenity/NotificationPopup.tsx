@@ -62,7 +62,7 @@ const NotificationPopup = () => {
                 objectFit="cover"
               />
               <div className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-bl">
-                Only for first 5 buyers!
+                75% OFF - Limited Time!
               </div>
             </div>
 
@@ -71,7 +71,7 @@ const NotificationPopup = () => {
                 SaaS landing page template is now live!
               </p>
               <p className="mb-4 text-red-400 text-sm font-medium">
-                Limited offer: Only for the first 5 buyers!
+                Limited offer: 75% off for the first 5 buyers!
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center">
                 <Link href="/templates">
@@ -95,7 +95,7 @@ const NotificationPopup = () => {
                     <span className="text-neutral-500 line-through mr-2 text-sm">
                       $79
                     </span>
-                    Buy Now $29
+                    Buy Now $19
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
