@@ -89,7 +89,7 @@ function Home() {
             <TechUsed />
             <ChatWidget />
           </div>
-          <NotificationPopup />
+          {/* <NotificationPopup /> */}
         </div>
       </div>
     </>
