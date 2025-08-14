@@ -1,9 +1,18 @@
+// Search.tsx
 import React from "react";
+import { useSearch } from "./SearchContext";
 
 function Search() {
+  const { openSearch } = useSearch();
+
   return (
-    <div className="flex justify-center items-center">
-      <div className="bg-black/50  border border-zinc-900 relative flex items-center shadow-md rounded-full w-52 h-10">
+    <div
+      onClick={openSearch}
+      className="flex justify-center items-center cursor-pointer"
+      role="button"
+      aria-label="Open search modal"
+    >
+      <div className="bg-black/50 border border-zinc-900 relative flex items-center shadow-md rounded-full w-52 h-10">
         {/* Search Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +34,9 @@ function Search() {
           name="SearchBar"
           id="Searchbar"
           placeholder="Press / to search"
-          disabled
-          className="placeholder-zinc-400 w-10 bg-transparent outline-none flex-grow pl-10 pr-10 py-2 rounded-full text-sm"
+          readOnly
+          onClick={openSearch}
+          className="placeholder-zinc-400 w-full bg-transparent outline-none flex-grow pl-10 pr-10 py-2 rounded-full text-sm cursor-pointer"
         />
 
         {/* Modern Backslash Icon */}
