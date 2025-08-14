@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { TbBrandNextjs } from 'react-icons/tb';
-import { SiReact } from 'react-icons/si';
-import { BiLogoTailwindCss } from 'react-icons/bi';
-import { BiLogoTypescript } from 'react-icons/bi';
-import { TbBrandFramerMotion } from 'react-icons/tb';
-import Link from 'next/link';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { TbBrandNextjs } from "react-icons/tb";
+import { SiReact } from "react-icons/si";
+import { BiLogoTailwindCss } from "react-icons/bi";
+import { BiLogoTypescript } from "react-icons/bi";
+import { TbBrandFramerMotion } from "react-icons/tb";
+import Link from "next/link";
 
 const techItems = [
-  { href: 'https://nextjs.org/', label: 'Next.js', icon: TbBrandNextjs },
-  { href: 'https://react.dev/', label: 'React', icon: SiReact },
-  { href: 'https://tailwindcss.com/', label: 'Tailwind', icon: BiLogoTailwindCss },
-  { href: 'https://www.typescriptlang.org/', label: 'TypeScript', icon: BiLogoTypescript },
-  { href: 'https://www.framer.com/motion/', label: 'Framer Motion', icon: TbBrandFramerMotion },
+  { href: "https://nextjs.org/", label: "Next.js", icon: TbBrandNextjs },
+  { href: "https://react.dev/", label: "React", icon: SiReact },
+  {
+    href: "https://tailwindcss.com/",
+    label: "Tailwind",
+    icon: BiLogoTailwindCss,
+  },
+  {
+    href: "https://www.typescriptlang.org/",
+    label: "TypeScript",
+    icon: BiLogoTypescript,
+  },
+  {
+    href: "https://www.framer.com/motion/",
+    label: "Framer Motion",
+    icon: TbBrandFramerMotion,
+  },
 ];
 
-
-
 const TechUsed = () => {
-
   const [iconSize, setIconSize] = useState(30);
 
   useEffect(() => {
@@ -30,14 +39,11 @@ const TechUsed = () => {
       }
     };
 
-    
     handleResize();
 
-    
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -51,17 +57,20 @@ const TechUsed = () => {
           visible: {
             opacity: 1,
             scale: 1,
-            
           },
         }}
       >
         {techItems.map(({ href, label, icon: Icon }) => (
-          <div
-            key={label}
-            className="relative"
-          >
-            <Link href={href} target="_blank" className="text-white flex items-center">
-              <Icon size={iconSize} className="hover:text-zinc-300 transition-colors duration-300" />
+          <div key={label} className="relative">
+            <Link
+              href={href}
+              target="_blank"
+              className="text-white flex items-center"
+            >
+              <Icon
+                size={iconSize}
+                className="hover:text-zinc-300 transition-colors duration-300"
+              />
               <motion.span
                 className="ml-1"
                 initial={{ opacity: 1, x: 0 }}
