@@ -6,7 +6,7 @@ Beautifully crafted UI components to elevate your web projects. Fully customizab
 
 ## Built By
 
-Created with ❤️ by [Ayushmaan Singh](https://ayushmxxn.com/).
+Created with ❤️ by <a href="https://ayushmxxn.com/" target="_blank">Ayushmaan Singh</a>
 
 ## License
 
