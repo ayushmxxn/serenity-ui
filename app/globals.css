@@ -725,3 +725,26 @@ body {
     transform: translateX(400%) translateY(400%) rotate(45deg);
   }
 }
+
+.components-scrollable {
+  max-height: calc(
+    100vh - 300px
+  ); /* Adjust based on the height of other sections */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #282828 #0e0f11;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.components-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.components-scrollable::-webkit-scrollbar-track {
+  background: #0e0f11;
+}
+
+.components-scrollable::-webkit-scrollbar-thumb {
+  background-color: #282828;
+  border-radius: 4px;
+}

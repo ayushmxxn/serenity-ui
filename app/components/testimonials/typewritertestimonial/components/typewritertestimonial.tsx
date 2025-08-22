@@ -1,126 +1,171 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-type Testimonial = {
-  image: string;
-  audio: string;
-  text: string;
-  name: string;
-  jobtitle: string;
-};
+// testimonials data
+const testimonials = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    text: "Using this component library has significantly speed up our development process. The quality and ease of integration are remarkable!",
+    name: "David Smith",
+    jobtitle: "UI Designer",
+    audio: "David.mp3",
+    social: "https://i.imgur.com/VRtqhGC.png",
+  },
+  {
+    image: "https://i.imgur.com/6fKCuVC.png",
+    text: "The components are highly responsive and work seamlessly across different devices and screen sizes.",
+    name: "Emily Chen",
+    jobtitle: "Mobile App Developer",
+    audio: "Emily.mp3",
+    social: "https://i.imgur.com/VRtqhGC.png",
+  },
+  {
+    image: "https://i.imgur.com/bG88vHI.png",
+    text: "This library has saved us a significant amount of time and effort. The components are well-documented and easy to integrate.",
+    name: "Sarah Taylor",
+    jobtitle: "Backend Developer",
+    audio: "Sarah.mp3",
+    social: "https://i.imgur.com/VRtqhGC.png",
+  },
+  {
+    image: "https://i.imgur.com/tjmS77j.png",
+    text: "I appreciate the attention to detail in the design. The components are visually appealing and professional.",
+    name: "Kevin White",
+    jobtitle: "UI/UX Designer",
+    audio: "Kevin.mp3",
+    social: "https://i.imgur.com/VRtqhGC.png",
+  },
+  {
+    image: "https://i.imgur.com/pnsLqpq.png",
+    text: "I love how the components are designed to be highly responsive and work well across different screen sizes.",
+    name: "Brian Kim",
+    jobtitle: "Mobile App Developer",
+    audio: "Brian.mp3",
+    social: "https://i.imgur.com/VRtqhGC.png",
+  },
+];
 
-type TestimonialsProps = {
-  testimonials: Testimonial[];
-};
-
-const TypewriterTestimonial: React.FC<TestimonialsProps> = ({ testimonials }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+const TypewriterTestimonial: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [audioPlayer, setAudioPlayer] = useState<HTMLAudioElement | null>(null);
-  const [hasBeenHovered, setHasBeenHovered] = useState<boolean[]>(new Array(testimonials.length).fill(false));
-  const [typedText, setTypedText] = useState('');
+  const [typedText, setTypedText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const typewriterRef = useRef<NodeJS.Timeout | null>(null);
-  const currentTextRef = useRef('');
+  const animationFrameRef = useRef<number | null>(null);
 
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-    const audio = new Audio(`/audio/${testimonials[index].audio}`);
-    audio.play();
-    setAudioPlayer(audio);
-    setHasBeenHovered(prev => {
-      const updated = [...prev];
-      updated[index] = true;
-      return updated;
-    });
-    startTypewriter(testimonials[index].text);
-  };
-
-  const handleMouseLeave = () => {
+  const handleProfileHover = (index: number) => {
+    if (typewriterRef.current) {
+      clearTimeout(typewriterRef.current);
+      typewriterRef.current = null;
+    }
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
     if (audioPlayer) {
       audioPlayer.pause();
       audioPlayer.currentTime = 0;
+      setAudioPlayer(null);
     }
-    setHoveredIndex(null);
-    setAudioPlayer(null);
-    stopTypewriter();
+
+    setActiveIndex(index);
+
+    const audio = new Audio(`/audio/${testimonials[index].audio}`);
+    audio.play().catch((error) => {
+      console.log("Audio playback failed:", error);
+    });
+    setAudioPlayer(audio);
+
+    startTypewriter(testimonials[index].text);
   };
 
   const startTypewriter = (text: string) => {
+    setIsTyping(true);
+    setTypedText("");
     let i = 0;
-    setTypedText('');
-    currentTextRef.current = text;
-    
+
     const type = () => {
       if (i <= text.length) {
         setTypedText(text.slice(0, i));
         i++;
-        typewriterRef.current = setTimeout(type, 50);
+        typewriterRef.current = setTimeout(() => {
+          animationFrameRef.current = requestAnimationFrame(type);
+        }, 35);
+      } else {
+        setIsTyping(false);
+        typewriterRef.current = null;
       }
     };
 
-    type();
+    animationFrameRef.current = requestAnimationFrame(type);
   };
-
-  const stopTypewriter = () => {
-    if (typewriterRef.current) {
-      clearTimeout(typewriterRef.current);
-    }
-    setTypedText('');
-    currentTextRef.current = '';
-  };
-
-  useEffect(() => {
-    return () => {
-      if (typewriterRef.current) {
-        clearTimeout(typewriterRef.current);
-      }
-    };
-  }, []);
 
   return (
-    <div className="flex justify-center items-center gap-4 flex-wrap">
-      {testimonials.map((testimonial, index) => (
-        <motion.div
-          key={index}
-          className="relative flex flex-col items-center"
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.img
-            src={testimonial.image}
-            alt={`Testimonial ${index}`}
-            className="w-16 h-16 rounded-full border-4 hover:animate-pulse border-gray-300"
-            animate={{ 
-              borderColor: (hoveredIndex === index || hasBeenHovered[index]) ? '#ACA0FB' : '#E5E7EB'
-            }}
-            transition={{ duration: 0.3 }}
-          />
-          <AnimatePresence>
-            {hoveredIndex === index && (
+    <div className="p-8 rounded-2xl max-w-4xl mx-auto">
+      <div className="flex flex-col items-center gap-6">
+        <div className="relative h-32 w-full max-w-sm flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            {activeIndex !== null && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: -10 }}
-                animate={{ opacity: 1, scale: 1, y: -20 }}
-                exit={{ opacity: 0, scale: 0.8, y: -10 }}
-                transition={{ duration: 0.4 }}
-                className="absolute bottom-20 bg-white text-black text-sm px-4 py-3 rounded-lg shadow-2xl max-w-xs w-56"
+                className="bg-white text-gray-800 rounded-lg px-4 py-3 shadow-lg border border-gray-200 w-full relative"
+                key={activeIndex}
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
               >
-                <div className="h-24 overflow-hidden whitespace-pre-wrap">
-                  {typedText}
-                  <span className="animate-blink">|</span>
+                <div className="min-h-[60px]">
+                  <p className="text-sm leading-relaxed text-gray-700">
+                    {typedText}
+                    {isTyping && <span className="animate-pulse">|</span>}
+                  </p>
                 </div>
-                <p className="mt-2 text-right font-semibold">{testimonial.name}</p>
-                <p className="text-right text-gray-500 text-sm">{testimonial.jobtitle}</p>
-                <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-4">
-                  <div className="w-3 h-3 bg-white rounded-full shadow-lg"></div>
-                  <div className="w-2 h-2 bg-white rounded-full shadow-lg mt-1"></div>
-                  <div className="w-1 h-1 bg-white rounded-full shadow-lg mt-1"></div>
+                <div className="mt-2 pt-2 border-t border-gray-200">
+                  <p className="font-medium text-xs text-gray-800">
+                    {testimonials[activeIndex].name}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {testimonials[activeIndex].jobtitle}
+                  </p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
-      ))}
+        </div>
+
+        {/* Profile Images */}
+        <div className="flex items-center relative">
+          {testimonials.map((testimonial, index) => (
+            <motion.button
+              key={index}
+              onMouseEnter={() => handleProfileHover(index)}
+              className="relative focus:outline-none rounded-full"
+              style={{
+                marginLeft: index > 0 ? "-12px" : "0",
+                zIndex: index === activeIndex ? 20 : 10 - index,
+              }}
+              whileHover={{ zIndex: 25 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.img
+                src={testimonial.image}
+                alt={testimonial.name}
+                className={`w-10 h-10 rounded-full border-2 cursor-pointer transition-all duration-300 ${
+                  index === activeIndex
+                    ? "border-red-500 shadow-lg"
+                    : "border-gray-300 hover:border-gray-400"
+                }`}
+                animate={{
+                  scale: index === activeIndex ? 1.1 : 1,
+                  borderWidth: index === activeIndex ? 3 : 2,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

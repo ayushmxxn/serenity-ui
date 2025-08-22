@@ -1,47 +1,31 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaReact } from 'react-icons/fa';
-import { SiNextdotjs, SiFramer} from 'react-icons/si';
-import PropsTable from '@/components/serenity/Table';
-import SpotlightCard from './components/SpotlightCard';
-import SerenityExampleBlock from '@/components/serenity/SerenityExampleBlock';
-import SerenitySourceCodeBlock from '@/components/serenity/SerenitySourceCodeBlock';
+"use client";
 
-// Props data for component
- const cardData = [
-  {
-    title: 'Next.js',
-    description: 'A React framework for server-rendered or statically-exported React apps.',
-    icon: <SiNextdotjs size={40} />,
-    
-  },
-  {
-    title: 'React',
-    description: 'A JavaScript library for building user interfaces.',
-    icon: <FaReact size={40}  />,
-  },
-  {
-    title: 'Framer Motion',
-    description: ' A production-ready motion library for React.',
-    icon: <SiFramer size={40} />,
-  },
-];
+import React, { useState, useEffect, Suspense } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Code, Copy, SquareTerminal } from "lucide-react";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { GeistSans } from "geist/font/sans";
+import SpotlightCard from "./components/SpotlightCard";
 
-// Source Code
+const LazySyntaxHighlighter = React.lazy(() =>
+  import("react-syntax-highlighter").then((module) => ({
+    default: module.Prism,
+  }))
+);
+
+// Source code for spotlight card component
 const sourcecode = `
-'use client'
-import React, { useRef, useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+"use client";
+import React, { useRef, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { SiNextdotjs, SiFramer } from "react-icons/si";
+import { FaReact } from "react-icons/fa";
 
 interface CardData {
   title: string;
   description: string;
   icon: React.ReactNode;
-}
-
-interface SpotlightCardProps {
-  cards: CardData[];
 }
 
 const SpotlightItem: React.FC<CardData> = ({ title, description, icon }) => {
@@ -64,7 +48,7 @@ const SpotlightItem: React.FC<CardData> = ({ title, description, icon }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={\`relative w-80 rounded-3xl border border-neutral-800 bg-neutral-950 p-8\`}
+      className="relative w-72 rounded-3xl border border-neutral-800 bg-neutral-950 p-6"
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-3xl"
@@ -74,23 +58,36 @@ const SpotlightItem: React.FC<CardData> = ({ title, description, icon }) => {
           background: \`radial-gradient(600px circle at \${position.x}px \${position.y}px, rgba(255,255,255,.25), transparent 40%)\`,
         }}
       />
-      <div className="mb-4">
-        {icon}
-      </div>
-      <h3 className="mb-2 font-medium text-neutral-100">
-        {title}
-      </h3>
-      <p className="text-sm text-neutral-400">
-        {description}
-      </p>
+      <div className="mb-4">{icon}</div>
+      <h3 className="mb-2 font-medium text-neutral-100">{title}</h3>
+      <p className="text-sm text-neutral-400">{description}</p>
     </div>
   );
 };
 
-const SpotlightCard: React.FC<SpotlightCardProps> = ({ cards }) => {
+const SpotlightCard: React.FC = () => {
+  const cardData: CardData[] = [
+    {
+      title: "Next.js",
+      description:
+        "A React framework for server-rendered or statically-exported React apps.",
+      icon: <SiNextdotjs size={40} />,
+    },
+    {
+      title: "React",
+      description: "A JavaScript library for building user interfaces.",
+      icon: <FaReact size={40} />,
+    },
+    {
+      title: "Framer Motion",
+      description: "A production-ready motion library for React.",
+      icon: <SiFramer size={40} />,
+    },
+  ];
+
   return (
-    <div className="flex flex-wrap justify-center gap-4">
-      {cards.map((card, index) => (
+    <div className="flex flex-wrap sm:flex-none justify-center gap-4 mt-10">
+      {cardData.map((card, index) => (
         <SpotlightItem
           key={index}
           title={card.title}
@@ -105,191 +102,244 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ cards }) => {
 export default SpotlightCard;
 `;
 
-// Example code
-const example = [
-  {
-    title: 'Example.tsx',
-    code: `import React from 'react';
-import { FaReact } from 'react-icons/fa';
-import { SiNextdotjs, SiFramer} from 'react-icons/si';
-import SpotlightCard from '../components/cards/spotlightcard/page';
+interface CustomButtonProps {
+  label?: string;
+  onClick: () => void;
+  icon?: React.ReactNode;
+  variant?: "light" | "dark";
+  showTooltip?: boolean;
+}
 
+const CustomButton: React.FC<CustomButtonProps> = ({
+  label,
+  onClick,
+  icon,
+  variant = "dark",
+  showTooltip = false,
+}) => {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-const cardData = [
-  {
-    title: 'Next.js',
-    description: 'A React framework for server-rendered or statically-exported React apps.',
-    icon: <SiNextdotjs size={40} />,
-    
-  },
-  {
-    title: 'React',
-    description: 'A JavaScript library for building user interfaces.',
-    icon: <FaReact size={40}  />,
-  },
-  {
-    title: 'Framer Motion',
-    description: ' A production-ready motion library for React.',
-    icon: <SiFramer size={40} />,
-  },
-];
+  const handleClick = () => {
+    onClick();
+    if (showTooltip) {
+      setTooltipVisible(true);
+      setTimeout(() => setTooltipVisible(false), 2000);
+    }
+  };
 
-const Page = () => {
   return (
-    <div className='mt-10'>
-      <SpotlightCard cards={cardData} />
+    <div className="relative">
+      <button
+        className={`flex items-center font-medium justify-center px-3 py-1.5 rounded-lg text-sm transition-all duration-200 ${
+          variant === "light"
+            ? "bg-neutral-200 border border-neutral-200 text-neutral-900 hover:bg-neutral-100 hover:text-neutral-700"
+            : "bg-neutral-800/80 border border-neutral-700/50 text-neutral-300 hover:bg-neutral-700/50 hover:text-neutral-100"
+        } ${!label ? "p-2" : ""}`}
+        onClick={handleClick}
+      >
+        {icon && <span className={label ? "mr-1" : ""}>{icon}</span>}
+        {label}
+      </button>
+      {showTooltip && tooltipVisible && (
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-neutral-200 text-neutral-900 text-xs rounded-md shadow-lg z-10">
+          Copied!
+        </div>
+      )}
     </div>
   );
 };
 
-export default Page;
-`,
-  },
-];
+const ComponentShowcase: React.FC = () => {
+  const [showCode, setShowCode] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
+  const [copiedModalCode, setCopiedModalCode] = useState(false);
 
-
-// Props data
-const propsData = [
-    { name: 'title', type: 'string', description: 'Title of the card' },
-    { name: 'description', type: 'string', description: 'Description of the card' },
-    { name: 'icon', type: 'React.ReactNode / string', description: 'Icon of the card' },
-  
-  ]
-
-function UsernameTestimonialPage() {
-  
-  const [activeTab, setActiveTab] = useState('Preview');
-
-  const handleTabChange = (tab: React.SetStateAction<string>) => {
-    setActiveTab(tab);
-  };
-
-  const [copiedStep, setCopiedStep] = useState<number | null>(null);
-
-  const copyToClipboard = (text: string, step: number) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        setCopiedStep(step);
-        setTimeout(() => setCopiedStep(null), 2000);
-      },
-      () => alert('Failed to copy.')
+  const copyCLI = () => {
+    navigator.clipboard.writeText(
+      "npx @ayushmxxn/serenity-ui@latest add spotlightcard"
     );
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
   };
 
+  const copyCode = () => {
+    navigator.clipboard.writeText(sourcecode);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
+  };
+
+  const copyModalCode = () => {
+    navigator.clipboard.writeText(sourcecode);
+    setCopiedModalCode(true);
+    setTimeout(() => setCopiedModalCode(false), 2000);
+  };
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowCode(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   return (
-    <div className='bg-black/80 text-white backdrop-blur-md w-full  pt-24 overflow-auto p-5'>
-      <span className='text-4xl font-semibold pl-1'>SpotLight Card</span>
-      <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-lg 2xl:max-w-xl'>Use this card for highlighting product features or services  with a dynamic and interactive spotlight effect.</p>
-      </div>
-      <div className='flex flex-col items-start mt-10'>
-        <div className='flex justify-between items-center w-full'>
-          <div className='flex items-center space-x-4'>
-            <button
-            className={`flex items-center text-white px-3 py-1 rounded-md ${activeTab === 'Preview' ? 'bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-800 text-white border-b-2 border-zinc-600' : ''}`}
-            onClick={() => handleTabChange('Preview')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-            </svg>
-            Preview
-          </button>
-          <button
-            className={`flex items-center text-white px-3 py-1 rounded-md ${activeTab === 'Code' ? 'bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-800 text-white border-b-2 border-zinc-600' : ''}`}
-            onClick={() => handleTabChange('Code')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
-            </svg>
-            Code
-          </button>
-          </div>
-          
-          
-        </div>
-        <div className='bg-black  border rounded-lg border-zinc-800 w-full h-auto mt-2 '>
-          <div>
-            {activeTab === 'Preview' && (
-              <div className='black-grid-embed py-10'>
-                  <SpotlightCard cards={cardData}/>
-              </div>
-            )}
-            {activeTab === 'Code' && (
-              <div>
-                <SerenitySourceCodeBlock codeString={sourcecode} language="javascript"/>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='pt-20 py-3 text-xl font-semibold'>
-        <div className='flex items-center'>
-            <div className='mr-2 sm:pl-4'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            </div>
-            Installation
-        </div>
-        </div>
-        <div>
-          <div className='relative'>
-                  <pre className='bg-[#18181B] p-3 sm:ml-4 rounded-md overflow-auto text-sm sm:text-base w-[350px] sm:w-[600px] border border-zinc-700'>
-                    <code className='text-zinc-300'>npx @ayushmxxn/serenity-ui@latest add spotlightcard</code>
-                  </pre>
-                  <button
-                    onClick={() => copyToClipboard('npx @ayushmxxn/serenity-ui@latest add spotlightcard', 1)}
-                    className='absolute right-0 top-2 p-2 w-10 h-auto bg-[#18181B] rounded border-r border-zinc-700'
-                    aria-label='Copy command'
-                  >
-                    {copiedStep ? (
-                    <motion.svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="#4ADE80"
-                      className="w-4 h-4"
-                      initial={{ scale: 0, opacity: 1 }}
-                      animate={{ scale: [0, 1.1, 1], opacity: [1, 1, 1] }}
-                      transition={{ duration: 0.6 }} // Adjust duration if needed
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </motion.svg>
-                  ) : (
-                    <span className='relative -top-1 -left-1'>
-                      <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 6.75H7.75C6.64543 6.75 5.75 7.64543 5.75 8.75V17.25C5.75 18.3546 6.64543 19.25 7.75 19.25H16.25C17.3546 19.25 18.25 18.3546 18.25 17.25V8.75C18.25 7.64543 17.3546 6.75 16.25 6.75H15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M14 8.25H10C9.44772 8.25 9 7.80228 9 7.25V5.75C9 5.19772 9.44772 4.75 10 4.75H14C14.5523 4.75 15 5.19772 15 5.75V7.25C15 7.80228 14.5523 8.25 14 8.25Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M9.75 12.25H14.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M9.75 15.25H14.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                      </svg>
-                    </span>
-                  )}
-                  </button>
-            </div>
-        </div>
-        <div className='flex items-center pt-20 py-3 sm:pl-4 text-xl font-semibold'>
-           <div className='mr-2'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
-            </svg>
-            </div>
-            Usage        
-        </div>
-        <SerenityExampleBlock files={example}/>
-      </div>
-      <div className="container mx-auto p-1 sm:p-4 mt-20">
-        <div className='flex items-center mb-3'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-            </svg>
-            <h1 className="text-xl font-semibold ml-2">Props</h1>
-        </div>
-        <PropsTable propsData={propsData} />
-      </div>
-    </div>
-  )
-}
+    <section className="min-h-screen bg-neutral-950 text-white pb-12 relative">
+      {/* Profile Image */}
+      <a
+        href="https://ayushmxxn.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-4 right-4 z-50 hidden sm:flex"
+      >
+        <Image
+          src="https://i.ibb.co/pBPsjfg2/myavatar.jpg"
+          alt="Your Profile"
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
+      </a>
 
-export default UsernameTestimonialPage;
+      <div className="max-w-7xl mx-auto py-8 px-6 sm:px-8 lg:px-12">
+        <div className="mb-6">
+          <h1 className="text-3xl font-semibold text-white mb-2">
+            SpotLight Card
+          </h1>
+          <p className="text-neutral-400 text-base max-w-2xl">
+            Use this card for highlighting product features with an interactive
+            spotlight effect.
+          </p>
+        </div>
+
+        {/* Button Section */}
+        <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+          <div className="flex items-center gap-3">
+            <CustomButton
+              label="Show Code"
+              onClick={() => setShowCode(!showCode)}
+              icon={<Code className="w-4 h-4" />}
+              variant="light"
+            />
+          </div>
+          <CustomButton
+            label="Add with CLI"
+            onClick={copyCLI}
+            icon={<SquareTerminal className="w-4 h-4" />}
+            variant="dark"
+            showTooltip={true}
+          />
+        </div>
+
+        <motion.div className="bg-neutral-950 w-full border-t border-neutral-900 overflow-hidden">
+          <div className="flex flex-col items-center justify-center w-full">
+            <SpotlightCard />
+          </div>
+        </motion.div>
+
+        {/* Custom Modal */}
+        {showCode && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Background Overlay */}
+            <motion.div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowCode(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            ></motion.div>
+
+            {/* Modal */}
+            <motion.div
+              className={`${GeistSans.className} bg-[#1A1A1A] border border-[#2D2D2D] ring-4 ring-[#171717] rounded-xl w-full max-w-4xl h-auto max-h-[71vh] shadow-2xl flex flex-col z-50 mx-1 relative`}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Modal Header */}
+              <div className="flex justify-between items-center p-4 border-b border-[#2D2D2D]">
+                <CustomButton
+                  label="Go Back"
+                  onClick={() => setShowCode(false)}
+                  variant="dark"
+                />
+                <CustomButton
+                  icon={
+                    copiedModalCode ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="w-4 h-4"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )
+                  }
+                  onClick={copyModalCode}
+                  variant="dark"
+                />
+              </div>
+
+              {/* Body */}
+              <div className="flex-1 overflow-y-auto custom-scrollbar pb-4 px-4">
+                <Suspense fallback={<div>Loading code...</div>}>
+                  <LazySyntaxHighlighter
+                    language="jsx"
+                    style={oneDark}
+                    showLineNumbers
+                    wrapLongLines={false}
+                    customStyle={{
+                      margin: 0,
+                      padding: "1rem",
+                      background: "#1A1A1A",
+                      fontSize: "0.875rem",
+                      minHeight: "100%",
+                      maxWidth: "100%",
+                      overflowX: "auto",
+                    }}
+                  >
+                    {sourcecode}
+                  </LazySyntaxHighlighter>
+                </Suspense>
+              </div>
+
+              {/* Scrollbar Styles */}
+              <style jsx>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                  width: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                  background-color: #4a4a4a;
+                  border-radius: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background-color: #6b6b6b;
+                }
+              `}</style>
+            </motion.div>
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default ComponentShowcase;

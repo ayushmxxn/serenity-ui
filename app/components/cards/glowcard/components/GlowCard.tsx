@@ -1,10 +1,41 @@
-'use client'
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const cards = [
+  {
+    title: "Exploring Mountains",
+    date: "Mar 06, 2024",
+    imageSrc:
+      "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    title: "Beautiful Beach View",
+    date: "Jul 15, 2023",
+    imageSrc:
+      "https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    title: "Mystical Forest",
+    date: "Aug 22, 2024",
+    imageSrc:
+      "https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    title: "City at Night",
+    date: "Sep 10, 2023",
+    imageSrc:
+      "https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    title: "Serenity by the Sea",
+    date: "Oct 15, 2023",
+    imageSrc:
+      "https://images.pexels.com/photos/3374347/pexels-photo-3374347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+];
 
 type CardProps = {
   title: string;
@@ -16,9 +47,8 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({ title, date, imageSrc, isHovered }) => (
   <motion.div
     className={`p-4 rounded-3xl flex flex-col items-start justify-between w-64 h-64 
-      ${isHovered ? 'shadow-xl border-blue-200' : 'shadow-md border-gray-600'}
-      ${isHovered ? 'border-2' : 'border-2'}
-      bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800`}
+      ${isHovered ? "shadow-xl border-blue-200" : "shadow-md border-gray-600"}
+      border-2 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800`}
     animate={{
       scale: isHovered ? 1.1 : 1,
     }}
@@ -32,20 +62,11 @@ const Card: React.FC<CardProps> = ({ title, date, imageSrc, isHovered }) => (
       className="mb-4 object-cover rounded-3xl"
     />
     <h2 className="text-lg font-bold text-gray-200">{title}</h2>
-    <p className="text-sm text-gray-400">{date}</p>
+    <p className="text-sm text-neutral-400">{date}</p>
   </motion.div>
 );
 
-type CardStackProps = {
-  cards: Array<{
-    title: string;
-    date: string;
-    imageSrc: string;
-  }>;
-  offset?: number;
-};
-
-const GlowCard: React.FC<CardStackProps> = ({ cards, offset = 40 }) => {
+const GlowCard: React.FC<{ offset?: number }> = ({ offset = 40 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
 
@@ -54,12 +75,18 @@ const GlowCard: React.FC<CardStackProps> = ({ cards, offset = 40 }) => {
   }, []);
 
   return (
-    <div className={`${inter.className} flex items-center justify-center h-[600px] sm:h-[300px] bg-black overflow-hidden`}>
-      <div className="relative flex flex-col md:flex-row justify-center items-center mb-40 sm:m-0 md:m-0 lg:m-0">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="relative flex items-center justify-center">
         {cards.map((card, index) => {
-          const yOffset = index * offset;
-          const xOffset = index * offset;
           const isHovered = hoveredIndex === index;
+          const totalCards = cards.length;
+
+          const centerIndex = (totalCards - 1) / 2;
+          const relativeIndex = index - centerIndex;
+          const xOffset =
+            isClient && window.innerWidth >= 768 ? relativeIndex * offset : 0;
+          const yOffset =
+            isClient && window.innerWidth < 768 ? relativeIndex * offset : 0;
 
           return (
             <motion.div
@@ -73,14 +100,13 @@ const GlowCard: React.FC<CardStackProps> = ({ cards, offset = 40 }) => {
               animate={{
                 scale: 1,
                 opacity: 1,
+                x: xOffset,
                 y: yOffset,
-                x: 0,
                 filter: isHovered ? "blur(0px)" : "blur(2px)",
-                ...(isClient && window.innerWidth >= 768 ? { x: xOffset, y: 0 } : {}),
               }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               style={{
-                zIndex: isHovered ? 100 : cards.length - index,
+                zIndex: isHovered ? 100 : totalCards - index,
               }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}

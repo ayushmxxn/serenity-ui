@@ -28,48 +28,23 @@ const componentsList = [
     url: "/components/testimonials",
     subComponents: [
       "Voice Testimonial",
-      "Star Rating Testimonial",
-      "Username Testimonial",
-      "3D Book Testimonial",
+      "Book Testimonial",
       "Typewriter Testimonial",
     ],
   },
-  {
-    name: "Pricing",
-    url: "/components/pricing",
-    subComponents: ["Pricing Section"],
-  },
-  {
-    name: "Authentication",
-    url: "/components/authentication",
-    subComponents: [
-      "Signup Form",
-      "SignUp Form V2",
-      "SignIn Form",
-      "Forgot Password",
-      "Email",
-      "Otp",
-      "Create New Password",
-      "Password Changed",
-    ],
-  },
+
   {
     name: "Carousels",
     url: "/components/carousels",
     subComponents: ["Image Carousel", "Video Carousel", "Carousel 360"],
   },
-  {
-    name: "Navbars",
-    url: "/components/navbars",
-    subComponents: ["Tubelight Navbar"],
-  },
+
   {
     name: "Cards",
     url: "/components/cards",
     subComponents: [
       "Spotlight Card",
       "Swipe Card",
-      "Project Cards",
       "Glow Card",
       "3D Flip Card",
     ],
@@ -79,32 +54,22 @@ const componentsList = [
 // Additional Components List
 const additionalComponentsList = [
   { name: "Inputs", url: "/components/inputs", subComponents: [] },
-  { name: "Dock", url: "/components/dock", subComponents: [] },
   {
-    name: "Feature Section",
-    url: "/components/featuresection",
+    name: "Tubelight Navbar",
+    url: "/components/tubelightnavbar",
     subComponents: [],
   },
+  { name: "Dock", url: "/components/dock", subComponents: [] },
+
   {
     name: "Shortcut Modal",
     url: "/components/shortcutmodal",
     subComponents: [],
   },
-  { name: "Code Block", url: "/components/codeblock", subComponents: [] },
   { name: "Image Gallery", url: "/components/imagegallery", subComponents: [] },
-  { name: "Film Roll", url: "/components/filmroll", subComponents: [] },
-  { name: "Drawer", url: "/components/drawer", subComponents: [] },
-  { name: "Footer", url: "/components/footer", subComponents: [] },
-  { name: "NewsLetter", url: "/components/newsletter", subComponents: [] },
-  { name: "Cookie", url: "/components/cookie", subComponents: [] },
-  { name: "WaitList", url: "/components/waitlist", subComponents: [] },
-  { name: "TechStack", url: "/components/techstack", subComponents: [] },
   { name: "Toast", url: "/components/toast", subComponents: [] },
-  { name: "Steps", url: "/components/steps", subComponents: [] },
   { name: "Brands", url: "/components/brandsection", subComponents: [] },
-  { name: "Star Rating", url: "/components/starrating", subComponents: [] },
   { name: "Buttons", url: "/components/buttons", subComponents: [] },
-  { name: "Toggle", url: "/components/toggle", subComponents: [] },
 ];
 
 const SideBar: React.FC = () => {
@@ -189,7 +154,7 @@ const SideBar: React.FC = () => {
               />
             </Link>
             <Link
-              href="https://twitter.com/messages/compose?recipient_id=YOUR_TWITTER_ID"
+              href="https://x.com/ayushmxxn"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"

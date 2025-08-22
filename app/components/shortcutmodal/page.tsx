@@ -1,416 +1,367 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import PropsTable from '@/components/serenity/Table';
-import SerenityExampleBlock from '@/components/serenity/SerenityExampleBlock';
-import ShortcutModal from './components/ShortcutModal';
-import { AnimatePresence, motion, animate } from 'framer-motion';
-import SerenitySourceCodeBlock from '@/components/serenity/SerenitySourceCodeBlock';
+"use client";
+import React, { useState, useEffect, Suspense } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Code, Copy, SquareTerminal } from "lucide-react";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { GeistSans } from "geist/font/sans";
+import ShortcutModal from "./components/ShortcutModal";
 
-
-// Props data for component
-const shortcuts = [
-  { key: 'Ctrl+B', description: 'Download canvas as a PNG image' },
-  { key: 'Ctrl+C', description: 'Copy canvas to clipboard as a PNG image' },
-  { key: 'Ctrl+K', description: 'Open quick access menu' },
-  { key: 'Ctrl+Shift+V', description: 'Paste image from clipboard to add a new image annotation layer' },
-  { key: 'Ctrl+Shift+F', description: 'Clear editor state' },
-  { key: 'Del', description: 'Delete selected annotation layer' },
-];
-
-
-// Source code
-const sourcecode = `
-'use client';
-import React, { useState, ChangeEvent, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Inter } from 'next/font/google';
-import { MdKeyboard } from 'react-icons/md';
-import { IoMdSearch } from 'react-icons/io';
-
-const inter = Inter({ subsets: ['latin'], weight: '500' });
+// Source code for shortcut modal component
+const sourcecode = `"use client";
+import React, { useState, ChangeEvent } from "react";
+import { GeistSans } from "geist/font/sans";
+import { IoMdSearch, IoMdClose } from "react-icons/io";
+import { MdKeyboard } from "react-icons/md";
 
 interface Shortcut {
   key: string;
   description: string;
 }
 
-interface ShortcutModalProps {
-  shortcuts: Shortcut[];
-  mode?: 'light' | 'dark';
-}
+const ShortcutModal: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-const ShortcutModal: React.FC<ShortcutModalProps> = ({ shortcuts, mode= 'dark'}) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const shortcuts: Shortcut[] = [
+    { key: "Ctrl+B", description: "Download canvas as a PNG image" },
+    { key: "Ctrl+C", description: "Copy canvas to clipboard as a PNG image" },
+    { key: "Ctrl+K", description: "Open quick access menu" },
+    {
+      key: "Ctrl+Shift+V",
+      description:
+        "Paste image from clipboard to add a new image annotation layer",
+    },
+    { key: "Ctrl+Shift+F", description: "Clear editor state" },
+    { key: "Del", description: "Delete selected annotation layer" },
+  ];
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredShortcuts = shortcuts.filter(shortcut =>
-    shortcut.key.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    shortcut.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredShortcuts = shortcuts.filter(
+    (shortcut) =>
+      shortcut.key.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      shortcut.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isOpen) {
-        closeModal();
-      } else if (event.key === '/' && !isOpen) {
-        openModal();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Background Overlay */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
-
-      {/* Modal */}
-      <div className={\`\${inter.className} \${mode === 'dark' ? 'bg-black border-zinc-800' : 'bg-white border-zinc-300'} w-[550px] h-auto max-h-[500px] border rounded-lg shadow-lg flex flex-col z-50 mx-2\`}>
-        <div className={\`\${mode === 'dark' ? 'bg-black border-zinc-800' : 'bg-white border-zinc-300'} flex items-center justify-between px-6 border-b rounded-t-lg\`}>
-          <div className="flex items-center justify-center">
-            <MdKeyboard size={20} className={mode === 'dark' ? 'text-white' : 'text-zinc-800'} />
-            <h1 className={\`\${mode === 'dark' ? 'text-white' : 'text-zinc-800'} px-2 py-5 font-semibold\`}>Keyboard Shortcuts</h1>
+    <div className="max-h-[80vh] w-full overflow-y-auto">
+      <div
+        className={\`\${GeistSans.className} bg-[#1A1A1A] border border-[#2D2D2D] rounded-xl w-full shadow-2xl flex flex-col mx-auto mt-8\`}
+      >
+        {/* Header */}
+        <div className="px-4 py-3 bg-[#1A1A1A] border-b border-[#2D2D2D] rounded-t-xl flex items-center justify-between">
+          <div className="flex items-center">
+            <MdKeyboard className="text-neutral-400 w-5 h-5 mr-2" />
+            <h1 className="text-neutral-100 text-sm font-medium">
+              Keyboard Shortcuts
+            </h1>
           </div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={\`\${mode === 'dark' ? 'text-zinc-300 hover:text-white' : 'text-zinc-700'} w-5 h-5 transition-colors cursor-pointer\`}
-            onClick={closeModal}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <IoMdClose
+            className="text-neutral-400 w-5 h-5 cursor-pointer hover:text-neutral-100 transition-colors"
+            onClick={() => setSearchQuery("")}
+          />
         </div>
+
         {/* Searchbar */}
-        <div className={\`px-6 py-2 \${mode === 'dark' ? 'bg-black' : 'bg-white'}\`}>
-          <div className="relative py-2 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={mode === 'dark' ? '#A1A1AA' : '#71717A'} className="size-4 sm:size-5 absolute left-3">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
+        <div className="px-4 py-3 bg-[#1A1A1A]">
+          <div className="relative flex items-center">
+            <IoMdSearch className="text-neutral-400 w-5 h-5 absolute left-2 top-1/2 transform -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search shortcuts..."
-              className={\`\${mode === 'dark' ? 'bg-black text-white border-zinc-800 placeholder-zinc-400' : 'bg-white text-black border-zinc-300 placeholder-zinc-500'} w-full border-b  py-2 px-4 pl-10 focus:outline-none\`}
+              className="bg-neutral-700/50 text-neutral-100 placeholder-neutral-400 w-full pl-8 pr-2 py-2 focus:outline-none text-sm font-normal rounded-lg"
             />
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto rounded-b-lg custom-scrollbar">
-          <div>
-            {filteredShortcuts.length > 0 ? (
-              filteredShortcuts.map((shortcut, index) => (
-                <motion.div
-                  key={index}
-                  className={\`p-4 flex flex-col\`}
-                >
-                  <div className="flex justify-between items-center">
-                    <p className={\`\${mode === 'dark' ? 'text-white' : 'text-black'} text-sm flex-1 overflow-hidden text-ellipsis\`}>
-                      {shortcut.description}
-                    </p>
-                    <div className={\`\${mode === 'dark' ? 'text-white' : 'text-black'} font-medium ml-4 whitespace-nowrap\`}>
-                      <div className="flex space-x-2">
-                        {shortcut.key.split('+').map((key, idx) => (
-                          <span key={idx} className="bg-zinc-700 hover:bg-zinc-800 border-b border-zinc-400 text-white px-2 py-1 rounded-lg text-xs cursor-pointer">
-                            {key}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+
+        {/* Results */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-2 max-h-[300px]">
+          {filteredShortcuts.length > 0 ? (
+            filteredShortcuts.map((shortcut, index) => (
+              <div
+                key={index}
+                className="group hover:bg-[#2D2D2D] rounded-lg p-2 transition-all duration-200 ease-in-out"
+              >
+                <div className="flex justify-between items-center">
+                  <p className="text-neutral-100 text-sm font-normal flex-1 overflow-hidden text-ellipsis">
+                    {shortcut.description}
+                  </p>
+                  <div className="flex space-x-2 ml-4">
+                    {shortcut.key.split("+").map((key, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-[#2D2D2D] hover:bg-[#4a4a4a] text-neutral-100 px-2 py-1 rounded-lg text-xs cursor-default border border-[#4a4a4a]"
+                      >
+                        {key}
+                      </span>
+                    ))}
                   </div>
-                </motion.div>
-              ))
-            ) : (
-              <div className='flex justify-center items-center gap-1'>
-                <IoMdSearch className={\`\${mode === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}\`} size={20} />
-                <p className={\`\${mode === 'dark' ? 'text-zinc-300' : 'text-zinc-600'} text-center py-10\`}>No shortcuts found</p>
+                </div>
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className="flex justify-center items-center gap-2 py-10">
+              <p className="text-neutral-100 text-sm font-normal text-center">
+                No shortcuts found.
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      {/* Scrollbar Styles */}
-      <style>{\`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: \${mode === 'dark' ? '#27272A' : '#27272A'};
-          border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background-color: \${mode === 'dark' ? '#5555' : '#555'};
-        }
-      \`}</style>
-    </div>
-  );
-}
-
-export default ShortcutModal;
-`;
-
-
-// Example code
-const example = [
-  {
-    title: 'Example.tsx',
-    code: `import React from 'react';
-import ShortcutModal from './components/ui/ShortcutModal';
-
-
-const shortcuts = [
-  { key: 'Ctrl+B', description: 'Download canvas as a PNG image' },
-  { key: 'Ctrl+C', description: 'Copy canvas to clipboard as a PNG image' },
-  { key: 'Ctrl+K', description: 'Open quick access menu' },
-  { key: 'Ctrl+Shift+V', description: 'Paste image from clipboard to add a new image annotation layer' },
-  { key: 'Ctrl+Shift+F', description: 'Clear editor state' },
-  { key: 'Del', description: 'Delete selected annotation layer' },
-];
-
-
-const Home: React.FC = () => {
-  return (
-    <div>
-      <ShortcutModal shortcuts={shortcuts} mode='dark'/>
     </div>
   );
 };
 
-export default Home;
-`,
-  },
-];
+export default ShortcutModal;`;
 
+const LazySyntaxHighlighter = React.lazy(() =>
+  import("react-syntax-highlighter").then((module) => ({
+    default: module.Prism,
+  }))
+);
 
-// Props data
-const propsData = [
-  { name: 'key', type: 'string', description: 'Shortcut Key' },
-  { name: 'description', type: 'string', description: 'Description of the shortcut key' },
-  { name: 'mode', type: 'string', description: 'Specifies the color scheme. light / dark ' },
-  
-];
-
-
-function ShortcutModalPage() {
-  
-  const [activeTab, setActiveTab] = useState('Preview');
-  const [darkMode, setDarkMode] = useState(true);
-  const [hasMounted, setHasMounted] = useState(false);
-  
-  const handleTabChange = (tab: React.SetStateAction<string>) => {
-    setActiveTab(tab);
-  };
-
-  const [copiedStep, setCopiedStep] = useState<number | null>(null);
-
-  const copyToClipboard = (text: string, step: number) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        setCopiedStep(step);
-        setTimeout(() => setCopiedStep(null), 2000);
-      },
-      () => alert('Failed to copy.')
-    );
-  };
-
-   
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
-
-   useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-
-  return (
-    <div className='bg-black/80 text-white backdrop-blur-md w-full  pt-24 overflow-auto p-5'>
-      <span className='text-4xl font-semibold pl-1'>Shortcut Modal</span>
-      <div>
-        <p className='sm:text-base mt-4 pl-1 text-gray-400 max-w-xl'>Use the ShortcutModal component to display and manage keyboard shortcuts, with support for light and dark themes.</p>
-      </div>
-      <div className='flex flex-col items-start mt-10'>
-        <div className='flex justify-between items-center w-full'>
-          <div className='flex items-center space-x-4'>
-            <button
-            className={`flex items-center text-white px-3 py-1 rounded-md ${activeTab === 'Preview' ? 'bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-800 text-white border-b-2 border-zinc-600' : ''}`}
-            onClick={() => handleTabChange('Preview')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-            </svg>
-            Preview
-          </button>
-          <button
-            className={`flex items-center text-white px-3 py-1 rounded-md ${activeTab === 'Code' ? 'bg-gradient-to-r from-zinc-700 via-zinc-800 to-zinc-800 text-white border-b-2 border-zinc-600' : ''}`}
-            onClick={() => handleTabChange('Code')}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 9.75 16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
-            </svg>
-            Code
-          </button>
-          </div>
-           <div className='flex justify-end items-center gap-2'>
-              
-
-            <div className='mr-1 sm:mr-2'>
-             <motion.button
-      whileTap={{ scale: 0.95 }}
-      className="flex items-center rounded-full p-2 text-white focus:outline-none"
-      onClick={toggleDarkMode}
-    >
-      <AnimatePresence mode="wait">
-        {darkMode ? (
-          <motion.svg
-            key="dark"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-6 w-6"
-            initial={hasMounted ? { opacity: 0, rotate: -90 } : false}
-            animate={hasMounted ? { opacity: 1, rotate: 0 } : false}
-            exit={{ opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.1 }}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-          </motion.svg>
-        ) : (
-          <motion.svg
-            key="light"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-6 w-6"
-            initial={hasMounted ? { opacity: 0, rotate: -90 } : false}
-            animate={hasMounted ? { opacity: 1, rotate: 0 } : false}
-            exit={{ opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.1 }}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-          </motion.svg>
-        )}
-      </AnimatePresence>
-    </motion.button>
-            </div>
-          </div>
-          
-        </div>
-        <div className='bg-black  border rounded-lg border-zinc-800 w-full h-auto mt-2 '>
-          <div>
-            {activeTab === 'Preview' && (
-              <div className='black-grid-embed py-20'>
-                <ShortcutModal shortcuts={shortcuts} mode={`${darkMode? 'dark' : 'light'}`}/>
-       
-      
-              </div>
-            )}
-            {activeTab === 'Code' && (
-              <div>
-                <SerenitySourceCodeBlock codeString={sourcecode} language="javascript"/>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='pt-20 py-3 text-xl font-semibold'>
-        <div className='flex items-center'>
-            <div className='mr-2 sm:pl-4'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            </div>
-            Installation
-        </div>
-        </div>
-        <div>
-          <div className='relative'>
-                  <pre className='bg-[#18181B] p-3 sm:ml-4 rounded-md overflow-auto text-sm sm:text-base w-[350px] sm:w-[600px] border border-zinc-700'>
-                    <code className='text-zinc-300'>npx @ayushmxxn/serenity-ui@latest add shortcutmodal</code>
-                  </pre>
-                  <button
-                    onClick={() => copyToClipboard('npx @ayushmxxn/serenity-ui@latest add shortcutmodal', 1)}
-                    className='absolute right-0 top-2 p-2 w-10 h-auto bg-[#18181B] rounded border-r border-zinc-700'
-                    aria-label='Copy command'
-                  >
-                    {copiedStep ? (
-                    <motion.svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="#4ADE80"
-                      className="w-4 h-4"
-                      initial={{ scale: 0, opacity: 1 }}
-                      animate={{ scale: [0, 1.1, 1], opacity: [1, 1, 1] }}
-                      transition={{ duration: 0.6 }} // Adjust duration if needed
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </motion.svg>
-                  ) : (
-                    <span className='relative -top-1 -left-1'>
-                      <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 6.75H7.75C6.64543 6.75 5.75 7.64543 5.75 8.75V17.25C5.75 18.3546 6.64543 19.25 7.75 19.25H16.25C17.3546 19.25 18.25 18.3546 18.25 17.25V8.75C18.25 7.64543 17.3546 6.75 16.25 6.75H15" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M14 8.25H10C9.44772 8.25 9 7.80228 9 7.25V5.75C9 5.19772 9.44772 4.75 10 4.75H14C14.5523 4.75 15 5.19772 15 5.75V7.25C15 7.80228 14.5523 8.25 14 8.25Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M9.75 12.25H14.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                        <path d="M9.75 15.25H14.25" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"></path>
-                      </svg>
-                    </span>
-                  )}
-                  </button>
-            </div>
-        </div>
-        <div className='flex items-center pt-20 py-3 sm:pl-4 text-xl font-semibold'>
-           <div className='mr-2'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
-            </svg>
-            </div>
-            Usage        
-        </div>
-        <SerenityExampleBlock files={example}/>
-      </div>
-      <div className="container mx-auto p-1 sm:p-4 mt-20">
-        <div className='flex items-center mb-3'>
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-            </svg>
-            <h1 className="text-xl font-semibold ml-2">Props</h1>
-        </div>
-        <PropsTable propsData={propsData} />
-      </div>
-    </div>
-  )
+interface CustomButtonProps {
+  label?: string;
+  onClick: () => void;
+  icon?: React.ReactNode;
+  variant?: "light" | "dark";
+  showTooltip?: boolean;
 }
 
-export default ShortcutModalPage;
+const CustomButton: React.FC<CustomButtonProps> = ({
+  label,
+  onClick,
+  icon,
+  variant = "dark",
+  showTooltip = false,
+}) => {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  const handleClick = () => {
+    onClick();
+    if (showTooltip) {
+      setTooltipVisible(true);
+      setTimeout(() => setTooltipVisible(false), 2000);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <button
+        className={`flex items-center font-medium justify-center px-3 py-1.5 rounded-lg text-sm transition-all duration-200 ${
+          variant === "light"
+            ? "bg-neutral-200 border border-neutral-200 text-neutral-900 hover:bg-neutral-100 hover:text-neutral-700"
+            : "bg-neutral-800/80 border border-neutral-700/50 text-neutral-300 hover:bg-neutral-700/50 hover:text-neutral-100"
+        } ${!label ? "p-2" : ""}`}
+        onClick={handleClick}
+      >
+        {icon && <span className={label ? "mr-1" : ""}>{icon}</span>}
+        {label}
+      </button>
+      {showTooltip && tooltipVisible && (
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-neutral-200 text-neutral-900 text-xs rounded-md shadow-lg z-10">
+          Copied!
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ComponentShowcase: React.FC = () => {
+  const [showCode, setShowCode] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
+  const [copiedModalCode, setCopiedModalCode] = useState(false);
+
+  const copyCLI = () => {
+    navigator.clipboard.writeText(
+      "npx @ayushmxxn/serenity-ui@latest add shortcutmodal"
+    );
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
+  };
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(sourcecode);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
+  };
+
+  const copyModalCode = () => {
+    navigator.clipboard.writeText(sourcecode);
+    setCopiedModalCode(true);
+    setTimeout(() => setCopiedModalCode(false), 2000);
+  };
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowCode(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
+
+  return (
+    <section className="min-h-screen bg-neutral-950 text-white pb-12 relative">
+      {/* Profile Image */}
+      <a
+        href="https://ayushmxxn.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-4 right-4 z-50 hidden sm:flex"
+      >
+        <Image
+          src="https://i.ibb.co/pBPsjfg2/myavatar.jpg"
+          alt="Your Profile"
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
+      </a>
+
+      <div className=" mx-auto py-8 px-6 sm:px-8 lg:px-12">
+        <div className="mb-6">
+          <h1 className="text-3xl font-semibold text-white mb-2">
+            Shortcut Modal
+          </h1>
+          <p className="text-neutral-400 text-base max-w-2xl">
+            A modal component displaying a searchable list of keyboard
+            shortcuts.
+          </p>
+        </div>
+
+        {/* Button Section */}
+        <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+          <div className="flex items-center gap-3">
+            <CustomButton
+              label="Show Code"
+              onClick={() => setShowCode(!showCode)}
+              icon={<Code className="w-4 h-4" />}
+              variant="light"
+            />
+          </div>
+          <CustomButton
+            label="Add with CLI"
+            onClick={copyCLI}
+            icon={<SquareTerminal className="w-4 h-4" />}
+            variant="dark"
+            showTooltip={true}
+          />
+        </div>
+
+        <motion.div className="bg-neutral-950 w-full border-t border-neutral-900 overflow-hidden">
+          <div className="flex flex-col items-center justify-center w-full">
+            <ShortcutModal />
+          </div>
+        </motion.div>
+
+        {/* Custom Modal */}
+        {showCode && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Background Overlay */}
+            <motion.div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowCode(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            ></motion.div>
+
+            {/* Modal */}
+            <motion.div
+              className={`${GeistSans.className} bg-[#1A1A1A] border border-[#2D2D2D] ring-4 ring-[#171717] rounded-xl w-full max-w-4xl h-auto max-h-[71vh] shadow-2xl flex flex-col z-50 mx-1 relative`}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Modal Header */}
+              <div className="flex justify-between items-center p-4 border-b border-[#2D2D2D]">
+                <CustomButton
+                  label="Go Back"
+                  onClick={() => setShowCode(false)}
+                  variant="dark"
+                />
+                <CustomButton
+                  icon={
+                    copiedModalCode ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="w-4 h-4"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )
+                  }
+                  onClick={copyModalCode}
+                  variant="dark"
+                />
+              </div>
+
+              {/* Body */}
+              <div className="flex-1 overflow-y-auto custom-scrollbar pb-4 px-4">
+                <Suspense fallback={<div>Loading code...</div>}>
+                  <LazySyntaxHighlighter
+                    language="jsx"
+                    style={oneDark}
+                    showLineNumbers
+                    wrapLongLines={false}
+                    customStyle={{
+                      margin: 0,
+                      padding: "1rem",
+                      background: "#1A1A1A",
+                      fontSize: "0.875rem",
+                      minHeight: "100%",
+                      maxWidth: "100%",
+                      overflowX: "auto",
+                    }}
+                  >
+                    {sourcecode}
+                  </LazySyntaxHighlighter>
+                </Suspense>
+              </div>
+
+              {/* Scrollbar Styles */}
+              <style jsx>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                  width: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                  background-color: #4a4a4a;
+                  border-radius: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background-color: #6b6b6b;
+                }
+              `}</style>
+            </motion.div>
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default ComponentShowcase;

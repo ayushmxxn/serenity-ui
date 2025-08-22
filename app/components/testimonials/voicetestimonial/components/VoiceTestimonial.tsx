@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
-import { RiTwitterXLine } from 'react-icons/ri';
-import { motion, Variants } from 'framer-motion';
-
-type Mode = 'light' | 'dark';
+import Image from "next/image";
+import React, { useState, useEffect, useRef } from "react";
+import { RiTwitterXLine } from "react-icons/ri";
+import { motion, Variants } from "framer-motion";
 
 interface Testimonial {
   image?: string;
@@ -16,14 +14,39 @@ interface Testimonial {
   social?: string;
 }
 
-interface VoiceTestimonialProps {
-  mode: Mode;
-  testimonials: Testimonial[];
-}
+// Define testimonials data within the component
+const testimonials: Testimonial[] = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    text: "I'm blown away by the versatility of the components in this library. They make UI development a breeze!",
+    name: "Alice Johnson",
+    jobtitle: "Frontend Developer",
+    audio: "Alice.mp3",
+    social: "https://x.com/ayushmxxn",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    text: "Using this component library has significantly speed up our development process. The quality and ease of integration are remarkable!",
+    name: "David Smith",
+    jobtitle: "UI Designer",
+    audio: "David.mp3",
+    social: "https://x.com/ayushmxxn",
+  },
+  {
+    image: "https://i.imgur.com/kaDy9hV.jpeg",
+    text: "The components in this library are not just well-designed but also highly customizable. It's a developer's dream!",
+    name: "Emma Brown",
+    jobtitle: "Software Engineer",
+    audio: "Emma.mp3",
+    social: "https://x.com/ayushmxxn",
+  },
+];
 
-const WaveVariants = (): Variants[] => {
+const WaveVariants = (numBars: number): Variants[] => {
   const waveVariants: Variants[] = [];
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < numBars; i++) {
     waveVariants.push({
       initial: {
         scaleY: 1.5,
@@ -36,7 +59,7 @@ const WaveVariants = (): Variants[] => {
         transition: {
           duration: Math.random() * 0.5 + 0.5,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
           delay: Math.random() * 0.5,
         },
       },
@@ -45,20 +68,34 @@ const WaveVariants = (): Variants[] => {
   return waveVariants;
 };
 
-const waveVariants = WaveVariants();
-
-const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials }) => {
-  const [currentPlayingIndex, setCurrentPlayingIndex] = useState<number | null>(null);
-  const [audioElements, setAudioElements] = useState<(HTMLAudioElement | null)[]>([]);
+const VoiceTestimonial: React.FC = () => {
+  const [currentPlayingIndex, setCurrentPlayingIndex] = useState<number | null>(
+    null
+  );
+  const [audioElements, setAudioElements] = useState<
+    (HTMLAudioElement | null)[]
+  >([]);
   const [showAll, setShowAll] = useState(false);
+  const [waveVariants, setWaveVariants] = useState<Variants[]>([]);
+  const audioContainerRef = useRef<HTMLDivElement>(null);
 
+  // Calculate number of wave bars based on container width
   useEffect(() => {
-    
+    if (audioContainerRef.current) {
+      const containerWidth = audioContainerRef.current.offsetWidth - 32 - 16; // Subtract button width (32px) and padding (8px * 2)
+      const barWidth = 4; // Width (2px) + margin (1.5px * 2)
+      const numBars = Math.max(10, Math.floor(containerWidth / barWidth)); // Ensure at least 10 bars
+      setWaveVariants(WaveVariants(numBars));
+    }
+  }, []);
+
+  // Handle audio elements
+  useEffect(() => {
     const elements: (HTMLAudioElement | null)[] = [];
     testimonials.forEach((testimonial) => {
       if (testimonial.audio) {
         const audio = new Audio(`/audio/${testimonial.audio}`);
-        audio.addEventListener('ended', handleAudioEnded);
+        audio.addEventListener("ended", handleAudioEnded);
         elements.push(audio);
       } else {
         elements.push(null);
@@ -66,16 +103,15 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
     });
     setAudioElements(elements);
 
-    
     return () => {
       elements.forEach((audio) => {
         if (audio) {
           audio.pause();
-          audio.removeEventListener('ended', handleAudioEnded);
+          audio.removeEventListener("ended", handleAudioEnded);
         }
       });
     };
-  }, [testimonials]);
+  }, []);
 
   const handlePlay = (index: number) => {
     if (currentPlayingIndex !== null && currentPlayingIndex !== index) {
@@ -84,7 +120,9 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
 
     const audio = audioElements[index];
     if (audio) {
-      audio.play().catch((error) => console.error('Audio playback error:', error));
+      audio
+        .play()
+        .catch((error) => console.error("Audio playback error:", error));
       setCurrentPlayingIndex(index);
     }
   };
@@ -111,63 +149,73 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
   };
 
   const openInNewTab = (url: string) => {
-    const win = window.open(url, '_blank');
+    const win = window.open(url, "_blank");
     if (win) {
       win.focus();
     }
   };
 
-  const shouldShowLoadMore = testimonials.length > 6; 
+  const shouldShowLoadMore = testimonials.length > 6;
 
   return (
     <div>
       <div className="flex flex-col items-center justify-center pt-5">
-        <div className="flex flex-col gap-5 mb-8">
-          <span className="text-center text-4xl">Read what people are saying</span>
-          <span className="text-center text-slate-300">
-            Dummy feedback from virtual customers <br /> using our component library.
-          </span>
-        </div>
+        <div className="flex flex-col gap-5 mb-8"></div>
       </div>
       <div className="relative">
-        <div className={`flex justify-center items-center gap-5 flex-wrap shadow-black overflow-hidden ${showAll ? 'max-h-full' : 'max-h-[720px]'} relative`}>
-          {shouldShowLoadMore && !showAll && <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10"></div>}
+        <div className="flex justify-center items-center gap-5 flex-wrap shadow-black overflow-hidden relative">
+          {shouldShowLoadMore && !showAll && (
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10"></div>
+          )}
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className={`${
-                mode === 'dark' ? 'bg-black' : 'bg-white'
-              } border border-zinc-400 w-80 h-auto rounded-2xl p-5 relative ${
-                !showAll && index >= 6 ? 'testimonial-partially-visible' : ''
-              }`}>
-              <div onClick={() => openInNewTab(testimonial.social || '')} className="absolute top-5 right-5">
+              className={`bg-white border border-neutral-300 w-64 h-auto rounded-2xl p-4 relative ${
+                !showAll && index >= 6 ? "testimonial-partially-visible" : ""
+              }`}
+            >
+              <div
+                onClick={() => openInNewTab(testimonial.social || "")}
+                className="absolute top-4 right-4"
+              >
                 <RiTwitterXLine
-                  className={`${mode === 'dark' ? 'text-white' : 'text-slate-800'} cursor-pointer`}
-                  size={20}
+                  className="text-neutral-800 cursor-pointer"
+                  size={18}
                 />
               </div>
               <div className="flex items-center">
                 <Image
-                  src={testimonial.image || 'https://via.placeholder.com/50'}
+                  src={testimonial.image || "https://via.placeholder.com/40"}
                   alt="profile"
-                  width={50}
-                  height={50}
+                  width={40}
+                  height={40}
                   className="rounded-full"
                 />
-                <div className="flex flex-col pl-4">
-                  <span className={`${mode === 'dark' ? 'text-white' : 'text-black'}`}>{testimonial.name}</span>
-                  <span className={`${mode === 'dark' ? 'text-zinc-300' : 'text-zinc-600'} text-sm`}>
+                <div className="flex flex-col pl-3">
+                  <span className="text-black text-sm">{testimonial.name}</span>
+                  <span className="text-neutral-600 text-xs">
                     {testimonial.jobtitle}
                   </span>
                 </div>
               </div>
-              <div className="mt-5 mb-1">
-                <span className={`${mode === 'dark' ? 'text-slate-200' : 'text-black'}`}>{testimonial.text}</span>
+              <div className="mt-4 mb-1">
+                <span className="text-black text-sm">{testimonial.text}</span>
               </div>
-              <div className={`${mode === 'dark'? 'bg-zinc-200' : 'bg-slate-100'}  w-full h-12 mt-4 rounded-lg flex justify-between items-center p-2 relative`}>
+              <div
+                ref={audioContainerRef}
+                className="bg-stone-100  w-full h-10 mt-3 rounded-lg flex justify-between items-center p-2 relative"
+              >
                 {currentPlayingIndex !== index ? (
-                  <span onClick={() => handlePlay(index)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`${mode === 'dark'? 'text-zinc-900' : 'text-slate-600'} size-10 `}>
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => handlePlay(index)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="text-neutral-600 size-8 "
+                    >
                       <path
                         fillRule="evenodd"
                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
@@ -176,7 +224,12 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
                   </span>
                 ) : (
                   <span onClick={() => handlePause(index)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`${mode === 'dark'? 'text-zinc-900' : 'text-slate-600'} size-10 `}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="text-neutral-600 size-8"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM9 8.25a.75.75 0 0 0-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 0 0 .75-.75V9a.75.75 0 0 0-.75-.75H9Zm5.25 0a.75.75 0 0 0-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 0 0 .75-.75V9a.75.75 0 0 0-.75-.75h-.75Z"
@@ -184,20 +237,22 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
                     </svg>
                   </span>
                 )}
-                <div className="flex">
+                <div className="flex flex-1 items-center justify-between">
                   {waveVariants.map((variant, i) => (
                     <motion.div
                       key={i}
-                      className={`${mode === 'dark'? 'bg-zinc-900' : 'bg-slate-600'}`}
+                      className="bg-neutral-600"
                       style={{
-                        width: '3px',
-                        height: `${Math.random() * 20 + 5}px`,
-                        margin: '0 2px',
-                        borderRadius: '2px',
+                        flex: "1 1 0", // Distribute space evenly
+                        height: `${Math.random() * 15 + 4}px`, // Random height
+                        margin: "0 1px", // Reduced margin for spacing
+                        borderRadius: "1px",
                       }}
                       variants={variant}
                       initial="initial"
-                      animate={currentPlayingIndex === index ? 'animate' : 'initial'}
+                      animate={
+                        currentPlayingIndex === index ? "animate" : "initial"
+                      }
                     />
                   ))}
                 </div>
@@ -206,7 +261,7 @@ const VoiceTestimonial: React.FC<VoiceTestimonialProps> = ({ mode, testimonials 
           ))}
         </div>
         {shouldShowLoadMore && !showAll && (
-          <div className='absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20'>
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20">
             <button
               onClick={handleLoadMore}
               className="whiteshimmerbtn py-2 px-4 rounded-full"

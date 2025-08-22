@@ -104,7 +104,7 @@ const HomeNav: React.FC = () => {
               />
             </Link>
             <Link
-              href="https://twitter.com/messages/compose?recipient_id=YOUR_TWITTER_ID"
+              href="https://x.com/ayushmxxn"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
@@ -160,7 +160,7 @@ const HomeNav: React.FC = () => {
 
       {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
-        <div className="sm:hidden text-sm absolute top-full left-0 right-0 mt-2 bg-[#0E0F11]/50  border-t-2 border-neutral-900 backdrop-blur-2xl rounded-2xl shadow-lg z-40 overflow-hidden px-2 font-medium">
+        <div className="sm:hidden text-sm absolute top-full left-0 right-0 mt-2 bg-[#0E0F11]/50  border-t-2 border-neutral-900 backdrop-blur-3xl rounded-2xl shadow-lg z-40 overflow-hidden px-2 font-medium">
           <div className="py-2">
             {/* Navigation Links */}
             <div className="py-2">
@@ -217,7 +217,7 @@ const HomeNav: React.FC = () => {
                   />
                 </Link>
                 <Link
-                  href="https://twitter.com/messages/compose?recipient_id=YOUR_TWITTER_ID"
+                  href="https://x.com/ayushmxxn"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter"

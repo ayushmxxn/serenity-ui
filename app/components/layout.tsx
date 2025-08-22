@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import SideBar from "@/components/serenity/SideBar";
-import Navbar from "@/components/serenity/Navbar";
-import { Spotlight } from "@/components/ui/spotlight";
 import { ToastProvider } from "./toast/components/Toast";
-
-const poppin = Poppins({ subsets: ["latin"], weight: "500" });
+import Navbar from "@/components/serenity/Navbar";
 
 export const metadata: Metadata = {
   title: "Components",
@@ -18,16 +14,16 @@ export default function RootLayout({
 }>) {
   return (
     <ToastProvider>
-      <div className={`${poppin.className}`}>
-        <div className="hidden md:flex">
-          <Spotlight fill="gray" />
+      <div>
+        <div className="hidden md:flex"></div>
+        <div className="">
+          <Navbar />
         </div>
-        <Navbar />
         <div className="flex">
-          <SideBar />
-          <div className="bg-black w-full">
-            {children}
+          <div className="">
+            <SideBar />
           </div>
+          <div className="bg-neutral-950 w-full rounded-2xl">{children}</div>
         </div>
       </div>
     </ToastProvider>

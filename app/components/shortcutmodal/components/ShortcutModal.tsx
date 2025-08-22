@@ -1,123 +1,109 @@
-'use client';
-import React, { useState, ChangeEvent } from 'react';
-import { motion } from 'framer-motion';
-import { Inter } from 'next/font/google';
-import { MdKeyboard } from 'react-icons/md';
-import { IoMdSearch } from 'react-icons/io';
-
-const inter = Inter({ subsets: ['latin'], weight: '500' });
+"use client";
+import React, { useState, ChangeEvent } from "react";
+import { GeistSans } from "geist/font/sans";
+import { IoMdSearch, IoMdClose } from "react-icons/io";
+import { MdKeyboard } from "react-icons/md";
 
 interface Shortcut {
   key: string;
   description: string;
 }
 
-interface ShortcutModalProps {
-  shortcuts: Shortcut[];
-  mode?: 'light' | 'dark';
-}
+const ShortcutModal: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-const ShortcutModal: React.FC<ShortcutModalProps> = ({ shortcuts, mode= 'dark'}) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const shortcuts: Shortcut[] = [
+    { key: "Ctrl+B", description: "Download canvas as a PNG image" },
+    { key: "Ctrl+C", description: "Copy canvas to clipboard as a PNG image" },
+    { key: "Ctrl+K", description: "Open quick access menu" },
+    {
+      key: "Ctrl+Shift+V",
+      description:
+        "Paste image from clipboard to add a new image annotation layer",
+    },
+    { key: "Ctrl+Shift+F", description: "Clear editor state" },
+    { key: "Del", description: "Delete selected annotation layer" },
+  ];
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredShortcuts = shortcuts.filter(shortcut =>
-    shortcut.key.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    shortcut.description.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredShortcuts = shortcuts.filter(
+    (shortcut) =>
+      shortcut.key.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      shortcut.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
- 
-
   return (
-    <div className=" z-50 flex items-center justify-center">
-      {/* Background Overlay */}
-      <div className=" bg-black/70 backdrop-blur-md"></div>
-
-      {/* Modal */}
-      <div className={`${inter.className} ${mode === 'dark' ? 'bg-black border-zinc-800' : 'bg-white border-zinc-300'} w-[550px] h-auto max-h-[500px] border rounded-lg shadow-lg flex flex-col z-50 mx-2`}>
-        <div className={`${mode === 'dark' ? 'bg-black border-zinc-800' : 'bg-white border-zinc-300'} flex items-center justify-between px-6 border-b rounded-t-lg`}>
-          <div className="flex items-center justify-center">
-            <MdKeyboard size={20} className={mode === 'dark' ? 'text-white' : 'text-zinc-800'} />
-            <h1 className={`${mode === 'dark' ? 'text-white' : 'text-zinc-800'} px-2 py-5 font-semibold`}>Keyboard Shortcuts</h1>
+    <div className="max-h-[80vh] w-full overflow-y-auto">
+      <div
+        className={`${GeistSans.className} bg-[#1A1A1A] border border-[#2D2D2D] rounded-xl w-full shadow-2xl flex flex-col mx-auto mt-8`}
+      >
+        {/* Header */}
+        <div className="px-4 py-3 bg-[#1A1A1A] border-b border-[#2D2D2D] rounded-t-xl flex items-center justify-between">
+          <div className="flex items-center">
+            <MdKeyboard className="text-neutral-400 w-5 h-5 mr-2" />
+            <h1 className="text-neutral-100 text-sm font-medium">
+              Keyboard Shortcuts
+            </h1>
           </div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={`${mode === 'dark' ? 'text-zinc-300 hover:text-white' : 'text-zinc-700'} w-5 h-5 transition-colors cursor-pointer`}
-            
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <IoMdClose
+            className="text-neutral-400 w-5 h-5 cursor-pointer hover:text-neutral-100 transition-colors"
+            onClick={() => setSearchQuery("")}
+          />
         </div>
+
         {/* Searchbar */}
-        <div className={`px-6 py-2 ${mode === 'dark' ? 'bg-black' : 'bg-white'}`}>
-          <div className="relative py-2 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke={mode === 'dark' ? '#A1A1AA' : '#71717A'} className="size-4 sm:size-5 absolute left-3">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
+        <div className="px-4 py-3 bg-[#1A1A1A]">
+          <div className="relative flex items-center">
+            <IoMdSearch className="text-neutral-400 w-5 h-5 absolute left-2 top-1/2 transform -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Search shortcuts..."
-              className={`${mode === 'dark' ? 'bg-black text-white border-zinc-800 placeholder-zinc-400' : 'bg-white text-black border-zinc-300 placeholder-zinc-500'} w-full border-b  py-2 px-4 pl-10 focus:outline-none`}
+              className="bg-neutral-700/50 text-neutral-100 placeholder-neutral-400 w-full pl-8 pr-2 py-2 focus:outline-none text-sm font-normal rounded-lg"
             />
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto rounded-b-lg custom-scrollbar">
-          <div>
-            {filteredShortcuts.length > 0 ? (
-              filteredShortcuts.map((shortcut, index) => (
-                <motion.div
-                  key={index}
-                  className={`p-4 flex flex-col`}
-                >
-                  <div className="flex justify-between items-center">
-                    <p className={`${mode === 'dark' ? 'text-white' : 'text-black'} text-sm flex-1 overflow-hidden text-ellipsis`}>
-                      {shortcut.description}
-                    </p>
-                    <div className={`${mode === 'dark' ? 'text-white' : 'text-black'} font-medium ml-4 whitespace-nowrap`}>
-                      <div className="flex space-x-2">
-                        {shortcut.key.split('+').map((key, idx) => (
-                          <span key={idx} className="bg-zinc-700 hover:bg-zinc-800 border-b border-zinc-400 text-white px-2 py-1 rounded-lg text-xs cursor-pointer">
-                            {key}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+
+        {/* Results */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-2 max-h-[300px]">
+          {filteredShortcuts.length > 0 ? (
+            filteredShortcuts.map((shortcut, index) => (
+              <div
+                key={index}
+                className="group hover:bg-[#2D2D2D] rounded-lg p-2 transition-all duration-200 ease-in-out"
+              >
+                <div className="flex justify-between items-center">
+                  <p className="text-neutral-100 text-sm font-normal flex-1 overflow-hidden text-ellipsis">
+                    {shortcut.description}
+                  </p>
+                  <div className="flex space-x-2 ml-4">
+                    {shortcut.key.split("+").map((key, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-[#2D2D2D] hover:bg-[#4a4a4a] text-neutral-100 px-2 py-1 rounded-lg text-xs cursor-default border border-[#4a4a4a]"
+                      >
+                        {key}
+                      </span>
+                    ))}
                   </div>
-                </motion.div>
-              ))
-            ) : (
-              <div className='flex justify-center items-center gap-1'>
-                <IoMdSearch className={`${mode === 'dark' ? 'text-zinc-300' : 'text-zinc-600'}`} size={20} />
-                <p className={`${mode === 'dark' ? 'text-zinc-300' : 'text-zinc-600'} text-center py-10`}>No shortcuts found</p>
+                </div>
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className="flex justify-center items-center gap-2 py-10">
+              <p className="text-neutral-100 text-sm font-normal text-center">
+                No shortcuts found.
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      {/* Scrollbar Styles */}
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: ${mode === 'dark' ? '#27272A' : '#27272A'};
-          border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background-color: ${mode === 'dark' ? '#5555' : '#555'};
-        }
-      `}</style>
     </div>
   );
-}
+};
 
 export default ShortcutModal;

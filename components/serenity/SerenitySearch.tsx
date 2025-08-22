@@ -43,45 +43,17 @@ const defaultPages: Page[] = [
     icon: <Code2 size={16} />,
     category: "Navigation",
   },
-  {
-    title: "Carousel 360",
-    url: "/components/carousels/carousel360",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Feature Section",
-    url: "/components/featuresection",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Film Roll",
-    url: "/components/filmroll",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
+
   {
     title: "Voice Testimonial",
     url: "/components/testimonials/voicetestimonial",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
+
   {
-    title: "Star Rating Testimonial",
-    url: "/components/testimonials/starratingtestimonial",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Username Testimonial",
-    url: "/components/testimonials/usernametestimonial",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "3D Book Testimonial",
-    url: "/components/testimonials/3dbooktestimonial",
+    title: "Book Testimonial",
+    url: "/components/testimonials/booktestimonial",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
@@ -92,56 +64,14 @@ const defaultPages: Page[] = [
     category: "Components",
   },
   {
-    title: "Pricing Section",
-    url: "/components/pricing/pricingsection",
+    title: "Carousel 360",
+    url: "/components/carousels/carousel360",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
   {
-    title: "SignUp Form",
-    url: "/components/authentication/signup信息技术form",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "SignUp Form V2",
-    url: "/components/authentication/signupformv2",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "SignIn Form",
-    url: "/components/authentication/signinform",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Forgot Password",
-    url: "/components/authentication/forgotpassword",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Email",
-    url: "/components/authentication/email",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "OTP",
-    url: "/components/authentication/otp",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Create New Password",
-    url: "/components/authentication/createnewpassword",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Password Changed",
-    url: "/components/authentication/passwordchanged",
+    title: "Tubelight Navbar",
+    url: "/components/tubelightnavbar",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
@@ -157,12 +87,7 @@ const defaultPages: Page[] = [
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
-  {
-    title: "Tubelight Navbar",
-    url: "/components/navbars/tubelightnavbar",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
+
   {
     title: "SpotLight Card",
     url: "/components/cards/spotlightcard",
@@ -175,18 +100,7 @@ const defaultPages: Page[] = [
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
-  {
-    title: "Star Rating",
-    url: "/components/starrating",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Project Cards",
-    url: "/components/cards/projectcards",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
+
   {
     title: "Dock",
     url: "/components/dock",
@@ -200,23 +114,12 @@ const defaultPages: Page[] = [
     category: "Components",
   },
   {
-    title: "Code Block",
-    url: "/components/codeblock",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
     title: "Image Gallary",
     url: "/components/imagegallery",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
-  {
-    title: "NewsLetter",
-    url: "/components/newsletter",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
+
   {
     title: "Glow card",
     url: "/components/cards/glowcard",
@@ -226,36 +129,6 @@ const defaultPages: Page[] = [
   {
     title: "3D Flip card",
     url: "/components/cards/3dflipcard",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Drawer",
-    url: "/components/drawer",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Footer",
-    url: "/components/footer",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Cookie",
-    url: "/components/cookie",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "WaitList",
-    url: "/components/waitlist",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "TechStack",
-    url: "/components/techstack",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
@@ -280,12 +153,6 @@ const defaultPages: Page[] = [
   {
     title: "Inputs",
     url: "/components/inputs",
-    icon: <ArrowRight size={16} />,
-    category: "Components",
-  },
-  {
-    title: "Toggle",
-    url: "/components/toggle",
     icon: <ArrowRight size={16} />,
     category: "Components",
   },
@@ -428,7 +295,7 @@ const SerenitySearch: React.FC<SearchModalProps> = ({
 
         {/* Fixed Footer */}
         <div
-          className="px-4 py-3 border-t border-[#2D2D2D] bg-[#1A1A1A] sticky bottom-0 z-10 rounded-b-xl"
+          className="px-4 py-3  bg-[#1A1A1A] sticky bottom-0 z-10 rounded-b-xl"
           style={{ height: "22px" }}
         ></div>
 
