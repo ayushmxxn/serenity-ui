@@ -132,9 +132,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               <button
                 type="button"
                 onClick={() => handleSelect(option.value)}
-                className="w-full flex items-center px-4 py-3 text-left text-neutral-100 hover:bg-[#2D2D2D] transition-colors duration-150 text-sm"
+                className="w-full flex items-center px-4 py-2.5 text-left text-neutral-100 hover:bg-[#2D2D2D] transition-colors duration-150 text-sm"
               >
-                {option.icon && <span className="mr-3">{option.icon}</span>}
+                {option.icon && <span className="mr-2">{option.icon}</span>}
                 <span>{option.label}</span>
               </button>
               {index < options.length - 1 && (
@@ -262,10 +262,10 @@ const TestimonialWidget: React.FC = () => {
     <>
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-6 right-6 bg-[#2D2D2D] text-neutral-100 hover:bg-[#3D3D3D] rounded-full p-3 shadow-2xl transition-all duration-200 border border-[#404040] ring-2 ring-[#171717]"
+        className="fixed bottom-5 right-5 bg-[#2D2D2D] text-neutral-100 hover:bg-[#3D3D3D] rounded-full p-2.5 shadow-2xl transition-all duration-200 border border-[#404040] ring-2 ring-[#171717]"
         aria-label="Open testimonial form"
       >
-        <Pen className="h-5 w-5" />
+        <Pen className="h-4 w-4" />
       </button>
 
       {isModalOpen && (
@@ -276,7 +276,7 @@ const TestimonialWidget: React.FC = () => {
             aria-hidden="true"
           />
           <div
-            className="bg-[#1A1A1A] border border-[#2D2D2D] ring-4 ring-[#171717] rounded-xl w-full max-w-md shadow-2xl flex flex-col z-50 mx-4 relative"
+            className="bg-[#1A1A1A] border border-[#2D2D2D] ring-4 ring-[#171717] rounded-xl w-full max-w-[360px] shadow-2xl flex flex-col z-50 mx-4 relative"
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -285,7 +285,7 @@ const TestimonialWidget: React.FC = () => {
             <form
               id="testimonial-form"
               onSubmit={handleSubmit}
-              className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4"
+              className="flex-1 overflow-y-auto custom-scrollbar p-3.5 space-y-3.5"
             >
               <h2 id="testimonial-form-title" className="sr-only">
                 Submit a Testimonial
@@ -294,7 +294,7 @@ const TestimonialWidget: React.FC = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-2"
+                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-1.5"
                 >
                   Name
                 </label>
@@ -313,7 +313,7 @@ const TestimonialWidget: React.FC = () => {
               <div>
                 <label
                   htmlFor="profession"
-                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-2"
+                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-1.5"
                 >
                   Profession
                 </label>
@@ -332,7 +332,7 @@ const TestimonialWidget: React.FC = () => {
               <div>
                 <label
                   htmlFor="text"
-                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-2"
+                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-1.5"
                 >
                   Testimonial
                 </label>
@@ -351,7 +351,7 @@ const TestimonialWidget: React.FC = () => {
               <div>
                 <label
                   htmlFor="socialPlatform"
-                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-2"
+                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-1.5"
                 >
                   Social
                 </label>
@@ -418,7 +418,7 @@ const TestimonialWidget: React.FC = () => {
               <div>
                 <label
                   htmlFor="socialHandle"
-                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-2"
+                  className="block text-neutral-400 text-xs uppercase tracking-wider font-medium mb-1.5"
                 >
                   Profile URL
                 </label>
@@ -454,14 +454,14 @@ const TestimonialWidget: React.FC = () => {
               </div>
 
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-2.5">
                   <p className="text-red-400 text-sm" role="alert">
                     {error}
                   </p>
                 </div>
               )}
               {success && (
-                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-2.5">
                   <p className="text-green-400 text-sm" role="alert">
                     {success}
                   </p>
@@ -469,19 +469,19 @@ const TestimonialWidget: React.FC = () => {
               )}
             </form>
 
-            <div className="px-4 py-3 bg-[#1A1A1A] sticky bottom-0 z-10 rounded-b-xl border-t border-[#2D2D2D]">
-              <div className="flex justify-end gap-3">
+            <div className="px-3.5 py-3 bg-[#1A1A1A] sticky bottom-0 z-10 rounded-b-xl border-t border-[#2D2D2D]">
+              <div className="flex justify-end gap-2.5">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 bg-[#2D2D2D] text-neutral-300 rounded-lg hover:bg-[#3D3D3D] hover:text-neutral-100 transition-all duration-200 text-sm font-normal border border-[#404040]"
+                  className="px-3.5 py-2 bg-[#2D2D2D] text-neutral-300 rounded-lg hover:bg-[#3D3D3D] hover:text-neutral-100 transition-all duration-200 text-sm font-normal border border-[#404040]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   form="testimonial-form"
-                  className="px-4 py-2 bg-gradient-to-r from-neutral-50 to-neutral-200 hover:opacity-90 text-neutral-800 rounded-lg transition-all duration-200 text-sm shadow-lg hover:shadow-xl transform font-medium"
+                  className="px-3.5 py-2 bg-gradient-to-r from-neutral-50 to-neutral-200 hover:opacity-90 text-neutral-800 rounded-lg transition-all duration-200 text-sm shadow-lg hover:shadow-xl transform font-medium"
                 >
                   Submit
                 </button>
