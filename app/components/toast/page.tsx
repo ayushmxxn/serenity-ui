@@ -210,7 +210,7 @@ export { ToastProvider };
 const LazySyntaxHighlighter = React.lazy(() =>
   import("react-syntax-highlighter").then((module) => ({
     default: module.Prism,
-  }))
+  })),
 );
 
 interface CustomButtonProps {
@@ -268,7 +268,7 @@ const ComponentShowcase: React.FC = () => {
 
   const copyCLI = () => {
     navigator.clipboard.writeText(
-      "npx @ayushmxxn/serenity-ui@latest add toast"
+      "npx @ayushmxxn/serenity-ui@latest add toast",
     );
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
@@ -313,7 +313,7 @@ const ComponentShowcase: React.FC = () => {
         className="absolute top-4 right-4 z-50 hidden sm:flex"
       >
         <Image
-          src="https://i.ibb.co/pBPsjfg2/myavatar.jpg"
+          src="/avatar.svg"
           alt="Your Profile"
           width={30}
           height={30}

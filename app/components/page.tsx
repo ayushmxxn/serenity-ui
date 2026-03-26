@@ -252,7 +252,7 @@ export default function ComponentsPage() {
         className="absolute top-4 right-4 z-50 hidden sm:flex"
       >
         <Image
-          src="https://i.ibb.co/pBPsjfg2/myavatar.jpg"
+          src="/avatar.svg"
           alt="Your Profile"
           width={30}
           height={30}
