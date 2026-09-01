@@ -35,6 +35,15 @@ export function LiquidSegmentedSwitcher({
         role="tablist"
         aria-label="Content view selection"
         data-state={activeTab}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+            e.preventDefault();
+            if (activeTab === "components") handleTabClick("blocks");
+          } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+            e.preventDefault();
+            if (activeTab === "blocks") handleTabClick("components");
+          }
+        }}
         className="group relative inline-grid grid-cols-3 items-center gap-0 text-sm font-medium after:absolute after:inset-y-0 after:w-1/3 after:rounded-[12px] sm:after:rounded-[14px] after:bg-white dark:after:bg-[#1e1e22] after:border after:border-black/[0.06] dark:after:border-white/[0.08] after:shadow-[0_1px_3px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.9)] dark:after:shadow-[0_2px_8px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.09),inset_0_-1px_0_rgba(0,0,0,0.3)] after:transition-transform after:duration-300 after:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] data-[state=components]:after:translate-x-0 data-[state=blocks]:after:translate-x-full data-[state=templates]:after:translate-x-[200%]"
       >
         {/* Components Tab */}

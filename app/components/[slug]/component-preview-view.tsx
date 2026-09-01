@@ -736,8 +736,8 @@ export function ComponentPreviewView({ item }: { item: RegistryEntry }) {
                   play("tap");
                   setIsSourceOpen(false);
                 }}
-                aria-label="Close modal"
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--pill-hover)] transition-colors cursor-pointer active:scale-95"
+                aria-label="Close source code dialog"
+                className="flex h-7 w-7 items-center justify-center rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--pill-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 transition-colors cursor-pointer active:scale-95"
               >
                 <X className="h-4 w-4" />
               </button>

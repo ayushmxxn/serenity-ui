@@ -721,12 +721,19 @@ export default function Hero({
 
               {/* Custom Email Signup Form */}
               <div className="mt-6 w-full max-w-xl sm:mt-8">
-                <form onSubmit={handleSubscribe} className="w-full">
+                <form
+                  onSubmit={handleSubscribe}
+                  aria-label="Newsletter subscription"
+                  aria-busy={status === "loading"}
+                  className="w-full"
+                >
                   <div className="flex w-full flex-col gap-4 sm:w-fit sm:flex-row sm:items-center">
                     <div className="relative w-full sm:w-[280px] sm:flex-none">
                       <input
+                        id="hero-email-input"
                         type="email"
                         required
+                        autoComplete="email"
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -738,14 +745,20 @@ export default function Hero({
                         disabled={status === "loading" || status === "success"}
                         placeholder="Enter your email"
                         aria-label="Email address"
-                        className="w-full rounded-2xl bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] py-3 px-5 text-sm text-[var(--pill-text)] placeholder-[var(--text-muted)] outline-none shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] disabled:opacity-60"
+                        aria-invalid={status === "error"}
+                        aria-describedby={
+                          status === "error"
+                            ? "hero-email-error hero-email-desc"
+                            : "hero-email-desc"
+                        }
+                        className="w-full rounded-2xl bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] py-3 px-5 text-sm text-[var(--pill-text)] placeholder-[var(--text-muted)] outline-none focus-visible:ring-2 focus-visible:ring-orange-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] disabled:opacity-60"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={status === "loading" || status === "success"}
-                      className="flex w-full sm:w-[140px] sm:flex-none items-center justify-center rounded-2xl bg-gradient-to-b from-[#FF6B35] via-[#FF5A1F] to-[#EA4E15] border border-[#ff7b47]/40 px-6 py-3 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-1px_0_rgba(0,0,0,0.15),0_2px_8px_rgba(255,90,31,0.25),0_1px_2px_rgba(0,0,0,0.2)] transition-all duration-200 enabled:hover:from-[#ff7542] enabled:hover:via-[#ff6329] enabled:hover:to-[#f0531a] enabled:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_16px_rgba(255,90,31,0.35),0_2px_4px_rgba(0,0,0,0.25)] enabled:active:scale-[0.98] enabled:active:from-[#f0531a] enabled:active:to-[#db430d] enabled:active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_1px_2px_rgba(0,0,0,0.2)] disabled:opacity-75 disabled:cursor-not-allowed enabled:cursor-pointer touch-manipulation whitespace-nowrap"
+                      className="flex w-full sm:w-[140px] sm:flex-none items-center justify-center rounded-2xl bg-gradient-to-b from-[#FF6B35] via-[#FF5A1F] to-[#EA4E15] border border-[#ff7b47]/40 px-6 py-3 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-1px_0_rgba(0,0,0,0.15),0_2px_8px_rgba(255,90,31,0.25),0_1px_2px_rgba(0,0,0,0.2)] transition-all duration-200 enabled:hover:from-[#ff7542] enabled:hover:via-[#ff6329] enabled:hover:to-[#f0531a] enabled:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_4px_16px_rgba(255,90,31,0.35),0_2px_4px_rgba(0,0,0,0.25)] enabled:active:scale-[0.98] enabled:active:from-[#f0531a] enabled:active:to-[#db430d] enabled:active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_1px_2px_rgba(0,0,0,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:opacity-75 disabled:cursor-not-allowed enabled:cursor-pointer touch-manipulation whitespace-nowrap"
                     >
                       {status === "loading" ? (
                         <span className="flex items-center gap-2">
@@ -761,13 +774,21 @@ export default function Hero({
                   </div>
 
                   {/* Supporting copy aligned with left edge of input */}
-                  <p className="mt-2.5 px-3 text-xs font-medium text-[var(--text-muted)]">
+                  <p
+                    id="hero-email-desc"
+                    className="mt-2.5 px-3 text-xs font-medium text-[var(--text-muted)]"
+                  >
                     Get new components, updates and launches.
                   </p>
 
                   {/* Feedback message for errors */}
                   {status === "error" && errorMessage && (
-                    <p className="mt-2 px-3 text-xs font-medium text-red-500">
+                    <p
+                      id="hero-email-error"
+                      role="alert"
+                      aria-live="polite"
+                      className="mt-2 px-3 text-xs font-medium text-red-500"
+                    >
                       {errorMessage}
                     </p>
                   )}

@@ -410,6 +410,8 @@ export default function AllComponentsView({
                   borderRadius: btnBorderRadius,
                 }}
                 type="text"
+                aria-label="Search components"
+                aria-controls="components-grid"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onKeyDown={(e) => {
@@ -418,7 +420,7 @@ export default function AllComponentsView({
                   }
                 }}
                 placeholder="Search components..."
-                className={`w-full text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] placeholder:text-xs focus:outline-none focus:border-[var(--card-hover-border)] focus:ring-0 transition-all pl-7.5 rounded-xl border border-[var(--card-border)] bg-[var(--pill-bg)] dark:bg-black/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)] ${
+                className={`w-full text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] placeholder:text-xs focus:outline-none focus:border-[var(--card-hover-border)] focus-visible:ring-2 focus-visible:ring-orange-500/70 transition-all pl-7.5 rounded-xl border border-[var(--card-border)] bg-[var(--pill-bg)] dark:bg-black/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)] ${
                   searchQuery ? "pr-7" : "pr-3"
                 }`}
               />
@@ -426,7 +428,7 @@ export default function AllComponentsView({
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  aria-label="Clear search"
+                  aria-label="Clear search query"
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer z-10 p-0.5"
                 >
                   <X className="h-3.5 w-3.5" />

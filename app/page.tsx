@@ -31,7 +31,7 @@ export default async function Home() {
       interval={0}
       className="min-h-full w-full flex-1 flex flex-col"
     >
-      <main className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
+      <main id="main-content" className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <Hero
           stats={stats}
           stargazers={stargazers}

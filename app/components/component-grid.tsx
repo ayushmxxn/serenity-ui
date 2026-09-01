@@ -169,8 +169,8 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
             <button
               onClick={handleToggleCliMenu}
               type="button"
-              aria-label="Copy CLI command"
-              className={`group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] touch-manipulation cursor-pointer active:scale-95 ${
+              aria-label={`Copy CLI command for ${item.name}`}
+              className={`group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 touch-manipulation cursor-pointer active:scale-95 ${
                 isCliMenuOpen ? "border-[var(--text-primary)]/30 dark:border-white/30" : ""
               }`}
             >
@@ -215,7 +215,7 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
                           type="button"
                           onClick={(e) => handleCopyPackageManager(e, pm.id, cmd)}
                           onMouseEnter={() => setHoveredPm(pm.id)}
-                          className={`group/pm relative flex w-full items-center justify-between gap-2 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-colors cursor-pointer outline-none focus:outline-none ${
+                          className={`group/pm relative flex w-full items-center justify-between gap-2 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-colors cursor-pointer outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 ${
                             isCopied
                               ? "text-emerald-600 dark:text-emerald-400 font-semibold"
                               : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
@@ -268,8 +268,8 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
           <button
             onClick={handleCopyCode}
             type="button"
-            aria-label="Copy component code"
-            className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] touch-manipulation cursor-pointer active:scale-95"
+            aria-label={`Copy source code for ${item.name}`}
+            className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 touch-manipulation cursor-pointer active:scale-95"
           >
             {copiedType === "code" ? (
               <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-green-500" />
@@ -296,8 +296,8 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
                 : `/components/${item.slug}`
             }
             onClick={() => play("tap")}
-            aria-label={`View ${item.type === "block" ? "block" : "component"} preview`}
-            className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] touch-manipulation active:scale-95"
+            aria-label={`View ${item.type === "block" ? "block" : "component"} preview for ${item.name}`}
+            className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 touch-manipulation active:scale-95"
           >
             <Eye className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:scale-110" />
             {/* UI Tooltip */}
@@ -350,7 +350,7 @@ export default function ComponentGrid() {
             href={viewAllHref}
             onClick={() => play("tap")}
             aria-label={`${viewAllLabel} (${totalCount})`}
-            className="group/btn relative hidden sm:inline-flex items-center gap-2 rounded-xl bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] px-3.5 py-2 text-xs sm:text-sm font-medium text-[var(--text-primary)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] active:scale-95 cursor-pointer"
+            className="group/btn relative hidden sm:inline-flex items-center gap-2 rounded-xl bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] px-3.5 py-2 text-xs sm:text-sm font-medium text-[var(--text-primary)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 active:scale-95 cursor-pointer"
           >
             <span>{viewAllLabel}</span>
             <span className="flex h-5 items-center justify-center rounded-full bg-[var(--text-primary)]/10 dark:bg-white/10 px-2 text-[11px] font-semibold tabular-nums text-[var(--text-primary)]">
@@ -361,7 +361,12 @@ export default function ComponentGrid() {
         </div>
 
         {/* Dynamic Grid on Homepage (Components or Blocks) */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
+        <div
+          id={isBlocksTab ? "blocks-panel" : "components-panel"}
+          role="tabpanel"
+          aria-labelledby={isBlocksTab ? "tab-blocks" : "tab-components"}
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8"
+        >
           {displayedItems.map((item) => (
             <ComponentCard key={item.slug} item={item} />
           ))}

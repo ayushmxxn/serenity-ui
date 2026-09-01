@@ -76,29 +76,31 @@ export default function FAQ() {
                 const isOpen = openId === faq.id;
                 return (
                   <div key={faq.id} className="transition-colors duration-200">
-                    <button
-                      type="button"
-                      onClick={() => toggleFAQ(faq.id)}
-                      aria-expanded={isOpen}
-                      aria-controls={`serenity-faq-personal-${faq.id}`}
-                      id={`serenity-faq-btn-personal-${faq.id}`}
-                      className="flex w-full items-center justify-between gap-4 py-4.5 sm:py-5.5 text-left cursor-pointer select-none focus-visible:outline-none group/faq"
-                    >
-                      <span className="text-[15px] sm:text-base md:text-[1.075rem] font-bold font-heading transition-opacity duration-200 leading-snug text-[var(--text-primary)] group-hover/faq:opacity-75">
-                        {faq.question}
-                      </span>
-
-                      <div
-                        aria-hidden="true"
-                        className={`flex h-5 w-5 shrink-0 items-center justify-center text-[var(--text-muted)] transition-transform duration-200 ${
-                          isOpen
-                            ? "rotate-180 text-[var(--text-primary)]"
-                            : "group-hover/faq:text-[var(--text-primary)]"
-                        }`}
+                    <h3 className="m-0 p-0 font-normal">
+                      <button
+                        type="button"
+                        onClick={() => toggleFAQ(faq.id)}
+                        aria-expanded={isOpen}
+                        aria-controls={`serenity-faq-personal-${faq.id}`}
+                        id={`serenity-faq-btn-personal-${faq.id}`}
+                        className="flex w-full items-center justify-between gap-4 py-4.5 sm:py-5.5 text-left cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 focus-visible:ring-offset-2 rounded-lg group/faq"
                       >
-                        <ChevronDown className="h-4 w-4" />
-                      </div>
-                    </button>
+                        <span className="text-[15px] sm:text-base md:text-[1.075rem] font-bold font-heading transition-opacity duration-200 leading-snug text-[var(--text-primary)] group-hover/faq:opacity-75">
+                          {faq.question}
+                        </span>
+
+                        <div
+                          aria-hidden="true"
+                          className={`flex h-5 w-5 shrink-0 items-center justify-center text-[var(--text-muted)] transition-transform duration-200 ${
+                            isOpen
+                              ? "rotate-180 text-[var(--text-primary)]"
+                              : "group-hover/faq:text-[var(--text-primary)]"
+                          }`}
+                        >
+                          <ChevronDown className="h-4 w-4" />
+                        </div>
+                      </button>
+                    </h3>
 
                     <AnimatePresence initial={false}>
                       {isOpen && (
