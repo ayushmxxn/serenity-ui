@@ -3,13 +3,25 @@ import { NextResponse } from "next/server";
 const KIT_FORM_ID = "9850947";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// In-memory sliding window rate limiter
+// In-memory sliding window rate limiter with auto-pruning
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>();
 const RATE_LIMIT_COUNT = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
 
+function pruneRateLimits(now: number) {
+  if (rateLimitMap.size > 200) {
+    for (const [key, record] of rateLimitMap.entries()) {
+      if (now - record.lastReset > RATE_LIMIT_WINDOW_MS) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
+  pruneRateLimits(now);
+
   const record = rateLimitMap.get(ip);
 
   if (!record) {

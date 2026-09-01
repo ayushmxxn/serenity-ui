@@ -30,6 +30,15 @@ import Footer from "./footer";
 import type { ProfileStatsData } from "./profile-stats";
 
 const emptySubscribe = () => () => {};
+const subscribeMobile = (cb: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  const mql = window.matchMedia("(max-width: 639px)");
+  mql.addEventListener("change", cb);
+  return () => mql.removeEventListener("change", cb);
+};
+const getMobileSnapshot = () =>
+  typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
+const getMobileServerSnapshot = () => false;
 
 function ThemeToggleIcon({
   isDark,
@@ -129,13 +138,9 @@ export default function AllComponentsView({
   const { scrollY } = useScroll();
 
   const isMobile = useSyncExternalStore(
-    (cb) => {
-      if (typeof window === "undefined") return () => {};
-      window.addEventListener("resize", cb);
-      return () => window.removeEventListener("resize", cb);
-    },
-    () => (typeof window !== "undefined" ? window.innerWidth < 640 : false),
-    () => false,
+    subscribeMobile,
+    getMobileSnapshot,
+    getMobileServerSnapshot,
   );
 
   // Ultra-responsive, smooth organic spring physics tuned for 60-120Hz display refresh without lingering physics calculations

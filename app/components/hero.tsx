@@ -152,6 +152,7 @@ export default function Hero({
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    if (initialDiscordStats?.presenceCount) return;
     fetch("https://discord.com/api/guilds/1278780582481891339/widget.json")
       .then((res) => res.json())
       .then((data) => {
@@ -165,7 +166,7 @@ export default function Hero({
         }
       })
       .catch(() => {});
-  }, []);
+  }, [initialDiscordStats]);
 
   // Split stargazers into two marquee rows — no fallback, rows will be absent if GitHub fails
   const avatarRow1 = stargazers

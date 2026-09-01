@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
 
+export const revalidate = 21600;
+
+const CACHE_HEADERS = {
+  "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400",
+};
+
 export async function GET(): Promise<NextResponse> {
   try {
     const token = process.env.GITHUB_TOKEN;
@@ -24,9 +30,9 @@ export async function GET(): Promise<NextResponse> {
         if (response.status === 401 || response.status === 403 || response.status === 404) {
           // If unauthenticated or rate limited, return whatever supporters were collected or empty array
           if (allSupporters.length > 0) {
-            return NextResponse.json(allSupporters);
+            return NextResponse.json(allSupporters, { headers: CACHE_HEADERS });
           }
-          return NextResponse.json([], { status: 200 });
+          return NextResponse.json([], { status: 200, headers: CACHE_HEADERS });
         }
         break;
       }
@@ -49,9 +55,9 @@ export async function GET(): Promise<NextResponse> {
       page += 1;
     }
 
-    return NextResponse.json(allSupporters);
-  } catch (err: unknown) {
-    return NextResponse.json([], { status: 200 });
+    return NextResponse.json(allSupporters, { headers: CACHE_HEADERS });
+  } catch {
+    return NextResponse.json([], { status: 200, headers: CACHE_HEADERS });
   }
 }
 

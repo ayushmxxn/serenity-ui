@@ -30,6 +30,15 @@ import { useCoreAudio } from "../lib/use-core-audio";
 import { BLOCKS_REGISTRY } from "../registry";
 
 const emptySubscribe = () => () => {};
+const subscribeMobile = (cb: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  const mql = window.matchMedia("(max-width: 639px)");
+  mql.addEventListener("change", cb);
+  return () => mql.removeEventListener("change", cb);
+};
+const getMobileSnapshot = () =>
+  typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
+const getMobileServerSnapshot = () => false;
 
 function ThemeToggleIcon({
   isDark,
@@ -113,13 +122,9 @@ export default function AllBlocksView({
   const { scrollY } = useScroll();
 
   const isMobile = useSyncExternalStore(
-    (cb) => {
-      if (typeof window === "undefined") return () => {};
-      window.addEventListener("resize", cb);
-      return () => window.removeEventListener("resize", cb);
-    },
-    () => (typeof window !== "undefined" ? window.innerWidth < 640 : false),
-    () => false,
+    subscribeMobile,
+    getMobileSnapshot,
+    getMobileServerSnapshot,
   );
 
   const smoothScrollY = useSpring(scrollY, {

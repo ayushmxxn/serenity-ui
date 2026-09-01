@@ -142,8 +142,22 @@ export const BLOCKS_REGISTRY: RegistryEntry[] = COMPONENTS_REGISTRY.filter(
   (item) => item.type === "block"
 );
 
+export const ALL_COMPONENTS: RegistryEntry[] = COMPONENTS_REGISTRY.filter(
+  (item) => item.type !== "block"
+);
+
+const COMPONENT_SLUGS: string[] = ALL_COMPONENTS.map((item) => item.slug);
+
+const BLOCK_SLUGS: string[] = (() => {
+  const slugs = BLOCKS_REGISTRY.map((item) => item.slug);
+  if (slugs.includes("testimonial") && !slugs.includes("voice-testimonial")) {
+    slugs.push("voice-testimonial");
+  }
+  return slugs;
+})();
+
 export function getAllComponents(): RegistryEntry[] {
-  return COMPONENTS_REGISTRY.filter((item) => item.type !== "block");
+  return ALL_COMPONENTS;
 }
 
 export function getAllBlocks(): RegistryEntry[] {
@@ -173,16 +187,9 @@ export function getBlockBySlug(slug: string): RegistryEntry | undefined {
 }
 
 export function getAllComponentSlugs(): string[] {
-  const slugs = COMPONENTS_REGISTRY.filter((item) => item.type !== "block").map(
-    (item) => item.slug
-  );
-  return slugs;
+  return COMPONENT_SLUGS;
 }
 
 export function getAllBlockSlugs(): string[] {
-  const slugs = BLOCKS_REGISTRY.map((item) => item.slug);
-  if (slugs.includes("testimonial") && !slugs.includes("voice-testimonial")) {
-    slugs.push("voice-testimonial");
-  }
-  return slugs;
+  return BLOCK_SLUGS;
 }
