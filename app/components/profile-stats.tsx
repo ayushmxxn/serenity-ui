@@ -40,6 +40,7 @@ export function Profile21stCard({
           <img
             src={avatarUrl}
             alt="Ayushmaan Singh"
+            onError={() => setAvatarUrl("/logo.webp")}
             className="h-11 w-11 rounded-xl object-cover bg-neutral-900 flex-shrink-0"
           />
           <div className="min-w-0 flex-1">

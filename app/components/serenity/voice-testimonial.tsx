@@ -233,9 +233,9 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
       audio
         .play()
         .then(() => setCurrentPlaying({ key, index }))
-        .catch(() => setCurrentPlaying({ key, index }));
+        .catch(() => setCurrentPlaying(null));
     } else {
-      setCurrentPlaying({ key, index });
+      setCurrentPlaying(null);
     }
   };
 

@@ -544,7 +544,13 @@ function playKeySound(category: SoundCategory, muted: boolean, panHint = 0) {
   getThockEngine().then((engine) => {
     if (!engine || !engine.buffer) return;
     const { ctx, dry, wet, supportsPanning, buffer } = engine;
-    if (ctx.state === "suspended") void ctx.resume();
+    if (ctx.state === "suspended") {
+      try {
+        void ctx.resume().catch(() => {});
+      } catch {
+        // Safe fallback
+      }
+    }
 
     const profile = CATEGORY_PROFILE[category];
     const now = ctx.currentTime;

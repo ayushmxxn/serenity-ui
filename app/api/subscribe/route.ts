@@ -45,7 +45,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== "object") {
+      return NextResponse.json(
+        { success: false, error: "Invalid request payload." },
+        { status: 400 }
+      );
+    }
     const { email } = body;
 
     // Server-side email validation
