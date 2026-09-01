@@ -8,8 +8,16 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useCoreAudio } from "../../lib/use-core-audio";
 import type { RegistryEntry } from "../../registry";
 import { CodeHighlight } from "../code-highlight";
+import { Laser } from "../canvasui/Laser";
 
 const emptySubscribe = () => () => {};
+const subscribeMobile = (callback: () => void) => {
+  const mql = window.matchMedia("(max-width: 768px)");
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+};
+const getMobileSnapshot = () => window.matchMedia("(max-width: 768px)").matches;
+const getMobileServerSnapshot = () => false;
 
 function ThemeToggleIcon({
   isDark,
@@ -78,6 +86,11 @@ export function ComponentPreviewView({ item }: { item: RegistryEntry }) {
     emptySubscribe,
     () => true,
     () => false,
+  );
+  const isMobile = useSyncExternalStore(
+    subscribeMobile,
+    getMobileSnapshot,
+    getMobileServerSnapshot,
   );
   const isDark = mounted ? (resolvedTheme || theme) === "dark" : false;
 
@@ -176,9 +189,49 @@ export function ComponentPreviewView({ item }: { item: RegistryEntry }) {
 
   return (
     <div className="relative h-screen min-h-[100dvh] w-screen overflow-hidden bg-[var(--bg-primary)] text-[var(--text-primary)] select-none">
+      {/* Laser at the bottom on dark-mode */}
+      {isDark && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-x-0 bottom-0 left-0 right-0 z-0 overflow-hidden"
+          style={{
+            height: isMobile ? 150 : 240,
+          }}
+        >
+          <Laser
+            speed={0.25}
+            offset={0}
+            thickness={isMobile ? 0.35 : 0.5}
+            core={isMobile ? 0.4 : 0.55}
+            radius={isMobile ? 14 : 24}
+            glow={isMobile ? 0.55 : 0.85}
+            wave={isMobile ? 1.5 : 2}
+            width={1}
+            flicker={0.65}
+            reveal={isMobile ? 150 : 320}
+            heat={isMobile ? 0.75 : 1.15}
+            shimmer={isMobile ? 4 : 8}
+            sparkle={isMobile ? 0.4 : 0.7}
+            reactivity={0.8}
+            color={[1, 0.3529, 0.1216]}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </Laser>
+        </div>
+      )}
+
       {/* Fullscreen Live Component Canvas with background glassmorphism blur when modal is open */}
       <main
-        className={`h-full w-full flex items-center justify-center p-4 sm:p-8 pb-20 sm:pb-24 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden transition-all duration-300 ${
+        className={`relative z-10 h-full w-full flex items-center justify-center p-4 sm:p-8 pb-20 sm:pb-24 overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden transition-all duration-300 ${
           isSourceOpen
             ? "blur-md sm:blur-lg scale-[0.99] opacity-60 pointer-events-none"
             : ""
@@ -659,13 +712,13 @@ export function ComponentPreviewView({ item }: { item: RegistryEntry }) {
           aria-modal="true"
           data-lenis-prevent="true"
           aria-label={`${item.name} Source Code`}
-          className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-6 pb-20 sm:pb-24 bg-black/40 dark:bg-black/75 backdrop-blur-2xl animate-in fade-in duration-200 overscroll-contain"
+          className="fixed inset-0 z-40 flex items-center justify-center p-3 sm:p-6 pb-20 sm:pb-24 bg-black/40 dark:bg-black/75 backdrop-blur-2xl animate-fade-in overscroll-contain"
           onClick={() => setIsSourceOpen(false)}
         >
           <div
             data-lenis-prevent="true"
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl h-full max-h-[calc(100vh-6.5rem)] rounded-2xl sm:rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14),0_0_0_1px_rgba(0,0,0,0.05)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_8px_24px_-8px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200 overscroll-contain"
+            className="relative w-full max-w-4xl h-full max-h-[calc(100vh-6.5rem)] rounded-2xl sm:rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14),0_0_0_1px_rgba(0,0,0,0.05)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_8px_24px_-8px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)] flex flex-col overflow-hidden animate-zoom-in overscroll-contain"
           >
             {/* Fixed Sticky Header */}
             <div className="sticky top-0 z-20 flex shrink-0 items-center justify-between border-b border-[var(--card-border)] bg-[var(--card-bg)] px-4 sm:px-5 py-3">

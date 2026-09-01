@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: ["192.168.29.32"],
   images: {
+    qualities: [75, 80],
     remotePatterns: [
       {
         protocol: "https",
@@ -73,6 +75,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.postimg.cc",
+      },
+      {
+        protocol: "https",
+        hostname: "postimg.cc",
       },
     ],
   },
