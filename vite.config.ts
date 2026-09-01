@@ -12,7 +12,6 @@ export default defineConfig({
       prerender: { routes: "*" },
     }),
     cloudflare({
-      configPath: false,
       viteEnvironment: {
         name: "rsc",
         childEnvironments: ["ssr"],
