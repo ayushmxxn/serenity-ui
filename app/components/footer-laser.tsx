@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
-import { Laser } from "./canvasui/Laser";
+import { Laser } from "./effects/Laser";
 
 const emptySubscribe = () => () => {};
 const subscribeMobile = (callback: () => void) => {

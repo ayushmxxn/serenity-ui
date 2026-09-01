@@ -8,7 +8,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useCoreAudio } from "../../lib/use-core-audio";
 import type { RegistryEntry } from "../../registry";
 import { CodeHighlight } from "../code-highlight";
-import { Laser } from "../canvasui/Laser";
+import { Laser } from "../effects/Laser";
 
 const emptySubscribe = () => () => {};
 const subscribeMobile = (callback: () => void) => {

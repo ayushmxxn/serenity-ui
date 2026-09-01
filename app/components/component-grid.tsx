@@ -145,7 +145,7 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
               loop
               muted
               playsInline
-              preload="auto"
+              preload="metadata"
               disablePictureInPicture
               className="w-full h-full object-cover pointer-events-none"
             />

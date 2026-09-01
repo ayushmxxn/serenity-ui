@@ -1,7 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { codeToHtml } from "shiki";
+import { createHighlighter, type HighlighterCore } from "shiki";
+
+let highlighterPromise: Promise<HighlighterCore> | null = null;
+
+function getHighlighterInstance() {
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      themes: ["github-dark", "github-light"],
+      langs: ["tsx", "typescript", "javascript", "jsx", "bash", "json", "css", "html"],
+    });
+  }
+  return highlighterPromise;
+}
 
 interface CodeHighlightProps {
   code: string;
@@ -21,8 +33,12 @@ export function CodeHighlight({
 
     async function highlight() {
       try {
-        const result = await codeToHtml(code, {
-          lang,
+        const highlighter = await getHighlighterInstance();
+        const loadedLangs = highlighter.getLoadedLanguages();
+        const targetLang = loadedLangs.includes(lang) ? lang : "tsx";
+
+        const result = highlighter.codeToHtml(code, {
+          lang: targetLang,
           theme: isDark ? "github-dark" : "github-light",
           transformers: [
             {

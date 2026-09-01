@@ -547,7 +547,21 @@ const subscribeDesktop = (callback: () => void) => {
 const getDesktopSnapshot = () => window.matchMedia("(min-width: 768px)").matches;
 const getDesktopServerSnapshot = () => false;
 
-export function Ripple({ children, className, style, ...options }: RippleProps) {
+export function Ripple({
+  children,
+  className,
+  style,
+  amplitude,
+  speed,
+  wavelength,
+  rings,
+  decay,
+  refraction,
+  dispersion,
+  shine,
+  trigger,
+  interval,
+}: RippleProps) {
   const pathname = usePathname();
   const isPreviewPage = Boolean(pathname?.startsWith("/components/"));
   const isDesktop = useSyncExternalStore(
@@ -559,7 +573,18 @@ export function Ripple({ children, className, style, ...options }: RippleProps) 
   const contentRef = useRef<HTMLDivElement>(null);
   const outputRef = useRef<HTMLCanvasElement>(null);
   const instanceRef = useRef<RippleInstance | null>(null);
-  const [initialOptions] = useState(options);
+  const [initialOptions] = useState({
+    amplitude,
+    speed,
+    wavelength,
+    rings,
+    decay,
+    refraction,
+    dispersion,
+    shine,
+    trigger,
+    interval,
+  });
   const [failed, setFailed] = useState(false);
 
   const supported = useSyncExternalStore(
@@ -588,8 +613,32 @@ export function Ripple({ children, className, style, ...options }: RippleProps) 
 
   useEffect(() => {
     if (!isDesktop || isPreviewPage) return;
-    instanceRef.current?.setOptions(options);
-  });
+    instanceRef.current?.setOptions({
+      amplitude,
+      speed,
+      wavelength,
+      rings,
+      decay,
+      refraction,
+      dispersion,
+      shine,
+      trigger,
+      interval,
+    });
+  }, [
+    isDesktop,
+    isPreviewPage,
+    amplitude,
+    speed,
+    wavelength,
+    rings,
+    decay,
+    refraction,
+    dispersion,
+    shine,
+    trigger,
+    interval,
+  ]);
 
   if (!isDesktop || isPreviewPage) {
     return (

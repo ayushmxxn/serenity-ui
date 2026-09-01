@@ -23,7 +23,7 @@ export interface Testimonial {
 // Delete this and pass your own list via the `testimonials` prop.
 const defaultTestimonials: Testimonial[] = [
   {
-    image: "/images/avatars/punk-ape.png",
+    image: "/images/avatars/punk-ape.webp",
     text: "I'm blown away by the versatility of the components in this library. They make UI development a breeze!",
     name: "Alice Johnson",
     jobtitle: "Frontend Developer",
@@ -32,7 +32,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-alien.png",
+    image: "/images/avatars/punk-alien.webp",
     text: "Using this component library has significantly speed up our development process. The quality and ease of integration are remarkable!",
     name: "David Smith",
     jobtitle: "UI Designer",
@@ -41,7 +41,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-hoodie.png",
+    image: "/images/avatars/punk-hoodie.webp",
     text: "The components in this library are not just well-designed but also highly customizable. It's a developer's dream!",
     name: "Emma Brown",
     jobtitle: "Software Engineer",
@@ -50,7 +50,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-beanie.png",
+    image: "/images/avatars/punk-beanie.webp",
     text: "The components are highly responsive and work seamlessly across different devices and screen sizes.",
     name: "Emily Chen",
     jobtitle: "Mobile App Developer",
@@ -59,7 +59,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-pipe.png",
+    image: "/images/avatars/punk-pipe.webp",
     text: "This library has saved us a significant amount of time and effort. The components are well-documented and easy to integrate.",
     name: "Sarah Taylor",
     jobtitle: "Backend Developer",
@@ -68,7 +68,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-headband.png",
+    image: "/images/avatars/punk-headband.webp",
     text: "I appreciate the attention to detail in the design. The components are visually appealing and professional.",
     name: "Kevin White",
     jobtitle: "UI/UX Designer",
@@ -77,7 +77,7 @@ const defaultTestimonials: Testimonial[] = [
     social: "https://x.com/ayushmxxn",
   },
   {
-    image: "/images/avatars/punk-zombie.png",
+    image: "/images/avatars/punk-zombie.webp",
     text: "I love how the components are designed to be highly responsive and work well across different screen sizes.",
     name: "Brian Kim",
     jobtitle: "Mobile App Developer",

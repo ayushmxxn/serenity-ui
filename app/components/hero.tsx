@@ -10,6 +10,13 @@ import { ProfileStatsTrigger } from "./profile-stats";
 import { VintageKeyboard } from "./vintage-keyboard";
 
 const emptySubscribe = () => () => {};
+const subscribeResize = (cb: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("resize", cb);
+  return () => window.removeEventListener("resize", cb);
+};
+const getIsMobileSnapshot = () => window.innerWidth < 640;
+const getServerMobileSnapshot = () => false;
 
 function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -173,13 +180,9 @@ export default function Hero({
     : null;
 
   const isMobile = useSyncExternalStore(
-    (cb) => {
-      if (typeof window === "undefined") return () => {};
-      window.addEventListener("resize", cb);
-      return () => window.removeEventListener("resize", cb);
-    },
-    () => window.innerWidth < 640,
-    () => false,
+    subscribeResize,
+    getIsMobileSnapshot,
+    getServerMobileSnapshot,
   );
 
 
@@ -431,7 +434,7 @@ export default function Hero({
                   width: logoSize,
                   height: logoSize,
                 }}
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Serenity UI Logo"
                 className="shrink-0 object-contain rounded-[22%]"
               />
@@ -778,7 +781,7 @@ export default function Hero({
                   <h2 className="flex items-center gap-2 text-base font-bold tracking-tight font-heading text-[var(--text-primary)] sm:text-lg">
                     <span>Loved by the Community</span>
                     <img
-                      src="/heart.png"
+                      src="/heart.webp"
                       alt="Heart"
                       className="h-5 w-5 sm:h-5.5 sm:w-5.5 object-contain select-none pointer-events-none"
                     />

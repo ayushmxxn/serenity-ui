@@ -1,4 +1,4 @@
-import { Ripple } from "./components/canvasui/Ripple";
+import { Ripple } from "./components/effects/Ripple";
 import ComponentGrid from "./components/component-grid";
 import FAQ from "./components/faq";
 import Footer from "./components/footer";

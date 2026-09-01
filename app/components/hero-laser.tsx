@@ -1,8 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { Laser } from "./canvasui/Laser";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Laser } from "./effects/Laser";
 
 const emptySubscribe = () => () => {};
 const subscribeMobile = (callback: () => void) => {
