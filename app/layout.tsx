@@ -62,9 +62,9 @@ export const metadata: Metadata = {
       "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     images: [
       {
-        url: "/logo.webp",
-        width: 1200,
-        height: 630,
+        url: "/og.png",
+        width: 1024,
+        height: 493,
         alt: "Serenity UI — Components that make the web feel alive",
       },
     ],
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     description:
       "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     creator: "@ayushmxxn",
-    images: ["/logo.webp"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,
