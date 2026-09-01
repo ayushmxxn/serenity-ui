@@ -18,9 +18,72 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://serenity-ui.com";
+
 export const metadata: Metadata = {
-  title: "Serenity UI",
-  description: "Creative components in a new dimension",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Serenity UI – Creative Components for React & Next.js",
+    template: "%s | Serenity UI",
+  },
+  description:
+    "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS. Copy-paste ready for modern web apps.",
+  keywords: [
+    "React components",
+    "Next.js UI library",
+    "Tailwind CSS components",
+    "WebGL animations",
+    "Canvas UI",
+    "Shadcn UI components",
+    "Creative web components",
+  ],
+  authors: [{ name: "Ayushmaan Singh", url: "https://x.com/ayushmxxn" }],
+  creator: "Ayushmaan Singh",
+  publisher: "Serenity UI",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "Serenity UI",
+    title: "Serenity UI – Creative Components for React & Next.js",
+    description:
+      "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS.",
+    images: [
+      {
+        url: "/logo.webp",
+        width: 1200,
+        height: 630,
+        alt: "Serenity UI — Creative components in a new dimension",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Serenity UI – Creative Components for React & Next.js",
+    description:
+      "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS.",
+    creator: "@ayushmxxn",
+    images: ["/logo.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -28,6 +91,40 @@ export const metadata: Metadata = {
     ],
     apple: "/logo.webp",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Serenity UI",
+      description:
+        "Creative components in a new dimension for React and Next.js.",
+      publisher: {
+        "@type": "Person",
+        name: "Ayushmaan Singh",
+        url: "https://x.com/ayushmxxn",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${siteUrl}/#software`,
+      name: "Serenity UI",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      url: siteUrl,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      description:
+        "Free and open source React, Canvas, and WebGL component library for modern web applications.",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -41,6 +138,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <a
           href="#main-content"

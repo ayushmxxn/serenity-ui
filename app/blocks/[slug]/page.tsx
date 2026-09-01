@@ -22,13 +22,32 @@ export async function generateMetadata({
 
   if (!item) {
     return {
-      title: "Block Not Found — Serenity UI",
+      title: "Block Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
+  const title = `${item.name} — Serenity UI Blocks`;
+  const description = `Interactive preview, clean source code, and shadcn CLI installation for the ${item.name} block and full-width section.`;
+  const canonicalUrl = `/blocks/${slug}`;
+
   return {
-    title: `${item.name} — Serenity UI Blocks`,
-    description: `Interactive preview, source code, and CLI installation for ${item.name} block.`,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

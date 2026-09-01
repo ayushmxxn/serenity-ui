@@ -22,13 +22,32 @@ export async function generateMetadata({
 
   if (!item) {
     return {
-      title: "Component Not Found — Serenity UI",
+      title: "Component Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
+  const title = `${item.name} — Serenity UI`;
+  const description = `Interactive preview, clean source code, and shadcn CLI installation for the ${item.name} React component.`;
+  const canonicalUrl = `/components/${slug}`;
+
   return {
-    title: `${item.name} — Serenity UI`,
-    description: `Interactive preview, source code, and CLI installation for ${item.name}.`,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
