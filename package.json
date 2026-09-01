@@ -9,8 +9,8 @@
     "lint": "eslint",
     "dev:vinext": "vinext dev --port 3001",
     "build:vinext": "vinext build",
-    "start:vinext": "wrangler dev --config dist/server/wrangler.json",
-    "deploy:vinext": "vinext-cloudflare deploy --config dist/server/wrangler.json"
+    "start:vinext": "wrangler dev dist/server/index.js",
+    "deploy:vinext": "wrangler deploy dist/server/index.js"
   },
   "dependencies": {
     "@fontsource/open-runde": "^5.3.0",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.54.2",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

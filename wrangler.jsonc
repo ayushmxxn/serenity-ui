@@ -1,7 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "serenity-ui",
-  "main": "vinext/server/fetch-handler",
   "compatibility_date": "2025-08-16",
   "compatibility_flags": [
     "nodejs_compat"
