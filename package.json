@@ -13,6 +13,7 @@
     "deploy:vinext": "wrangler deploy"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
     "@fontsource/open-runde": "^5.3.0",
     "@vinext/cloudflare": "^1.0.0-beta.6",
     "@web-kits/audio": "^0.1.0",

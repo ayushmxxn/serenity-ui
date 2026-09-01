@@ -8,7 +8,7 @@ export async function getStargazers(): Promise<Stargazer[] | null> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "User-Agent": "serenity-ui-site",
-    "X-GitHub-Api-Version": "2026-03-10",
+    "X-GitHub-Api-Version": "2022-11-28",
   };
 
   if (token) {

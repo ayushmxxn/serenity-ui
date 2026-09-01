@@ -1,3 +1,7 @@
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
 import "@fontsource/open-runde/400.css";
 import "@fontsource/open-runde/500.css";
 import "@fontsource/open-runde/600.css";
@@ -23,11 +27,11 @@ const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://serenity-ui.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Serenity UI – Creative Components for React & Next.js",
+    default: "Serenity UI | Components that make the web feel alive",
     template: "%s | Serenity UI",
   },
   description:
-    "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS. Copy-paste ready for modern web apps.",
+    "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
   keywords: [
     "React components",
     "Next.js UI library",
@@ -53,23 +57,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Serenity UI",
-    title: "Serenity UI – Creative Components for React & Next.js",
+    title: "Serenity UI | Components that make the web feel alive",
     description:
-      "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS.",
+      "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     images: [
       {
         url: "/logo.webp",
         width: 1200,
         height: 630,
-        alt: "Serenity UI — Creative components in a new dimension",
+        alt: "Serenity UI — Components that make the web feel alive",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Serenity UI – Creative Components for React & Next.js",
+    title: "Serenity UI | Components that make the web feel alive",
     description:
-      "A curated collection of free, open-source React, Canvas, and WebGL components styled with Tailwind CSS.",
+      "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     creator: "@ayushmxxn",
     images: ["/logo.webp"],
   },
@@ -102,7 +106,7 @@ const jsonLd = {
       url: siteUrl,
       name: "Serenity UI",
       description:
-        "Creative components in a new dimension for React and Next.js.",
+        "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
       publisher: {
         "@type": "Person",
         name: "Ayushmaan Singh",
@@ -122,7 +126,7 @@ const jsonLd = {
         priceCurrency: "USD",
       },
       description:
-        "Free and open source React, Canvas, and WebGL component library for modern web applications.",
+        "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     },
   ],
 };

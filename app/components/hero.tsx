@@ -168,15 +168,29 @@ export default function Hero({
       .catch(() => {});
   }, [initialDiscordStats]);
 
-  // Split stargazers into two marquee rows — no fallback, rows will be absent if GitHub fails
-  const avatarRow1 = stargazers
-    ? stargazers
-        .slice(0, Math.ceil(stargazers.length / 2))
+  const [stargazersList, setStargazersList] = useState(stargazers);
+
+  useEffect(() => {
+    if (stargazersList && stargazersList.length > 0) return;
+    fetch("/api/stargazers")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setStargazersList(data);
+        }
+      })
+      .catch(() => {});
+  }, [stargazersList]);
+
+  // Split stargazers into two marquee rows
+  const avatarRow1 = stargazersList
+    ? stargazersList
+        .slice(0, Math.ceil(stargazersList.length / 2))
         .map((s) => s.avatar_url)
     : null;
-  const avatarRow2 = stargazers
-    ? stargazers
-        .slice(Math.ceil(stargazers.length / 2))
+  const avatarRow2 = stargazersList
+    ? stargazersList
+        .slice(Math.ceil(stargazersList.length / 2))
         .map((s) => s.avatar_url)
     : null;
 
@@ -701,17 +715,17 @@ export default function Hero({
             <div className="w-full max-w-2xl">
               <h1 className="text-[2.2rem] font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-[3.2rem]">
                 <span className="sm:hidden">
-                  Components that
+                  <span className="inline-block whitespace-nowrap">Components that</span>
                   <br />
-                  make the web
+                  <span className="inline-block whitespace-nowrap">make the web</span>
                   <br />
-                  feel alive
+                  <span className="inline-block whitespace-nowrap">feel alive</span>
                 </span>
 
                 <span className="hidden sm:inline">
-                  Components that make
+                  <span className="inline-block whitespace-nowrap">Components that make</span>
                   <br />
-                  the web feel alive
+                  <span className="inline-block whitespace-nowrap">the web feel alive</span>
                 </span>
               </h1>
 

@@ -12,7 +12,7 @@ export async function GET(): Promise<NextResponse> {
     const headers: HeadersInit = {
       Accept: "application/vnd.github+json",
       "User-Agent": "serenity-ui-site",
-      "X-GitHub-Api-Version": "2026-03-10",
+      "X-GitHub-Api-Version": "2022-11-28",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
