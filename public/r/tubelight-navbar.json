@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tubelight-navbar",
+  "title": "Tubelight Navbar",
+  "description": "A floating island navigation bar with a realistic glowing tubelight lamp and animated active indicator.",
+  "dependencies": [
+    "framer-motion",
+    "react-icons"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "app/components/serenity/tubelight-navbar.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"framer-motion\";\nimport Link from \"next/link\";\nimport { useState } from \"react\";\nimport { LuBriefcase, LuFileText, LuHouse, LuUser } from \"react-icons/lu\";\n\nexport function TubeLightNavbar() {\n  const [activeTab, setActiveTab] = useState(\"Home\");\n\n  const tabs = [\n    { name: \"Home\", url: \"#\", icon: <LuHouse /> },\n    { name: \"About\", url: \"#\", icon: <LuUser /> },\n    { name: \"Projects\", url: \"#\", icon: <LuBriefcase /> },\n    { name: \"Resume\", url: \"#\", icon: <LuFileText /> },\n  ];\n\n  return (\n    <div className=\"z-50 py-6 sm:py-10 flex justify-center select-none\">\n      <div\n        className=\"flex items-center gap-1 sm:gap-2 bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 py-1 px-1.5 rounded-full\"\n        style={{\n          boxShadow: \"0 1px 1px rgba(0,0,0,0.025), 0 2px 6px rgba(0,0,0,0.035)\",\n        }}\n      >\n        {tabs.map((tab) => {\n          const isActive = activeTab === tab.name;\n\n          return (\n            <Link\n              key={tab.name}\n              href={tab.url}\n              onClick={() => setActiveTab(tab.name)}\n              className={`relative cursor-pointer text-xs sm:text-sm px-4 sm:px-6 py-2 rounded-full transition-colors duration-200 ${\n                isActive\n                  ? \"text-[var(--text-primary)] font-semibold\"\n                  : \"text-[var(--text-muted)] hover:text-[var(--text-primary)]\"\n              }`}\n            >\n              {isActive && (\n                <motion.div\n                  layoutId=\"liquid-pill\"\n                  className=\"absolute inset-0 bg-black/[0.08] dark:bg-white/[0.18] rounded-full\"\n                  transition={{\n                    type: \"spring\",\n                    stiffness: 350,\n                    damping: 28,\n                    mass: 0.9,\n                  }}\n                />\n              )}\n\n              <span className=\"relative z-10 hidden md:inline\">{tab.name}</span>\n              <span className=\"relative z-10 md:hidden text-base\">\n                {tab.icon}\n              </span>\n\n              {isActive && (\n                <motion.div\n                  layoutId=\"tubelight-lamp\"\n                  className=\"absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-neutral-900 dark:bg-white rounded-t-md pointer-events-none\"\n                  initial={false}\n                  transition={{\n                    type: \"spring\",\n                    stiffness: 300,\n                    damping: 30,\n                  }}\n                >\n                  <div\n                    className=\"absolute left-1/2 -translate-x-1/2 -top-1.5 w-6 h-6 bg-neutral-900 dark:bg-white rounded-full pointer-events-none\"\n                    style={{ filter: \"blur(6px)\", opacity: 0.15 }}\n                  />\n                  <div\n                    className=\"absolute left-1/2 -translate-x-1/2 -top-2.5 w-10 h-8 bg-neutral-900 dark:bg-white rounded-full pointer-events-none\"\n                    style={{ filter: \"blur(10px)\", opacity: 0.07 }}\n                  />\n                </motion.div>\n              )}\n            </Link>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n\nexport default TubeLightNavbar;\n",
+      "type": "registry:component",
+      "target": "components/serenity/tubelight-navbar.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

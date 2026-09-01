@@ -1,0 +1,199 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "serenity-ui",
+  "homepage": "https://serenity-ui.com",
+  "items": [
+    {
+      "name": "portfolio-book",
+      "type": "registry:component",
+      "title": "Portfolio Book",
+      "description": "An interactive sketchbook portfolio with realistic 3D page flip animation.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/portfolio-book.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/portfolio-book.tsx"
+        }
+      ]
+    },
+    {
+      "name": "vintage-keyboard",
+      "type": "registry:component",
+      "title": "Vintage Keyboard",
+      "description": "A photorealistic mechanical keyboard with real-time audio synthesizer and key variance.",
+      "dependencies": [],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/vintage-keyboard.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/vintage-keyboard.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flame-button",
+      "type": "registry:component",
+      "title": "Flame Button",
+      "description": "An interactive flame glow button with dynamic mouse tracking and fiery gradients.",
+      "dependencies": ["lucide-react"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/flame-button.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/flame-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel-360",
+      "type": "registry:component",
+      "title": "Carousel 360",
+      "description": "A 3D perspective continuous rotation image cylinder carousel with drag and click navigation.",
+      "dependencies": ["framer-motion", "react-icons"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/carousel-360.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/carousel-360.tsx"
+        }
+      ]
+    },
+    {
+      "name": "typewriter-testimonial",
+      "type": "registry:component",
+      "title": "Typewriter Testimonial",
+      "description": "A typewriter testimonial showcase with pen-writing animation and avatar stacks.",
+      "dependencies": ["framer-motion", "lucide-react"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/typewriter-testimonial.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/typewriter-testimonial.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tubelight-navbar",
+      "type": "registry:component",
+      "title": "Tubelight Navbar",
+      "description": "A floating island navigation bar with a realistic glowing tubelight lamp and animated active indicator.",
+      "dependencies": ["framer-motion", "react-icons"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/tubelight-navbar.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/tubelight-navbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "brand-marquee",
+      "type": "registry:component",
+      "title": "Brand Marquee",
+      "description": "A lightweight, smooth continuous brand logos marquee with pause-on-hover and edge fade masking.",
+      "dependencies": ["react-icons"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/brand-marquee.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/brand-marquee.tsx"
+        }
+      ]
+    },
+    {
+      "name": "3d-flip-card",
+      "type": "registry:component",
+      "title": "3D Flip Card",
+      "description": "A layered 3D fanning and popping card stack with custom spring physics.",
+      "dependencies": ["framer-motion"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/flip-card-3d.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/flip-card-3d.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swipe-card",
+      "type": "registry:component",
+      "title": "Swipe Card",
+      "description": "Tinder-like gestural swipeable card stack with drag throw physics and rotation.",
+      "dependencies": ["framer-motion"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/swipe-card.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/swipe-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-carousel",
+      "type": "registry:component",
+      "title": "Image Carousel",
+      "description": "A stacked parallax image carousel with smooth drag navigation and card peeling transitions.",
+      "dependencies": ["framer-motion"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/image-carousel.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/image-carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-gallery",
+      "type": "registry:component",
+      "title": "Image Gallery",
+      "description": "An interactive expanding image gallery with smooth horizontal spring layout transitions.",
+      "dependencies": ["framer-motion"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/image-gallery.tsx",
+          "type": "registry:component",
+          "target": "components/serenity/image-gallery.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonial",
+      "type": "registry:block",
+      "title": "Testimonial",
+      "description": "A testimonial block featuring multi-row marquee animation, integrated audio player with waveforms, and video player modal dialog.",
+      "dependencies": ["framer-motion", "react-icons"],
+      "devDependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "app/components/serenity/voice-testimonial.tsx",
+          "type": "registry:block",
+          "target": "components/serenity/testimonial.tsx"
+        }
+      ]
+    }
+  ]
+}
