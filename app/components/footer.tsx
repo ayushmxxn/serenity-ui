@@ -79,10 +79,12 @@ export default function Footer({ stats }: FooterProps) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://github.com/ayushmxxn.png"
+                src="https://github.com/ayushmxxn.png?size=48"
                 alt="Ayushmaan"
                 width={20}
                 height={20}
+                loading="lazy"
+                decoding="async"
                 className="w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-[6px] object-cover border border-white/15 shadow-sm"
               />
               Ayushmaan

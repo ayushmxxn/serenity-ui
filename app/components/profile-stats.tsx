@@ -16,7 +16,7 @@ export function Profile21stCard({
   bookmarks: string;
 }) {
   const [avatarUrl, setAvatarUrl] = useState<string>(
-    "https://github.com/ayushmxxn.png",
+    "https://github.com/ayushmxxn.png?size=96",
   );
 
   useEffect(() => {
@@ -26,7 +26,9 @@ export function Profile21stCard({
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data?.avatar_url) {
-          setAvatarUrl(data.avatar_url);
+          const url = data.avatar_url;
+          const separator = url.includes("?") ? "&" : "?";
+          setAvatarUrl(`${url}${separator}s=96`);
         }
       })
       .catch(() => {});
@@ -40,6 +42,10 @@ export function Profile21stCard({
           <img
             src={avatarUrl}
             alt="Ayushmaan Singh"
+            width={44}
+            height={44}
+            loading="lazy"
+            decoding="async"
             onError={() => setAvatarUrl("/logo.webp")}
             className="h-11 w-11 rounded-xl object-cover bg-neutral-900 flex-shrink-0"
           />

@@ -111,6 +111,15 @@ interface Stargazer {
   avatar_url: string;
 }
 
+function formatAvatarUrl(url: string, size = 64) {
+  if (!url) return url;
+  if (url.includes("githubusercontent.com") || url.includes("github.com")) {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}s=${size}`;
+  }
+  return url;
+}
+
 interface HeroProps {
   stats?: {
     views: string;
@@ -836,8 +845,12 @@ export default function Hero({
                         {[...avatarRow1, ...avatarRow1].map((url, index) => (
                           <img
                             key={`row1-${index}`}
-                            src={url}
+                            src={formatAvatarUrl(url, 64)}
                             alt={`Stargazer ${index + 1}`}
+                            width={32}
+                            height={32}
+                            loading="lazy"
+                            decoding="async"
                             className="h-7 w-7 flex-shrink-0 rounded-lg border border-[var(--card-border)] object-cover shadow-sm sm:h-8 sm:w-8"
                           />
                         ))}
@@ -848,8 +861,12 @@ export default function Hero({
                         {[...avatarRow2, ...avatarRow2].map((url, index) => (
                           <img
                             key={`row2-${index}`}
-                            src={url}
+                            src={formatAvatarUrl(url, 64)}
                             alt={`Stargazer ${index + 15}`}
+                            width={32}
+                            height={32}
+                            loading="lazy"
+                            decoding="async"
                             className="h-7 w-7 flex-shrink-0 rounded-lg border border-[var(--card-border)] object-cover shadow-sm sm:h-8 sm:w-8"
                           />
                         ))}

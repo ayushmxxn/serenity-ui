@@ -192,7 +192,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
         if (!testimonial.audio) return null;
         try {
           const audio = new Audio(`${audioBasePath}${testimonial.audio}`);
-          audio.preload = "auto";
+          audio.preload = "none";
           audio.onended = () =>
             setCurrentPlaying((prev) => (prev?.index === i ? null : prev));
           return audio;
@@ -386,7 +386,7 @@ export const TestimonialBlock: React.FC<TestimonialProps> = ({
               src={testimonial.video}
               controls
               playsInline
-              preload="metadata"
+              preload="none"
               className="w-full h-full aspect-video object-cover border-0 border-none outline-none ring-0 block"
             />
           </div>

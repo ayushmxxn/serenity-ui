@@ -255,9 +255,27 @@ export default function FooterGlow() {
       targetActive: 0.0,
     };
 
+    let cachedRect: DOMRect | null = null;
+    let rectDirty = true;
+
+    const getCanvasRect = () => {
+      if (!cachedRect || rectDirty) {
+        if (canvas) {
+          cachedRect = canvas.getBoundingClientRect();
+          rectDirty = false;
+        }
+      }
+      return cachedRect;
+    };
+
+    const invalidateRect = () => {
+      rectDirty = true;
+    };
+
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
+      if (!canvas || !isVisible) return;
+      const rect = getCanvasRect();
+      if (!rect) return;
       const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
       const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
 
@@ -283,6 +301,8 @@ export default function FooterGlow() {
       mouse.targetActive = 0.0;
     };
 
+    window.addEventListener("scroll", invalidateRect, { passive: true });
+    window.addEventListener("resize", invalidateRect, { passive: true });
     window.addEventListener("mousemove", handlePointerMove, { passive: true });
     window.addEventListener("touchmove", handlePointerMove, { passive: true });
     window.addEventListener("mouseleave", handlePointerLeave, {
@@ -299,7 +319,9 @@ export default function FooterGlow() {
 
     const resize = () => {
       if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
+      rectDirty = true;
+      const rect = getCanvasRect();
+      if (!rect) return;
       const dpr = getDpr();
       const displayWidth = Math.round(rect.width * dpr);
       const displayHeight = Math.round(rect.height * dpr);
@@ -324,8 +346,8 @@ export default function FooterGlow() {
       const time = prefersReducedMotion ? 0.0 : elapsed;
 
       // Smooth inertia easing with responsive tracking
-      mouse.currentX += (mouse.targetX - mouse.currentX) * 0.1;
-      mouse.currentY += (mouse.targetY - mouse.currentY) * 0.1;
+      mouse.currentX += (mouse.targetX - mouse.currentX) * 0.08;
+      mouse.currentY += (mouse.targetY - mouse.currentY) * 0.08;
       mouse.currentActive += (mouse.targetActive - mouse.currentActive) * 0.08;
 
       gl.useProgram(program);
@@ -352,6 +374,7 @@ export default function FooterGlow() {
         entries.forEach((entry) => {
           isVisible = entry.isIntersecting;
           if (isVisible) {
+            rectDirty = true;
             if (!animationFrameId) {
               animationFrameId = requestAnimationFrame(render);
             }
@@ -368,6 +391,8 @@ export default function FooterGlow() {
     intersectionObserver.observe(canvas);
 
     return () => {
+      window.removeEventListener("scroll", invalidateRect);
+      window.removeEventListener("resize", invalidateRect);
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("touchmove", handlePointerMove);
       window.removeEventListener("mouseleave", handlePointerLeave);

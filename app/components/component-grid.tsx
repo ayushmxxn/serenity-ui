@@ -40,6 +40,48 @@ export const safeCopy = async (text: string): Promise<boolean> => {
   }
 };
 
+function LazyVideoPreview({ src }: { src: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasLoaded(true);
+          videoRef.current?.play().catch(() => {});
+        } else {
+          videoRef.current?.pause();
+        }
+      },
+      { rootMargin: "250px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full h-full">
+      <video
+        ref={videoRef}
+        src={hasLoaded ? src : undefined}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="none"
+        disablePictureInPicture
+        className="w-full h-full object-cover pointer-events-none"
+      />
+    </div>
+  );
+}
+
 export function ComponentCard({ item }: { item: RegistryEntry }) {
   const { play } = useCoreAudio();
   const [copiedType, setCopiedType] = useState<"cli" | "code" | null>(null);
@@ -139,16 +181,7 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
         {/* Live component preview or video preview */}
         <div className="relative z-10 flex items-center justify-center w-full h-full">
           {item.videoPreview ? (
-            <video
-              src={item.videoPreview}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              disablePictureInPicture
-              className="w-full h-full object-cover pointer-events-none"
-            />
+            <LazyVideoPreview src={item.videoPreview} />
           ) : (
             <ComponentPreview />
           )}

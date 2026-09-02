@@ -245,7 +245,7 @@ export function ComponentPreviewView({ item }: { item: RegistryEntry }) {
               loop
               muted
               playsInline
-              preload="auto"
+              preload="none"
               className="w-full h-full object-cover"
             />
           </div>

@@ -23,6 +23,7 @@ export const FlameButton: React.FC<FlameButtonProps> = ({
   onClick,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [width, setWidth] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
@@ -31,18 +32,29 @@ export const FlameButton: React.FC<FlameButtonProps> = ({
 
   useEffect(() => {
     const measure = () => {
-      if (wrapperRef.current)
-        setWidth(wrapperRef.current.getBoundingClientRect().width);
+      if (wrapperRef.current) {
+        const rect = wrapperRef.current.getBoundingClientRect();
+        rectRef.current = rect;
+        setWidth(rect.width);
+      }
     };
     measure();
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", measure, { passive: true });
     return () => window.removeEventListener("resize", measure);
   }, []);
 
+  const handleMouseEnter = () => {
+    if (wrapperRef.current) {
+      rectRef.current = wrapperRef.current.getBoundingClientRect();
+    }
+    setIsHovering(true);
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!wrapperRef.current) return;
-    const rect = wrapperRef.current.getBoundingClientRect();
-    setMouseX(e.clientX - rect.left);
+    const rect = rectRef.current;
+    if (rect) {
+      setMouseX(e.clientX - rect.left);
+    }
   };
 
   const safeMouseX = mouseX ?? width / 2;
@@ -90,7 +102,7 @@ export const FlameButton: React.FC<FlameButtonProps> = ({
       className="relative inline-block select-none isolate"
       ref={wrapperRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsHovering(false)}
     >
       <div
