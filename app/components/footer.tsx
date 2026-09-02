@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCoreAudio } from "../lib/use-core-audio";
 import FooterGlow from "./footer-glow";
 import { ProfileStatsData, ProfileStatsTrigger } from "./profile-stats";
@@ -25,6 +26,20 @@ export default function Footer({ stats }: FooterProps) {
           aria-label="Footer navigation"
           className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm sm:text-base font-medium text-[var(--text-muted)] mb-10 sm:mb-14"
         >
+          <Link
+            href="/components"
+            onClick={() => play("tap")}
+            className="hover:text-[var(--text-primary)] transition-colors"
+          >
+            Components
+          </Link>
+          <Link
+            href="/blocks"
+            onClick={() => play("tap")}
+            className="hover:text-[var(--text-primary)] transition-colors"
+          >
+            Blocks
+          </Link>
           <a
             href="https://github.com/ayushmxxn"
             target="_blank"

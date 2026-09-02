@@ -1,0 +1,101 @@
+# Serenity UI — Comprehensive Component & Block Catalog
+
+> Serenity UI (https://serenity-ui.com) is an open-source React, Tailwind CSS, Canvas, and Framer Motion library created by Ayushmaan Singh (@ayushmxxn). Released under the MIT License.
+
+## Full Catalog
+
+### 1. Portfolio Book
+- **Type**: Component
+- **Category**: Interactive / 3D
+- **Description**: Interactive flippable sketch portfolio book component for React and Tailwind CSS featuring realistic page-turning physics, handwritten typography, and sound effects.
+- **URL**: https://serenity-ui.com/components/portfolio-book
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/portfolio-book`
+- **Dependencies**: none
+
+### 2. Vintage Keyboard
+- **Type**: Component
+- **Category**: Interactive / Retro
+- **Description**: Retro mechanical typewriter and keyboard interactive simulator for React with synthesized mechanical key sounds, tactile keypress states, and Tailwind CSS.
+- **URL**: https://serenity-ui.com/components/vintage-keyboard
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard`
+- **Dependencies**: none (uses Web Audio API)
+
+### 3. Flame Button
+- **Type**: Component
+- **Category**: Buttons & CTAs
+- **Description**: Organic flame and particle fire button component for React featuring GPU-accelerated canvas shaders, dynamic hover physics, and customizable glow.
+- **URL**: https://serenity-ui.com/components/flame-button
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/flame-button`
+- **Dependencies**: none (HTML5 Canvas)
+
+### 4. 3D Flip Card
+- **Type**: Component
+- **Category**: Cards
+- **Description**: 3D perspective hover flip card component for React with smooth spring-animated rotational tilt, dual-sided content reveal, and Tailwind CSS transforms.
+- **URL**: https://serenity-ui.com/components/flip-card-3d
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/flip-card-3d`
+- **Dependencies**: `framer-motion`
+
+### 5. Brand Marquee
+- **Type**: Component
+- **Category**: Social Proof
+- **Description**: High-performance continuous logo marquee component for React with smooth edge-fade gradient masks, pause on hover, and dark mode support.
+- **URL**: https://serenity-ui.com/components/brand-marquee
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/brand-marquee`
+- **Dependencies**: `lucide-react`
+
+### 6. Swipe Card
+- **Type**: Component
+- **Category**: Interactive
+- **Description**: Interactive gesture-based swipeable stack card component for React with physics-driven drag velocity, auto-rotation, and touch gesture support.
+- **URL**: https://serenity-ui.com/components/swipe-card
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/swipe-card`
+- **Dependencies**: `framer-motion`, `lucide-react`
+
+### 7. 3D Image Carousel
+- **Type**: Component
+- **Category**: Media & Galleries
+- **Description**: Smooth 3D rotational perspective image carousel component for React with interactive dragging, depth scaling, and responsive layout.
+- **URL**: https://serenity-ui.com/components/image-carousel
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/image-carousel`
+- **Dependencies**: `framer-motion`
+
+### 8. Image Gallery
+- **Type**: Component
+- **Category**: Media & Galleries
+- **Description**: Modern masonry photo gallery component for React with fluid expand-to-fullscreen layout animations and high-resolution lightbox preview.
+- **URL**: https://serenity-ui.com/components/image-gallery
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/image-gallery`
+- **Dependencies**: `framer-motion`, `lucide-react`
+
+### 9. Tubelight Navbar
+- **Type**: Component
+- **Category**: Navigation
+- **Description**: Apple-inspired floating tubelight navigation bar for React with smooth spring-physics glowing indicator, audio feedback, and dark mode.
+- **URL**: https://serenity-ui.com/components/tubelight-navbar
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/tubelight-navbar`
+- **Dependencies**: `framer-motion`, `lucide-react`
+
+### 10. Typewriter Testimonial
+- **Type**: Component
+- **Category**: Social Proof
+- **Description**: Animated typewriter customer testimonial quote card for React with realistic typing cadence, avatar badge, and author verification.
+- **URL**: https://serenity-ui.com/components/typewriter-testimonial
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/typewriter-testimonial`
+- **Dependencies**: `framer-motion`, `lucide-react`
+
+### 11. Carousel 360
+- **Type**: Component
+- **Category**: Interactive / 3D
+- **Description**: 360-degree cylinder 3D carousel component for React with spatial depth perspective, continuous rotational dragging, and interactive item inspection.
+- **URL**: https://serenity-ui.com/components/carousel-360
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/carousel-360`
+- **Dependencies**: none (CSS 3D transforms)
+
+### 12. Voice Testimonial
+- **Type**: Block & Component
+- **Category**: Social Proof / Blocks
+- **Description**: Audio voice note testimonial section block for React featuring interactive audio waveforms, play/pause controls, duration counters, and verified creator badges.
+- **URL**: https://serenity-ui.com/blocks/testimonial
+- **Install**: `npx shadcn@latest add ayushmxxn/serenity-ui/testimonial`
+- **Dependencies**: `lucide-react`, `framer-motion`

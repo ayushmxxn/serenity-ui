@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -10,43 +8,72 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testing & coverage
 /coverage
+*.lcov
 
-# next.js
+# next.js & build outputs
 /.next/
 /out/
-
-# production
 /build
+/dist/
+.turbo/
+.cache/
 
-# misc
-.DS_Store
-*.pem
+# environment variables
+.env*.local
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
 
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
+# vercel & cloudflare
 .vercel
+.wrangler/
+.dev.vars
+.vinext/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-# cloudflare
-.wrangler/
-.dev.vars
-/dist/
-.vinext/
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
 
-# lighthouse reports
+# IDEs and editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# secrets & keys
+*.pem
+
+# performance & audits
 lighthouse-report.json
 lighthouse-*.json
 lighthouse-*.html

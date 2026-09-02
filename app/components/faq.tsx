@@ -4,39 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useCoreAudio } from "../lib/use-core-audio";
-
-interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-}
-
-const FAQS: FAQItem[] = [
-  {
-    id: "commercial-use",
-    question: "Is Serenity UI free for commercial projects?",
-    answer:
-      "Yes. 100% free and open-source under the MIT License for personal, client, and commercial projects.",
-  },
-  {
-    id: "how-to-install",
-    question: "How do I install components?",
-    answer:
-      "Copy and paste component source code directly into your project, or use shadcn CLI commands to add them instantly.",
-  },
-  {
-    id: "framework-support",
-    question: "Which frameworks are supported?",
-    answer:
-      "React 18 & 19, Next.js (App & Pages Router), Vite, Astro, Remix, and any React setup with Tailwind CSS.",
-  },
-  {
-    id: "customization",
-    question: "Can I customize the styling?",
-    answer:
-      "Yes. All components use standard Tailwind CSS classes and CSS design tokens, making color, size, and motion customization effortless.",
-  },
-];
+import { FAQS } from "../lib/faq-data";
 
 export default function FAQ() {
   const [openId, setOpenId] = useState<string | null>(null);

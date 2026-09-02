@@ -21,7 +21,7 @@ const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://serenity-ui.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Serenity UI | Components that make the web feel alive",
+    default: "Serenity UI | React Components, Blocks & Templates",
     template: "%s | Serenity UI",
   },
   description:
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "Tailwind CSS components",
     "WebGL animations",
     "Canvas UI",
-    "Shadcn UI components",
+    "Interactive React components",
     "Creative web components",
   ],
   authors: [{ name: "Ayushmaan Singh", url: "https://x.com/ayushmxxn" }],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Serenity UI",
-    title: "Serenity UI | Components that make the web feel alive",
+    title: "Serenity UI | React Components, Blocks & Templates",
     description:
       "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     images: [
@@ -61,13 +61,13 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Serenity UI — Components that make the web feel alive",
+        alt: "Serenity UI | React Components, Blocks & Templates",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Serenity UI | Components that make the web feel alive",
+    title: "Serenity UI | React Components, Blocks & Templates",
     description:
       "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
     creator: "@ayushmxxn",
@@ -101,12 +101,21 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "Serenity UI",
+      alternateName: ["SerenityUI", "Serenity UI Components"],
+      inLanguage: "en-US",
       description:
         "Free, open source React, Canvas & WebGL components. Add them with the shadcn CLI or copy the code directly.",
       publisher: {
         "@type": "Person",
+        "@id": `${siteUrl}/#creator`,
         name: "Ayushmaan Singh",
         url: "https://x.com/ayushmxxn",
+        sameAs: [
+          "https://github.com/ayushmxxn",
+          "https://x.com/ayushmxxn",
+          "https://discord.com/invite/kzk6uWey3g",
+          "https://ayushmxxn.com",
+        ],
       },
     },
     {
@@ -114,8 +123,13 @@ const jsonLd = {
       "@id": `${siteUrl}/#software`,
       name: "Serenity UI",
       applicationCategory: "DeveloperApplication",
+      applicationSubCategory: "UI Component Library",
       operatingSystem: "Web",
       url: siteUrl,
+      license: "https://opensource.org/licenses/MIT",
+      author: {
+        "@id": `${siteUrl}/#creator`,
+      },
       offers: {
         "@type": "Offer",
         price: "0",
