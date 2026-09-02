@@ -21,7 +21,6 @@
 ## Features
 
 - **Copy & Paste**: Add components via the shadcn CLI or copy source code directly.
-- **WebGL & Canvas**: Shaders, lasers, and interactive 3D physics built with React and Tailwind CSS.
 - **Framework Support**: Works with Next.js (App & Pages Router), Vite, Remix, Astro, and React 18/19.
 - **Customizable**: Built with standard Tailwind CSS classes and CSS custom properties.
 - **Accessible**: Semantic markup, ARIA compliance, and keyboard navigation.
@@ -36,13 +35,13 @@ Install any component directly into your project using the shadcn registry:
 
 ```bash
 # npm
-npx shadcn@latest add https://serenity-ui.com/r/vintage-keyboard.json
+npx shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard
 
 # pnpm
-pnpm dlx shadcn@latest add https://serenity-ui.com/r/vintage-keyboard.json
+pnpm dlx shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard
 
 # bun
-bunx --bun shadcn@latest add https://serenity-ui.com/r/vintage-keyboard.json
+bunx --bun shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard
 ```
 
 ### 2. Manual Installation
@@ -57,25 +56,25 @@ bunx --bun shadcn@latest add https://serenity-ui.com/r/vintage-keyboard.json
 
 ### Components
 
-| Component | Description | CLI Command |
-| :--- | :--- | :--- |
-| **Vintage Keyboard** | Mechanical keyboard with real-time sound synthesis & 3D keycaps | `npx shadcn@latest add https://serenity-ui.com/r/vintage-keyboard.json` |
-| **Portfolio Book** | Interactive sketchbook portfolio with 3D page flip physics | `npx shadcn@latest add https://serenity-ui.com/r/portfolio-book.json` |
-| **Flame Button** | Fiery flame glow button with mouse tracking & fiery gradients | `npx shadcn@latest add https://serenity-ui.com/r/flame-button.json` |
-| **Carousel 360** | 3D cylinder image carousel with drag and click rotation | `npx shadcn@latest add https://serenity-ui.com/r/carousel-360.json` |
-| **Tubelight Navbar** | Floating island navbar with glowing lamp indicator | `npx shadcn@latest add https://serenity-ui.com/r/tubelight-navbar.json` |
-| **Typewriter Testimonial** | Showcase card with typewriter effect & pen animation | `npx shadcn@latest add https://serenity-ui.com/r/typewriter-testimonial.json` |
-| **Brand Marquee** | Continuous logo marquee with edge fading and pause-on-hover | `npx shadcn@latest add https://serenity-ui.com/r/brand-marquee.json` |
-| **3D Flip Card** | Layered card stack with spring-driven 3D fanning | `npx shadcn@latest add https://serenity-ui.com/r/3d-flip-card.json` |
-| **Swipe Card** | Gestural swipeable card stack with drag throw physics | `npx shadcn@latest add https://serenity-ui.com/r/swipe-card.json` |
-| **Image Carousel** | Stacked parallax image carousel with peeling transitions | `npx shadcn@latest add https://serenity-ui.com/r/image-carousel.json` |
-| **Image Gallery** | Expanding image gallery with horizontal spring transitions | `npx shadcn@latest add https://serenity-ui.com/r/image-gallery.json` |
+| Component                  | Description                                                     | CLI Command                                                          |
+| :------------------------- | :-------------------------------------------------------------- | :------------------------------------------------------------------- |
+| **Vintage Keyboard**       | Mechanical keyboard with real-time sound synthesis & 3D keycaps | `npx shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard`       |
+| **Portfolio Book**         | Interactive sketchbook portfolio with 3D page flip physics      | `npx shadcn@latest add ayushmxxn/serenity-ui/portfolio-book`         |
+| **Flame Button**           | Fiery flame glow button with mouse tracking & fiery gradients   | `npx shadcn@latest add ayushmxxn/serenity-ui/flame-button`           |
+| **Carousel 360**           | 3D cylinder image carousel with drag and click rotation         | `npx shadcn@latest add ayushmxxn/serenity-ui/carousel-360`           |
+| **Tubelight Navbar**       | Floating island navbar with glowing lamp indicator              | `npx shadcn@latest add ayushmxxn/serenity-ui/tubelight-navbar`       |
+| **Typewriter Testimonial** | Showcase card with typewriter effect & pen animation            | `npx shadcn@latest add ayushmxxn/serenity-ui/typewriter-testimonial` |
+| **Brand Marquee**          | Continuous logo marquee with edge fading and pause-on-hover     | `npx shadcn@latest add ayushmxxn/serenity-ui/brand-marquee`          |
+| **3D Flip Card**           | Layered card stack with spring-driven 3D fanning                | `npx shadcn@latest add ayushmxxn/serenity-ui/3d-flip-card`           |
+| **Swipe Card**             | Gestural swipeable card stack with drag throw physics           | `npx shadcn@latest add ayushmxxn/serenity-ui/swipe-card`             |
+| **Image Carousel**         | Stacked parallax image carousel with peeling transitions        | `npx shadcn@latest add ayushmxxn/serenity-ui/image-carousel`         |
+| **Image Gallery**          | Expanding image gallery with horizontal spring transitions      | `npx shadcn@latest add ayushmxxn/serenity-ui/image-gallery`          |
 
 ### Blocks
 
-| Block | Description | CLI Command |
-| :--- | :--- | :--- |
-| **Testimonial** | Multi-row marquee with voice waveform audio & video dialog | `npx shadcn@latest add https://serenity-ui.com/r/testimonial.json` |
+| Block           | Description                                                | CLI Command                                               |
+| :-------------- | :--------------------------------------------------------- | :-------------------------------------------------------- |
+| **Testimonial** | Multi-row marquee with voice waveform audio & video dialog | `npx shadcn@latest add ayushmxxn/serenity-ui/testimonial` |
 
 ---
 
