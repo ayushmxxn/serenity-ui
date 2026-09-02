@@ -10,16 +10,16 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 // ─────────────────────────────────────────────
 
 const images = [
-  "https://images.unsplash.com/photo-1725017710297-d923d3102984?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1530789253388-582c481c54b0?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1725449670931-b53a7cb689b9?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1724182558400-5bc438d5db52?q=80&w=1858&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1724849306184-cba5daac68a8?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1613169620329-6785c004d900?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1725017710297-d923d3102984?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1530789253388-582c481c54b0?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1725449670931-b53a7cb689b9?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1724182558400-5bc438d5db52?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1724849306184-cba5daac68a8?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1613169620329-6785c004d900?q=75&w=600&auto=format&fit=crop",
 ];
 
 // How often the carousel auto-rotates (ms)
@@ -197,8 +197,8 @@ export const Carousel360: React.FC = () => {
                 alt="Featured"
                 width={320}
                 height={320}
-                priority
                 sizes={CENTER_SIZES_ATTR}
+                loading="lazy"
                 onLoad={() => setCenterLoaded(true)}
                 className={`object-cover ${CENTER_SIZE_CLASSES} transition-opacity duration-300 ${
                   centerLoaded ? "opacity-100" : "opacity-0"

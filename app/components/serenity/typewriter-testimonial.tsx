@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 const testimonials = [
   {
     image:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=75&w=120&auto=format&fit=crop",
     text: "Using this component library has significantly speed up our development process. The quality and ease of integration are remarkable!",
     name: "David Smith",
     jobtitle: "UI Designer",
@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=75&w=120&auto=format&fit=crop",
     text: "The components are highly responsive and work seamlessly across different devices and screen sizes.",
     name: "Emily Chen",
     jobtitle: "Mobile App Developer",
@@ -25,7 +25,7 @@ const testimonials = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=75&w=120&auto=format&fit=crop",
     text: "This library has saved us a significant amount of time and effort. The components are well-documented and easy to integrate.",
     name: "Sarah Taylor",
     jobtitle: "Backend Developer",
@@ -33,7 +33,7 @@ const testimonials = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=75&w=120&auto=format&fit=crop",
     text: "I appreciate the attention to detail in the design. The components are visually appealing and professional.",
     name: "Kevin White",
     jobtitle: "UI/UX Designer",
@@ -41,7 +41,7 @@ const testimonials = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=75&w=120&auto=format&fit=crop",
     text: "I love how the components are designed to be highly responsive and work well across different screen sizes.",
     name: "Brian Kim",
     jobtitle: "Mobile App Developer",

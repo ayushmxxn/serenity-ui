@@ -6,13 +6,13 @@ import React, { useEffect, useState } from "react";
 
 // ---- Customize here ----
 const imgs = [
-  "https://images.unsplash.com/photo-1719977325297-e3f142f2f171?q=80&w=1887&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1692177367567-e8fcff0a82ba?q=80&w=1935&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1586122891856-5f90886b0cee?q=80&w=1887&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1718966148389-a0fcf76af078?q=80&w=1887&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1719176372917-6c96c3608161?q=80&w=1887&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1719965249785-bc1bd672b07d?q=80&w=1937&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1718406922369-50ac826bab33?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1719977325297-e3f142f2f171?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1692177367567-e8fcff0a82ba?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1586122891856-5f90886b0cee?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1718966148389-a0fcf76af078?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1719176372917-6c96c3608161?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1719965249785-bc1bd672b07d?q=75&w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1718406922369-50ac826bab33?q=75&w=600&auto=format&fit=crop",
 ];
 
 const ONE_SECOND = 1000;

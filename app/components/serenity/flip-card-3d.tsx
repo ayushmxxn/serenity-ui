@@ -11,15 +11,15 @@ import React, { useEffect, useState } from "react";
 // Replace these with your own images
 const DEFAULT_IMAGES = [
   {
-    src: "https://images.pexels.com/photos/4588065/pexels-photo-4588065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/4588065/pexels-photo-4588065.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Sunset landscape",
   },
   {
-    src: "https://images.pexels.com/photos/321552/pexels-photo-321552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/321552/pexels-photo-321552.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Desert scene",
   },
   {
-    src: "https://images.pexels.com/photos/208821/pexels-photo-208821.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/208821/pexels-photo-208821.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Red building",
   },
   {
@@ -27,7 +27,7 @@ const DEFAULT_IMAGES = [
     alt: "Cactus close-up",
   },
   {
-    src: "https://images.pexels.com/photos/70568/spotted-baumwaran-monitor-tree-monitor-lizard-70568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/70568/spotted-baumwaran-monitor-tree-monitor-lizard-70568.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Ocean view",
   },
 ];
@@ -175,6 +175,7 @@ const Card: React.FC<CardProps> = ({
         fill
         className="object-cover rounded-2xl"
         sizes="(max-width: 640px) 256px, 288px"
+        loading="lazy"
       />
     </motion.div>
   );

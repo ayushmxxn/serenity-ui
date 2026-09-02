@@ -67,7 +67,7 @@ const CLOSE_BUTTON_DELAY = 0.15;
 const defaultImages: ImageType[] = [
   {
     id: 1,
-    src: "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Mountains",
     description: "19 July 2024",
     width: DEFAULT_WIDTH,
@@ -75,7 +75,7 @@ const defaultImages: ImageType[] = [
   },
   {
     id: 2,
-    src: "https://images.pexels.com/photos/459203/pexels-photo-459203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/459203/pexels-photo-459203.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Bridge",
     description: "11 Nov 2022",
     width: DEFAULT_WIDTH,
@@ -83,7 +83,7 @@ const defaultImages: ImageType[] = [
   },
   {
     id: 3,
-    src: "https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "River",
     description: "18 Oct 2023",
     width: DEFAULT_WIDTH,
@@ -91,7 +91,7 @@ const defaultImages: ImageType[] = [
   },
   {
     id: 4,
-    src: "https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    src: "https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Forest",
     description: "22 Mar 2024",
     width: DEFAULT_WIDTH,
@@ -99,7 +99,7 @@ const defaultImages: ImageType[] = [
   },
   {
     id: 5,
-    src: "https://images.pexels.com/photos/18275080/pexels-photo-18275080.jpeg",
+    src: "https://images.pexels.com/photos/18275080/pexels-photo-18275080.jpeg?auto=compress&cs=tinysrgb&w=600",
     alt: "Desert",
     description: "29 July 2026",
     width: DEFAULT_WIDTH,
@@ -169,10 +169,10 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
               alt={selected.alt}
               width={selected.width ?? DEFAULT_WIDTH}
               height={selected.height ?? DEFAULT_HEIGHT}
-              quality={90}
+              quality={85}
               className={`block w-auto h-auto ${MODAL_MAX_SIZE} object-contain`}
               sizes="(max-width: 640px) 90vw, 560px"
-              priority
+              loading="lazy"
             />
 
             <motion.div

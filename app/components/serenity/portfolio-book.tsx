@@ -247,6 +247,8 @@ function PhotoFrame({
       <img
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover object-center select-none"
         style={{ filter: "none", mixBlendMode: "normal", opacity: 1 }}
       />
@@ -593,6 +595,8 @@ function ProjectsPage({
                 <img
                   src={imgSrc}
                   alt={p.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center select-none"
                   style={{ filter: "none", mixBlendMode: "normal", opacity: 1 }}
                 />

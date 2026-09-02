@@ -8,23 +8,23 @@ import React, { useState } from "react";
 const defaultCards = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1712820504667-8952366b02d3?q=80&w=1887&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1712820504667-8952366b02d3?q=75&w=600&auto=format&fit=crop",
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1719776555224-75afcc74d03b?q=80&w=1887&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1719776555224-75afcc74d03b?q=75&w=600&auto=format&fit=crop",
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1653199898411-b93028f1a916?q=80&w=1964&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1653199898411-b93028f1a916?q=75&w=600&auto=format&fit=crop",
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1697468792373-ad4181550a5a?q=80&w=1887&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1697468792373-ad4181550a5a?q=75&w=600&auto=format&fit=crop",
   },
   {
     id: 5,
-    img: "https://images.unsplash.com/photo-1697577504575-5bee362e57a2?q=80&w=1887&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1697577504575-5bee362e57a2?q=75&w=600&auto=format&fit=crop",
   },
 ];
 
@@ -221,7 +221,7 @@ export function SwipeCards({
                   fill
                   className="pointer-events-none object-cover"
                   sizes={`${config.width}px`}
-                  priority={isFront}
+                  loading="lazy"
                 />
               </motion.div>
             </SwipeCard>
