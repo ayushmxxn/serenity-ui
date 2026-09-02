@@ -2,7 +2,6 @@
 
 import { useCoreAudio } from "../lib/use-core-audio";
 import FooterGlow from "./footer-glow";
-import FooterLaser from "./footer-laser";
 import { ProfileStatsData, ProfileStatsTrigger } from "./profile-stats";
 
 interface FooterProps {
@@ -14,7 +13,6 @@ export default function Footer({ stats }: FooterProps) {
 
   return (
     <footer className="relative overflow-visible bg-[var(--bg-primary)] text-[var(--text-primary)] [content-visibility:auto] [contain-intrinsic-size:auto_500px]">
-      <FooterLaser />
       <FooterGlow />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-20 sm:pt-36 md:pt-48 pb-16 sm:pb-24 flex flex-col items-center justify-center text-center">
         {/* Heading */}
