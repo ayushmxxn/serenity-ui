@@ -365,7 +365,7 @@ export default function ComponentGrid() {
   return (
     <section
       id="components"
-      className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] px-4 py-16 sm:px-10 lg:py-24"
+      className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] px-4 py-16 sm:px-10 lg:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
     >
       <div className="mx-auto max-w-7xl">
         {/* Header with Liquid Segmented Switcher & View All Button */}

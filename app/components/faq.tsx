@@ -53,7 +53,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] px-5 sm:px-8 lg:px-10 py-16 sm:py-20 lg:py-28"
+      className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] px-5 sm:px-8 lg:px-10 py-16 sm:py-20 lg:py-28 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
     >
       {/* Editorial Responsive Container */}
       <div className="mx-auto max-w-xl sm:max-w-2xl lg:max-w-[1180px]">

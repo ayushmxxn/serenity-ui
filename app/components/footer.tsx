@@ -13,7 +13,7 @@ export default function Footer({ stats }: FooterProps) {
   const { play } = useCoreAudio();
 
   return (
-    <footer className="relative overflow-visible bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <footer className="relative overflow-visible bg-[var(--bg-primary)] text-[var(--text-primary)] [content-visibility:auto] [contain-intrinsic-size:auto_500px]">
       <FooterLaser />
       <FooterGlow />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-20 sm:pt-36 md:pt-48 pb-16 sm:pb-24 flex flex-col items-center justify-center text-center">

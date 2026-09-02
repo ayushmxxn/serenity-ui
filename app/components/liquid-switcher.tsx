@@ -81,27 +81,25 @@ export function LiquidSegmentedSwitcher({
         </button>
 
         {/* Templates Tab (Disabled with tooltip) */}
-        <div role="presentation" className="relative group/templates inline-flex h-9 items-center justify-center">
-          <button
-            type="button"
-            role="tab"
-            id="tab-templates"
-            aria-selected={activeTab === "templates"}
-            aria-disabled="true"
-            disabled
-            className="relative z-10 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-[12px] sm:rounded-[14px] px-3 sm:px-4 text-xs sm:text-sm font-medium text-[var(--text-muted)] opacity-40 cursor-not-allowed select-none transition-colors duration-200 focus-visible:outline-none"
-          >
-            Templates
-          </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-templates"
+          aria-selected={activeTab === "templates"}
+          aria-disabled="true"
+          disabled
+          className="group/templates relative z-10 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-[12px] sm:rounded-[14px] px-3 sm:px-4 text-xs sm:text-sm font-medium text-[var(--text-muted)] opacity-40 cursor-not-allowed select-none transition-colors duration-200 focus-visible:outline-none"
+        >
+          <span>Templates</span>
 
           {/* Accessible Tooltip on hover */}
           <span
-            role="tooltip"
+            aria-hidden="true"
             className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-xl bg-zinc-950 text-white border border-white/[0.1] dark:bg-white dark:text-zinc-950 dark:border-black/[0.08] px-2.5 py-1 text-[11px] font-semibold shadow-2xl whitespace-nowrap z-40 opacity-0 translate-y-1 group-hover/templates:opacity-100 group-hover/templates:translate-y-0 transition-all duration-200"
           >
             Coming soon
           </span>
-        </div>
+        </button>
       </div>
     </div>
   );
