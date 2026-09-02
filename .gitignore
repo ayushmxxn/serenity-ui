@@ -45,3 +45,6 @@ next-env.d.ts
 .dev.vars
 /dist/
 .vinext/
+
+# lighthouse reports
+lighthouse-report.json

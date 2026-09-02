@@ -10,14 +10,9 @@ interface SmoothScrollProps {
 
 export function SmoothScroll({ children }: SmoothScrollProps) {
   const pathname = usePathname();
-  const [isTouch, setIsTouch] = useState(false);
   const isPreviewPage = Boolean(pathname?.startsWith("/components/"));
 
-  useEffect(() => {
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
-
-  if (isTouch || isPreviewPage) {
+  if (isPreviewPage) {
     return <>{children}</>;
   }
 

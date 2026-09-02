@@ -11,29 +11,29 @@ export function TopViewportOverlay() {
   const isPreviewPage =
     Boolean(pathname?.startsWith("/components/")) && pathname !== "/components";
 
-  // Reset immediately without animation when pathname changes
+  // Reset scroll state on pathname change
   useEffect(() => {
     setSkipTransition(true);
     setHasScrolled(false);
-
-    const timer = setTimeout(() => {
-      if (typeof window !== "undefined") {
-        setHasScrolled(window.scrollY > 2);
-      }
+    const raf = requestAnimationFrame(() => {
       setSkipTransition(false);
-    }, 50);
-
-    return () => clearTimeout(timer);
+    });
+    return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
   useEffect(() => {
     let rafId: number | null = null;
+    let lastScrolled = false;
 
     const handleScroll = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
-        setHasScrolled(window.scrollY > 2);
+        const scrolled = window.scrollY > 2;
+        if (scrolled !== lastScrolled) {
+          lastScrolled = scrolled;
+          setHasScrolled(scrolled);
+        }
       });
     };
 

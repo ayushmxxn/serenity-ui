@@ -30,16 +30,20 @@ export function HeroLaser() {
 
   useEffect(() => {
     let rafId: number | null = null;
+    let lastScrolled = false;
 
     const handleScroll = () => {
       if (rafId !== null) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
-        setHasScrolled(window.scrollY > 15);
+        const scrolled = window.scrollY > 15;
+        if (scrolled !== lastScrolled) {
+          lastScrolled = scrolled;
+          setHasScrolled(scrolled);
+        }
       });
     };
 
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       if (rafId !== null) cancelAnimationFrame(rafId);
@@ -53,11 +57,12 @@ export function HeroLaser() {
     <div
       aria-hidden="true"
       className={`pointer-events-none fixed inset-x-0 bottom-0 z-30 transition-opacity duration-300 ease-out ${
-        hasScrolled ? "opacity-0" : "opacity-100"
+        hasScrolled ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       style={{
         height: isMobile ? 150 : 240,
         willChange: "opacity",
+        display: hasScrolled ? "none" : "block",
       }}
     >
       <Laser

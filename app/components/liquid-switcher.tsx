@@ -81,7 +81,7 @@ export function LiquidSegmentedSwitcher({
         </button>
 
         {/* Templates Tab (Disabled with tooltip) */}
-        <div className="relative group/templates inline-flex h-9 items-center justify-center">
+        <div role="presentation" className="relative group/templates inline-flex h-9 items-center justify-center">
           <button
             type="button"
             role="tab"

@@ -9,6 +9,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 
 interface KeyConfig {
@@ -614,23 +615,31 @@ function resolveTier(): DeviceTier {
   return "desktop";
 }
 
+function subscribeTier(callback: () => void) {
+  const mobileQuery = window.matchMedia(MOBILE_BREAKPOINT);
+  const tabletQuery = window.matchMedia(TABLET_BREAKPOINT);
+  mobileQuery.addEventListener("change", callback);
+  tabletQuery.addEventListener("change", callback);
+  return () => {
+    mobileQuery.removeEventListener("change", callback);
+    tabletQuery.removeEventListener("change", callback);
+  };
+}
+
+function getTierSnapshot(): DeviceTier {
+  return resolveTier();
+}
+
+function getServerTierSnapshot(): DeviceTier {
+  return "desktop";
+}
+
 function useDeviceTier(): DeviceTier {
-  const [tier, setTier] = useState<DeviceTier>("desktop");
-
-  useEffect(() => {
-    const mobileQuery = window.matchMedia(MOBILE_BREAKPOINT);
-    const tabletQuery = window.matchMedia(TABLET_BREAKPOINT);
-    const update = () => setTier(resolveTier());
-    update();
-    mobileQuery.addEventListener("change", update);
-    tabletQuery.addEventListener("change", update);
-    return () => {
-      mobileQuery.removeEventListener("change", update);
-      tabletQuery.removeEventListener("change", update);
-    };
-  }, []);
-
-  return tier;
+  return useSyncExternalStore(
+    subscribeTier,
+    getTierSnapshot,
+    getServerTierSnapshot,
+  );
 }
 
 const RADIUS_TIERS: Record<DeviceTier, { wall: number; top: number }> = {

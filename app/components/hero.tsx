@@ -460,6 +460,8 @@ export default function Hero({
                 }}
                 src="/logo.webp"
                 alt="Serenity UI Logo"
+                width={32}
+                height={32}
                 className="shrink-0 object-contain rounded-[22%]"
               />
               <motion.span
@@ -828,6 +830,10 @@ export default function Hero({
                     <img
                       src="/heart.webp"
                       alt="Heart"
+                      width={22}
+                      height={22}
+                      loading="lazy"
+                      decoding="async"
                       className="h-5 w-5 sm:h-5.5 sm:w-5.5 object-contain select-none pointer-events-none"
                     />
                   </h2>

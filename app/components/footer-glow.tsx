@@ -202,171 +202,201 @@ export default function FooterGlow() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    const gl =
-      canvas.getContext("webgl", {
-        alpha: true,
-        antialias: false,
-        depth: false,
-        stencil: false,
-        powerPreference: "low-power",
-      }) ||
-      (canvas.getContext("experimental-webgl") as WebGLRenderingContext | null);
-
-    if (!gl) return;
-
-    const vertShader = createShader(gl, gl.VERTEX_SHADER, VERT_SHADER);
-    const fragShader = createShader(gl, gl.FRAGMENT_SHADER, FRAG_SHADER);
-    if (!vertShader || !fragShader) return;
-
-    const program = createProgram(gl, vertShader, fragShader);
-    if (!program) return;
-
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
-      gl.STATIC_DRAW,
-    );
-
-    const positionLocation = gl.getAttribLocation(program, "position");
-    const resolutionLocation = gl.getUniformLocation(program, "uResolution");
-    const timeLocation = gl.getUniformLocation(program, "uTime");
-    const mouseLocation = gl.getUniformLocation(program, "uMouse");
-    const mouseActiveLocation = gl.getUniformLocation(program, "uMouseActive");
-
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
+    let isInitialized = false;
     let isVisible = false;
     let animationFrameId: number | null = null;
-    const startTime = performance.now();
+    let cleanupGl: (() => void) | null = null;
 
-    const mouse = {
-      currentX: 0.5,
-      currentY: 0.0,
-      targetX: 0.5,
-      targetY: 0.0,
-      currentActive: 0.0,
-      targetActive: 0.0,
-    };
+    const initWebGL = () => {
+      if (isInitialized) return;
+      isInitialized = true;
 
-    let cachedRect: DOMRect | null = null;
-    let rectDirty = true;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
 
-    const getCanvasRect = () => {
-      if (!cachedRect || rectDirty) {
-        if (canvas) {
-          cachedRect = canvas.getBoundingClientRect();
-          rectDirty = false;
-        }
-      }
-      return cachedRect;
-    };
+      const gl =
+        canvas.getContext("webgl", {
+          alpha: true,
+          antialias: false,
+          depth: false,
+          stencil: false,
+          powerPreference: "low-power",
+        }) ||
+        (canvas.getContext("experimental-webgl") as WebGLRenderingContext | null);
 
-    const invalidateRect = () => {
-      rectDirty = true;
-    };
+      if (!gl) return;
 
-    const handlePointerMove = (e: MouseEvent | TouchEvent) => {
-      if (!canvas || !isVisible) return;
-      const rect = getCanvasRect();
-      if (!rect) return;
-      const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-      const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
+      const vertShader = createShader(gl, gl.VERTEX_SHADER, VERT_SHADER);
+      const fragShader = createShader(gl, gl.FRAGMENT_SHADER, FRAG_SHADER);
+      if (!vertShader || !fragShader) return;
 
-      const x = (clientX - rect.left) / Math.max(rect.width, 1);
-      const y = (rect.bottom - clientY) / Math.max(rect.height, 1);
+      const program = createProgram(gl, vertShader, fragShader);
+      if (!program) return;
 
-      mouse.targetX = Math.max(0.0, Math.min(1.0, x));
-      mouse.targetY = Math.max(0.0, Math.min(1.0, y));
-
-      if (
-        clientY >= rect.top - 50 &&
-        clientY <= rect.bottom + 50 &&
-        clientX >= rect.left - 50 &&
-        clientX <= rect.right + 50
-      ) {
-        mouse.targetActive = 1.0;
-      } else {
-        mouse.targetActive = 0.0;
-      }
-    };
-
-    const handlePointerLeave = () => {
-      mouse.targetActive = 0.0;
-    };
-
-    window.addEventListener("scroll", invalidateRect, { passive: true });
-    window.addEventListener("resize", invalidateRect, { passive: true });
-    window.addEventListener("mousemove", handlePointerMove, { passive: true });
-    window.addEventListener("touchmove", handlePointerMove, { passive: true });
-    window.addEventListener("mouseleave", handlePointerLeave, {
-      passive: true,
-    });
-    window.addEventListener("touchend", handlePointerLeave, { passive: true });
-
-    const getDpr = () => {
-      const isMobile =
-        /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
-        window.innerWidth < 768;
-      return isMobile ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.25);
-    };
-
-    const resize = () => {
-      if (!canvas) return;
-      rectDirty = true;
-      const rect = getCanvasRect();
-      if (!rect) return;
-      const dpr = getDpr();
-      const displayWidth = Math.round(rect.width * dpr);
-      const displayHeight = Math.round(rect.height * dpr);
-
-      if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
-        canvas.width = displayWidth;
-        canvas.height = displayHeight;
-        gl.viewport(0, 0, displayWidth, displayHeight);
-      }
-    };
-
-    const resizeObserver = new ResizeObserver(() => {
-      resize();
-    });
-    resizeObserver.observe(canvas);
-    resize();
-
-    const render = (now: number) => {
-      if (!isVisible) return;
-
-      const elapsed = (now - startTime) * 0.001;
-      const time = prefersReducedMotion ? 0.0 : elapsed;
-
-      // Smooth inertia easing with responsive tracking
-      mouse.currentX += (mouse.targetX - mouse.currentX) * 0.08;
-      mouse.currentY += (mouse.targetY - mouse.currentY) * 0.08;
-      mouse.currentActive += (mouse.targetActive - mouse.currentActive) * 0.08;
-
-      gl.useProgram(program);
-
-      gl.enableVertexAttribArray(positionLocation);
+      const positionBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+        gl.STATIC_DRAW,
+      );
 
-      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-      gl.uniform1f(timeLocation, time);
-      gl.uniform2f(mouseLocation, mouse.currentX, mouse.currentY);
-      gl.uniform1f(mouseActiveLocation, mouse.currentActive);
+      const positionLocation = gl.getAttribLocation(program, "position");
+      const resolutionLocation = gl.getUniformLocation(program, "uResolution");
+      const timeLocation = gl.getUniformLocation(program, "uTime");
+      const mouseLocation = gl.getUniformLocation(program, "uMouse");
+      const mouseActiveLocation = gl.getUniformLocation(program, "uMouseActive");
 
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      const startTime = performance.now();
 
-      animationFrameId = requestAnimationFrame(render);
+      const mouse = {
+        currentX: 0.5,
+        currentY: 0.0,
+        targetX: 0.5,
+        targetY: 0.0,
+        currentActive: 0.0,
+        targetActive: 0.0,
+      };
+
+      let cachedRect: DOMRect | null = null;
+      let rectDirty = true;
+
+      const getCanvasRect = () => {
+        if (!cachedRect || rectDirty) {
+          if (canvas) {
+            cachedRect = canvas.getBoundingClientRect();
+            rectDirty = false;
+          }
+        }
+        return cachedRect;
+      };
+
+      const invalidateRect = () => {
+        rectDirty = true;
+      };
+
+      const handlePointerMove = (e: MouseEvent | TouchEvent) => {
+        if (!canvas || !isVisible) return;
+        const rect = getCanvasRect();
+        if (!rect) return;
+        const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+        const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
+
+        const x = (clientX - rect.left) / Math.max(rect.width, 1);
+        const y = (rect.bottom - clientY) / Math.max(rect.height, 1);
+
+        mouse.targetX = Math.max(0.0, Math.min(1.0, x));
+        mouse.targetY = Math.max(0.0, Math.min(1.0, y));
+
+        if (
+          clientY >= rect.top - 50 &&
+          clientY <= rect.bottom + 50 &&
+          clientX >= rect.left - 50 &&
+          clientX <= rect.right + 50
+        ) {
+          mouse.targetActive = 1.0;
+        } else {
+          mouse.targetActive = 0.0;
+        }
+      };
+
+      const handlePointerLeave = () => {
+        mouse.targetActive = 0.0;
+      };
+
+      window.addEventListener("scroll", invalidateRect, { passive: true });
+      window.addEventListener("resize", invalidateRect, { passive: true });
+      window.addEventListener("mousemove", handlePointerMove, { passive: true });
+      window.addEventListener("touchmove", handlePointerMove, { passive: true });
+      window.addEventListener("mouseleave", handlePointerLeave, {
+        passive: true,
+      });
+      window.addEventListener("touchend", handlePointerLeave, { passive: true });
+
+      const getDpr = () => {
+        const isMobile =
+          /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+          window.innerWidth < 768;
+        return isMobile ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.25);
+      };
+
+      const resize = () => {
+        if (!canvas) return;
+        rectDirty = true;
+        const rect = getCanvasRect();
+        if (!rect) return;
+        const dpr = getDpr();
+        const displayWidth = Math.round(rect.width * dpr);
+        const displayHeight = Math.round(rect.height * dpr);
+
+        if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+          canvas.width = displayWidth;
+          canvas.height = displayHeight;
+          gl.viewport(0, 0, displayWidth, displayHeight);
+        }
+      };
+
+      const resizeObserver = new ResizeObserver(() => {
+        resize();
+      });
+      resizeObserver.observe(canvas);
+      resize();
+
+      const render = (now: number) => {
+        if (!isVisible) return;
+
+        const elapsed = (now - startTime) * 0.001;
+        const time = prefersReducedMotion ? 0.0 : elapsed;
+
+        // Smooth inertia easing with responsive tracking
+        mouse.currentX += (mouse.targetX - mouse.currentX) * 0.08;
+        mouse.currentY += (mouse.targetY - mouse.currentY) * 0.08;
+        mouse.currentActive += (mouse.targetActive - mouse.currentActive) * 0.08;
+
+        gl.useProgram(program);
+
+        gl.enableVertexAttribArray(positionLocation);
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+        gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+        gl.uniform1f(timeLocation, time);
+        gl.uniform2f(mouseLocation, mouse.currentX, mouse.currentY);
+        gl.uniform1f(mouseActiveLocation, mouse.currentActive);
+
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        animationFrameId = requestAnimationFrame(render);
+      };
+
+      if (isVisible && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+
+      cleanupGl = () => {
+        window.removeEventListener("scroll", invalidateRect);
+        window.removeEventListener("resize", invalidateRect);
+        window.removeEventListener("mousemove", handlePointerMove);
+        window.removeEventListener("touchmove", handlePointerMove);
+        window.removeEventListener("mouseleave", handlePointerLeave);
+        window.removeEventListener("touchend", handlePointerLeave);
+        resizeObserver.disconnect();
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+        gl.deleteProgram(program);
+        gl.deleteShader(vertShader);
+        gl.deleteShader(fragShader);
+        gl.deleteBuffer(positionBuffer);
+      };
     };
 
     const intersectionObserver = new IntersectionObserver(
@@ -374,9 +404,11 @@ export default function FooterGlow() {
         entries.forEach((entry) => {
           isVisible = entry.isIntersecting;
           if (isVisible) {
-            rectDirty = true;
-            if (!animationFrameId) {
-              animationFrameId = requestAnimationFrame(render);
+            if (!isInitialized) {
+              initWebGL();
+            } else if (!animationFrameId) {
+              // resume rendering
+              initWebGL();
             }
           } else {
             if (animationFrameId) {
@@ -386,26 +418,13 @@ export default function FooterGlow() {
           }
         });
       },
-      { threshold: 0.01 },
+      { threshold: 0.01, rootMargin: "100px" },
     );
     intersectionObserver.observe(canvas);
 
     return () => {
-      window.removeEventListener("scroll", invalidateRect);
-      window.removeEventListener("resize", invalidateRect);
-      window.removeEventListener("mousemove", handlePointerMove);
-      window.removeEventListener("touchmove", handlePointerMove);
-      window.removeEventListener("mouseleave", handlePointerLeave);
-      window.removeEventListener("touchend", handlePointerLeave);
-      resizeObserver.disconnect();
       intersectionObserver.disconnect();
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-      gl.deleteProgram(program);
-      gl.deleteShader(vertShader);
-      gl.deleteShader(fragShader);
-      gl.deleteBuffer(positionBuffer);
+      cleanupGl?.();
     };
   }, []);
 

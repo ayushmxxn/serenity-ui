@@ -1,11 +1,9 @@
-import "@fontsource/open-runde/400.css";
-import "@fontsource/open-runde/500.css";
-import "@fontsource/open-runde/600.css";
-import "@fontsource/open-runde/700.css";
+import "@fontsource/open-runde/latin.css";
 import { SoundProvider } from "@web-kits/audio/react";
 import "lenis/dist/lenis.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { SmoothScroll } from "./components/smooth-scroll";
 import { ThemeProvider } from "./components/theme-provider";
 import { TopViewportOverlay } from "./components/top-viewport-overlay";
@@ -142,22 +140,23 @@ export default function RootLayout({
     >
       <head>
         <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="f399a2d5-b5ad-44a4-9c71-55114795693c"
-        />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "ybn2su1axd");`,
-          }}
-        />
-        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        <Script
+          strategy="afterInteractive"
+          src="https://cloud.umami.is/script.js"
+          data-website-id="f399a2d5-b5ad-44a4-9c71-55114795693c"
+        />
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "ybn2su1axd");`,
+          }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--text-primary)] focus:text-[var(--bg-primary)] focus:rounded-xl focus:font-semibold focus:text-xs focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-500"

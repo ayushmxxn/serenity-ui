@@ -425,15 +425,8 @@ export function createLaser(
     beamSpan = contentMaxX;
     const child = content.firstElementChild;
     if (child instanceof HTMLElement) {
-      const childRect = child.getBoundingClientRect();
-      const outputRect = output.getBoundingClientRect();
-      const style = getComputedStyle(child);
-      const left =
-        childRect.left - outputRect.left + (parseFloat(style.paddingLeft) || 0);
-      const right =
-        childRect.right -
-        outputRect.left -
-        (parseFloat(style.paddingRight) || 0);
+      const left = child.offsetLeft;
+      const right = left + child.offsetWidth;
       if (right - left > 48) {
         beamCX = ((left + right) * 0.5) / viewW;
         beamSpan = (right - left) / viewW;

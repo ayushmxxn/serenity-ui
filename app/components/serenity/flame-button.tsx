@@ -30,22 +30,11 @@ export const FlameButton: React.FC<FlameButtonProps> = ({
   const [displayOpacity, setDisplayOpacity] = useState(0);
   const targetOpacityRef = useRef(0);
 
-  useEffect(() => {
-    const measure = () => {
-      if (wrapperRef.current) {
-        const rect = wrapperRef.current.getBoundingClientRect();
-        rectRef.current = rect;
-        setWidth(rect.width);
-      }
-    };
-    measure();
-    window.addEventListener("resize", measure, { passive: true });
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
   const handleMouseEnter = () => {
     if (wrapperRef.current) {
-      rectRef.current = wrapperRef.current.getBoundingClientRect();
+      const rect = wrapperRef.current.getBoundingClientRect();
+      rectRef.current = rect;
+      setWidth(rect.width);
     }
     setIsHovering(true);
   };
@@ -68,21 +57,29 @@ export const FlameButton: React.FC<FlameButtonProps> = ({
   }, [targetOpacity]);
 
   useEffect(() => {
-    let rafId: number;
+    let rafId: number | null = null;
 
     const tick = () => {
       setDisplayOpacity((prev) => {
         const target = targetOpacityRef.current;
         const diff = target - prev;
-        if (Math.abs(diff) < 0.002) return target;
+        if (Math.abs(diff) < 0.002) {
+          rafId = null;
+          return target;
+        }
+        rafId = requestAnimationFrame(tick);
         return prev + diff * 0.15;
       });
-      rafId = requestAnimationFrame(tick);
     };
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
+    if (Math.abs(targetOpacity - displayOpacity) > 0.002 && rafId === null) {
+      rafId = requestAnimationFrame(tick);
+    }
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [targetOpacity, displayOpacity]);
 
   const edgePercent = isRightSide ? 88 : 12;
 

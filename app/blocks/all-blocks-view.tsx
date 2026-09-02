@@ -536,7 +536,7 @@ export default function AllBlocksView({
         <div className="mb-6 sm:mb-8 hidden sm:flex items-center justify-center">
           <div className="relative inline-flex h-8 sm:h-9 items-center rounded-xl bg-[var(--pill-bg)] p-0.5 border border-[var(--card-border)] select-none max-w-full overflow-x-auto custom-scrollbar">
             <div
-              role="tablist"
+              role="group"
               aria-label="Filter blocks by category"
               className="relative flex items-center gap-0.5"
             >
@@ -546,9 +546,7 @@ export default function AllBlocksView({
                   <button
                     key={cat}
                     type="button"
-                    role="tab"
-                    id={`tab-${cat.toLowerCase().replace(/\s+/g, "-")}`}
-                    aria-selected={isSelected}
+                    aria-pressed={isSelected}
                     onClick={() => {
                       setSelectedCategory(cat);
                       play("tap");

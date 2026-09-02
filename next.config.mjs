@@ -104,11 +104,29 @@ const nextConfig = {
         ],
       },
       {
-        source: "/:file(logo\\.webp|favicon\\.png|og\\.png|heart\\.webp|21st-icon\\.png)",
+        source: "/images/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, stale-while-revalidate=604800",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/audio/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/:file(logo\\.webp|favicon\\.png|favicon\\.ico|favicon-16x16\\.png|favicon-32x32\\.png|og\\.png|heart\\.webp|21st-icon\\.png)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
