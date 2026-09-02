@@ -48,3 +48,5 @@ next-env.d.ts
 
 # lighthouse reports
 lighthouse-report.json
+lighthouse-*.json
+lighthouse-*.html
