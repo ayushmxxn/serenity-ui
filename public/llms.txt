@@ -2,48 +2,29 @@
 
 > Serenity UI (https://serenity-ui.com) is a free, open-source library of animated, interactive React components, blocks, and templates. Built with TypeScript, Tailwind CSS, Framer Motion, and HTML5 Canvas.
 
-## What is Serenity UI?
-Serenity UI is an open-source collection of interactive, animated React components and blocks. It focuses on micro-interactions, 3D perspective animations, canvas effects, and tactile feedback built on top of Tailwind CSS and Framer Motion.
+Serenity UI provides copy-paste React components and full-width UI blocks with a focus on micro-interactions, 3D perspective animations, canvas effects, and tactile feedback. All components are self-contained and compatible with the official shadcn CLI.
 
-- **Author**: Ayushmaan Singh (@ayushmxxn)
-- **Official Site**: https://serenity-ui.com
-- **License**: MIT License (100% free for personal, client, and commercial projects)
-- **Framework Support**: React 18 & 19, Next.js (App Router & Pages Router), Vite, Astro, Remix, Tailwind CSS
-- **CLI Compatibility**: Compatible with the official shadcn CLI (`npx shadcn@latest add ayushmxxn/serenity-ui/<component-name>`)
+## Components
+- [Portfolio Book](https://serenity-ui.com/components/portfolio-book): Interactive flippable sketch portfolio book component for React and Tailwind CSS with realistic page-turning physics and handwritten typography.
+- [Vintage Keyboard](https://serenity-ui.com/components/vintage-keyboard): Retro mechanical typewriter and keyboard interactive simulator for React with synthesized mechanical key sounds and tactile keypress states.
+- [Flame Button](https://serenity-ui.com/components/flame-button): Organic flame and particle fire button component for React featuring GPU-accelerated canvas shaders and dynamic hover glow.
+- [3D Flip Card](https://serenity-ui.com/components/flip-card-3d): 3D perspective hover flip card component for React with smooth spring-animated rotational tilt and dual-sided content reveal.
+- [Brand Marquee](https://serenity-ui.com/components/brand-marquee): High-performance continuous logo marquee component for React with smooth edge-fade gradient masks and pause on hover.
+- [Swipe Card](https://serenity-ui.com/components/swipe-card): Interactive gesture-based swipeable stack card component for React with physics-driven drag velocity and auto-rotation.
+- [3D Image Carousel](https://serenity-ui.com/components/image-carousel): Smooth 3D rotational perspective image carousel component for React with interactive dragging and depth scaling.
+- [Masonry Image Gallery](https://serenity-ui.com/components/image-gallery): Modern masonry photo gallery component for React with fluid expand-to-fullscreen layout animations.
+- [Tubelight Navbar](https://serenity-ui.com/components/tubelight-navbar): Apple-inspired floating tubelight navigation bar for React with smooth spring-physics glowing indicator and dark mode.
+- [Typewriter Testimonial](https://serenity-ui.com/components/typewriter-testimonial): Animated typewriter customer testimonial quote card for React with realistic typing cadence and author badge.
+- [Carousel 360](https://serenity-ui.com/components/carousel-360): 360-degree cylinder 3D carousel component for React with spatial depth perspective and continuous rotational dragging.
 
-## Core Categories & Components
-1. **Interactive & 3D**:
-   - Portfolio Book (`portfolio-book`): Multi-sheet realistic 3D book flip physics with handwritten typography.
-   - Vintage Keyboard (`vintage-keyboard`): Retro typewriter typing experience with synthesized sound effects.
-   - 3D Flip Card (`flip-card-3d`): Perspective hover tilt and dual-sided reveal.
-   - Swipe Cards (`swipe-card`): Physics-driven gesture swipeable stack.
-   - Carousel 360 (`carousel-360`): 360-degree cylinder 3D perspective slider.
-2. **Buttons & CTAs**:
-   - Flame Button (`flame-button`): GPU-accelerated canvas particle fire and dynamic glow shader.
-3. **Navigation**:
-   - Tubelight Navbar (`tubelight-navbar`): Floating Apple-style glass navbar with spring glow pill indicator.
-4. **Social Proof & Testimonials**:
-   - Brand Marquee (`brand-marquee`): Continuous 60fps logo ticker with alpha gradient masks.
-   - Typewriter Testimonial (`typewriter-testimonial`): Animated character-by-character customer quote card.
-   - Voice Testimonial (`testimonial`): Audio voice note waveform player with play/pause controls.
-5. **Media & Galleries**:
-   - 3D Image Carousel (`image-carousel`): Rotational depth perspective carousel.
-   - Masonry Image Gallery (`image-gallery`): Smooth shared layout expandable lightbox gallery.
+## Blocks
+- [Voice Testimonial](https://serenity-ui.com/blocks/testimonial): Audio voice note testimonial section block for React featuring interactive audio waveforms, play/pause controls, and duration counters.
 
-## Quick Start
-```bash
-# Add components directly via the shadcn CLI:
-npx shadcn@latest add ayushmxxn/serenity-ui/carousel-360
-npx shadcn@latest add ayushmxxn/serenity-ui/vintage-keyboard
-npx shadcn@latest add ayushmxxn/serenity-ui/flame-button
-npx shadcn@latest add ayushmxxn/serenity-ui/portfolio-book
-npx shadcn@latest add ayushmxxn/serenity-ui/testimonial
-```
+## Catalogs & Navigation
+- [All Components](https://serenity-ui.com/components): Catalog of all interactive, animated, and 3D React components.
+- [All Blocks](https://serenity-ui.com/blocks): Full-width UI sections and production blocks for React.
 
-## Documentation & Useful Links
-- Full Catalog & Source Reference: https://serenity-ui.com/llms-full.txt
-- Components Directory: https://serenity-ui.com/components
-- Blocks Directory: https://serenity-ui.com/blocks
-- GitHub Repository: https://github.com/ayushmxxn
-- Discord Community: https://discord.com/invite/kzk6uWey3g
-- Creator Twitter/X: https://x.com/ayushmxxn
+## Optional
+- [Full Documentation](https://serenity-ui.com/llms-full.txt): Complete reference of all Serenity UI components, CLI installation commands, dependencies, and specifications.
+- [GitHub Repository](https://github.com/ayushmxxn/serenity-ui): Official source code repository and issue tracker.
+- [Discord Community](https://discord.com/invite/kzk6uWey3g): Developer discussion and community support.

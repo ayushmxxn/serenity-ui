@@ -1,6 +1,14 @@
 # Serenity UI — Comprehensive Component & Block Catalog
 
-> Serenity UI (https://serenity-ui.com) is an open-source React, Tailwind CSS, Canvas, and Framer Motion library created by Ayushmaan Singh (@ayushmxxn). Released under the MIT License.
+> Serenity UI (https://serenity-ui.com) is an open-source library of animated, interactive React components and blocks created by Ayushmaan Singh (@ayushmxxn). Released under the MIT License.
+
+This document provides complete technical specifications, descriptions, CLI installation commands, and dependencies for all Serenity UI components and blocks. For the concise index, see [llms.txt](https://serenity-ui.com/llms.txt).
+
+## Quick Links
+- [All Components](https://serenity-ui.com/components): Full components catalog.
+- [All Blocks](https://serenity-ui.com/blocks): Full blocks and sections catalog.
+- [GitHub Repository](https://github.com/ayushmxxn/serenity-ui): Source code repository.
+- [Discord Community](https://discord.com/invite/kzk6uWey3g): Developer support and chat.
 
 ## Full Catalog
 
