@@ -205,6 +205,8 @@ export default function FooterGlow() {
     let isInitialized = false;
     let isVisible = false;
     let animationFrameId: number | null = null;
+    let startAnimation: (() => void) | null = null;
+    let stopAnimation: (() => void) | null = null;
     let cleanupGl: (() => void) | null = null;
 
     const initWebGL = () => {
@@ -347,7 +349,10 @@ export default function FooterGlow() {
       resize();
 
       const render = (now: number) => {
-        if (!isVisible) return;
+        if (!isVisible) {
+          animationFrameId = null;
+          return;
+        }
 
         const elapsed = (now - startTime) * 0.001;
         const time = prefersReducedMotion ? 0.0 : elapsed;
@@ -376,8 +381,21 @@ export default function FooterGlow() {
         animationFrameId = requestAnimationFrame(render);
       };
 
-      if (isVisible && !animationFrameId) {
-        animationFrameId = requestAnimationFrame(render);
+      startAnimation = () => {
+        if (!animationFrameId) {
+          animationFrameId = requestAnimationFrame(render);
+        }
+      };
+
+      stopAnimation = () => {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      };
+
+      if (isVisible) {
+        startAnimation();
       }
 
       cleanupGl = () => {
@@ -388,10 +406,7 @@ export default function FooterGlow() {
         window.removeEventListener("mouseleave", handlePointerLeave);
         window.removeEventListener("touchend", handlePointerLeave);
         resizeObserver.disconnect();
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-          animationFrameId = null;
-        }
+        stopAnimation?.();
         gl.deleteProgram(program);
         gl.deleteShader(vertShader);
         gl.deleteShader(fragShader);
@@ -406,15 +421,11 @@ export default function FooterGlow() {
           if (isVisible) {
             if (!isInitialized) {
               initWebGL();
-            } else if (!animationFrameId) {
-              // resume rendering
-              initWebGL();
+            } else {
+              startAnimation?.();
             }
           } else {
-            if (animationFrameId) {
-              cancelAnimationFrame(animationFrameId);
-              animationFrameId = null;
-            }
+            stopAnimation?.();
           }
         });
       },
