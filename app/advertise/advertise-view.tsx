@@ -62,12 +62,12 @@ export default function AdvertiseView({
           Accept: "application/json",
         },
         body: JSON.stringify({
-          productName: productName.trim() || "Serenity",
+          productName: productName.trim() || "Serenity UI",
           description:
             productPitch.trim() || "Components that make the web feel alive",
           productUrl: productUrl.trim() || "https://serenity-ui.com",
           email: email.trim(),
-          _subject: `New Serenity Top Strip Request: ${productName.trim() || "Serenity"}`,
+          _subject: `New Serenity UI Top Strip Request: ${productName.trim() || "Serenity UI"}`,
         }),
       });
 
@@ -96,7 +96,7 @@ export default function AdvertiseView({
       <header className="w-full shrink-0 flex flex-col">
         <TopSponsorStrip
           product={{
-            name: productName || "Serenity",
+            name: productName || "Serenity UI",
             description:
               productPitch || "Components that make the web feel alive",
             url: productUrl || "https://serenity-ui.com",
@@ -225,7 +225,7 @@ export default function AdvertiseView({
                   required
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  placeholder="Serenity"
+                  placeholder="Serenity UI"
                   maxLength={32}
                   className="w-full rounded-2xl bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] py-3 px-3 sm:px-5 text-[13px] sm:text-sm text-[var(--pill-text)] placeholder-[var(--text-muted)] outline-none focus-visible:ring-2 focus-visible:ring-orange-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] disabled:opacity-60 transition-all"
                 />

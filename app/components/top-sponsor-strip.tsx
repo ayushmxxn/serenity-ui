@@ -42,14 +42,13 @@ export function TopSponsorStrip({
           {product.description && (
             <>
               <span className="text-[var(--text-muted)]/40 shrink-0">
-                —
+                -
               </span>
               <span className="text-[var(--text-muted)] truncate">
                 {product.description}
               </span>
             </>
           )}
-          <span className="text-[var(--text-muted)]/40 shrink-0">·</span>
           <span className="inline-flex items-center gap-1 rounded-full bg-[var(--card-bg)] group-hover:bg-[var(--pill-hover)] px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-[var(--text-primary)] border border-[var(--card-border)] shrink-0 transition-all">
             <span>Visit</span>
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">
