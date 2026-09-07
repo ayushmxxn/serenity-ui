@@ -169,30 +169,48 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
   };
 
   const ComponentPreview = item.component;
+  const previewHref =
+    item.type === "block"
+      ? `/blocks/${item.slug}`
+      : `/components/${item.slug}`;
 
   return (
     <div className="group relative flex flex-col">
       {/* Component Preview Container */}
       <div
-        className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--pill-bg)] border border-[var(--card-border)] flex items-center justify-center transition-colors ${
+        className={`group/preview relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--pill-bg)] border border-[var(--card-border)] flex items-center justify-center transition-all duration-200 hover:border-black/20 dark:hover:border-white/20 ${
           item.videoPreview ? "p-0" : "p-4"
         }`}
       >
         {/* Live component preview or video preview */}
-        <div className="relative z-10 flex items-center justify-center w-full h-full">
+        <div className="relative z-10 flex items-center justify-center w-full h-full pointer-events-none select-none">
           {item.videoPreview ? (
             <LazyVideoPreview src={item.videoPreview} />
           ) : (
             <ComponentPreview />
           )}
         </div>
+
+        {/* Clickable Overlay Link to Component Preview Page */}
+        <Link
+          href={previewHref}
+          onClick={() => play("tap")}
+          aria-label={`View ${item.type === "block" ? "block" : "component"} preview for ${item.name}`}
+          className="absolute inset-0 z-20 cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70"
+        />
       </div>
 
       {/* Component Name and 3 Action Options */}
       <div className="relative flex items-center justify-between px-0.5 pt-2.5">
         {/* Title */}
         <h3 className="text-sm sm:text-base font-bold font-heading text-[var(--text-primary)] truncate pr-2">
-          {item.name}
+          <Link
+            href={previewHref}
+            onClick={() => play("tap")}
+            className="hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 rounded-md"
+          >
+            {item.name}
+          </Link>
         </h3>
 
         {/* Action Buttons: Compact View All Components Pill Style */}
@@ -323,11 +341,7 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
 
           {/* View Preview */}
           <Link
-            href={
-              item.type === "block"
-                ? `/blocks/${item.slug}`
-                : `/components/${item.slug}`
-            }
+            href={previewHref}
             onClick={() => play("tap")}
             aria-label={`View ${item.type === "block" ? "block" : "component"} preview for ${item.name}`}
             className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 touch-manipulation active:scale-95"
