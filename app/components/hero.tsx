@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Heart } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
@@ -815,15 +815,7 @@ export default function Hero({
                 <div className="flex items-center gap-2">
                   <h2 className="flex items-center gap-2 text-base font-bold tracking-tight font-heading text-[var(--text-primary)] sm:text-lg">
                     <span>Loved by the Community</span>
-                    <img
-                      src="/heart.webp"
-                      alt="Heart"
-                      width={22}
-                      height={22}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-5 w-5 sm:h-5.5 sm:w-5.5 object-contain select-none pointer-events-none"
-                    />
+                    <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5 text-red-500/80 fill-red-500/20 shrink-0" />
                   </h2>
                 </div>
 

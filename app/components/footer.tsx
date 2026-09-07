@@ -48,7 +48,7 @@ export default function Footer({ stats, className }: FooterProps) {
             Blocks
           </Link>
           <Link
-            href="/sponsors"
+            href="/#sponsors"
             onClick={() => play("tap")}
             className="hover:text-[var(--text-primary)] transition-colors"
           >

@@ -30,12 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/sponsors`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
   ];
 
   const componentSlugs = getAllComponentSlugs();
