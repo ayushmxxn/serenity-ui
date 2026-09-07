@@ -325,7 +325,7 @@ export default function AdvertiseView({
 
             {/* Price & Availability pill below CTA */}
             <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[var(--card-border)]/60 bg-[var(--card-bg)]/50 px-3 py-1 text-[11px] sm:text-xs font-medium text-[var(--text-muted)] mt-1 max-w-full">
-              <span className="font-semibold text-orange-500">$99</span>
+              <span className="font-semibold text-[var(--text-primary)] dark:text-white">$99</span>
               <span className="text-[var(--text-muted)]/40">·</span>
               <span className="truncate">One product · 30 days · One spot</span>
             </div>
