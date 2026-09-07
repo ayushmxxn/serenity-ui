@@ -7,13 +7,20 @@ import { ProfileStatsData, ProfileStatsTrigger } from "./profile-stats";
 
 interface FooterProps {
   stats?: ProfileStatsData | null;
+  className?: string;
 }
 
-export default function Footer({ stats }: FooterProps) {
+export default function Footer({ stats, className }: FooterProps) {
   const { play } = useCoreAudio();
 
   return (
-    <footer className="relative overflow-visible bg-[var(--bg-primary)] text-[var(--text-primary)] [content-visibility:auto] [contain-intrinsic-size:auto_500px]">
+    <footer
+      className={`relative overflow-visible bg-[var(--bg-primary)] text-[var(--text-primary)] ${
+        className !== undefined
+          ? className
+          : "[content-visibility:auto] [contain-intrinsic-size:auto_500px]"
+      }`}
+    >
       <FooterGlow />
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-20 sm:pt-36 md:pt-48 pb-16 sm:pb-24 flex flex-col items-center justify-center text-center">
         {/* Heading */}
@@ -39,6 +46,20 @@ export default function Footer({ stats }: FooterProps) {
             className="hover:text-[var(--text-primary)] transition-colors"
           >
             Blocks
+          </Link>
+          <Link
+            href="/sponsors"
+            onClick={() => play("tap")}
+            className="hover:text-[var(--text-primary)] transition-colors"
+          >
+            Sponsors
+          </Link>
+          <Link
+            href="/advertise"
+            onClick={() => play("tap")}
+            className="hover:text-[var(--text-primary)] transition-colors"
+          >
+            Advertise
           </Link>
           <a
             href="https://github.com/ayushmxxn"

@@ -1,5 +1,6 @@
 import { Ripple } from "./components/effects/Ripple";
 import ComponentGrid from "./components/component-grid";
+import HomepageSponsors from "./components/homepage-sponsors";
 import FAQ from "./components/faq";
 import Footer from "./components/footer";
 import Hero from "./components/hero";
@@ -59,6 +60,7 @@ export default async function Home() {
           />
           <HeroLaser />
           <ComponentGrid />
+          <HomepageSponsors />
           <FAQ />
           <Footer stats={stats} />
         </main>

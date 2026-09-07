@@ -8,6 +8,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { useCoreAudio } from "../lib/use-core-audio";
 import { ProfileStatsTrigger } from "./profile-stats";
 import { VintageKeyboard } from "./vintage-keyboard";
+import { TopSponsorStrip } from "./top-sponsor-strip";
 
 const emptySubscribe = () => () => {};
 const subscribeResize = (cb: () => void) => {
@@ -335,20 +336,7 @@ export default function Hero({
   return (
     <section className="relative flex min-h-screen w-full flex-col overflow-x-clip bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* Top Sponsor Strip */}
-      <div className="relative z-20 flex h-10 w-full items-center justify-center border-b border-[var(--card-border)] bg-[var(--bg-primary)] px-4 text-center text-xs sm:text-[13px] tracking-tight">
-        <span className="inline-flex items-center gap-1.5 sm:gap-2 text-[var(--text-muted)]">
-          <span className="font-medium text-[var(--text-muted)]">
-            Get your product featured here for
-          </span>
-          <span className="font-semibold text-[var(--text-primary)]/80">
-            $99/m
-          </span>
-          <span className="text-[var(--text-muted)]/40">·</span>
-          <span className="inline-flex items-center rounded-full bg-[var(--card-bg)] px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-[var(--text-muted)] border border-[var(--card-border)]">
-            Coming soon
-          </span>
-        </span>
-      </div>
+      <TopSponsorStrip />
 
       {/* Fixed Header Spacer in document flow to prevent layout shift */}
       <div className="h-16 w-full shrink-0 pointer-events-none" />
