@@ -2326,22 +2326,10 @@ export function MechanicalKeyboard({
   const [isTabVisible, setIsTabVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(true);
   const mountTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
     mountTimeRef.current = Date.now();
-  }, []);
-
-  useEffect(() => {
-    const check = () => {
-      const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-      const isWide = window.innerWidth >= 1024;
-      setIsDesktop(hasFinePointer && isWide);
-    };
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
   }, []);
 
   const handleReady = useCallback(() => {
@@ -2462,36 +2450,23 @@ export function MechanicalKeyboard({
     };
   }, [typingInteraction, interactive, isVisible]);
 
-  useEffect(() => {
-    const canvas = containerRef.current?.querySelector("canvas");
-    if (canvas) {
-      canvas.style.touchAction = "pan-y";
-    }
-  }, [isReady]);
-
   return (
     <div
       ref={containerRef}
       onPointerDown={() => setHasInteracted(true)}
-      className="mech-kb-wrapper relative w-full h-full select-none touch-pan-y"
+      className="mech-kb-wrapper relative w-full h-full select-none touch-none"
       style={{
         width: "100%",
         height: "100%",
         position: "relative",
-        touchAction: "pan-y",
+        touchAction: "none",
       }}
     >
-      <style>{`
-        .mech-kb-wrapper,
-        .mech-kb-wrapper canvas {
-          touch-action: pan-y !important;
-        }
-      `}</style>
       {/* Fun & Creative Mechanical Keyboard Loader */}
       {showLoader && <KeyboardCreativeLoader isReady={isReady} />}
 
       <Canvas
-        className={`transition-opacity duration-700 ease-out touch-pan-y ${
+        className={`transition-opacity duration-700 ease-out touch-none ${
           isReady ? "opacity-100" : "opacity-0"
         }`}
         shadows={{ type: THREE.PCFShadowMap }}
@@ -2502,7 +2477,7 @@ export function MechanicalKeyboard({
           powerPreference: "high-performance",
         }}
         frameloop={isVisible ? "always" : "never"}
-        style={{ width: "100%", height: "100%", touchAction: "pan-y" }}
+        style={{ width: "100%", height: "100%", touchAction: "none" }}
       >
         <FrameReadyNotifier onReady={handleReady} />
         <PerspectiveCamera
@@ -2513,15 +2488,20 @@ export function MechanicalKeyboard({
           far={100}
         />
         <ResponsiveCamera />
-        {isDesktop && (
+        {interactive && (
           <OrbitControls
             makeDefault
             enablePan={false}
+            enableRotate={true}
+            enableZoom={true}
             minPolarAngle={0.15}
             maxPolarAngle={1.42}
             minDistance={1.8}
             maxDistance={50.0}
             target={[0, 0, 0]}
+            enableDamping={true}
+            dampingFactor={0.05}
+            rotateSpeed={0.8}
           />
         )}
 
@@ -2591,11 +2571,11 @@ export function MechanicalKeyboard({
 export function MechanicalKeyboardDemo() {
   return (
     <div
-      className="mech-kb-wrapper relative w-full h-[380px] sm:h-[460px] md:h-[500px] select-none touch-pan-y"
+      className="mech-kb-wrapper relative w-full h-[380px] sm:h-[460px] md:h-[500px] select-none touch-none"
       style={{
         width: "100%",
         position: "relative",
-        touchAction: "pan-y",
+        touchAction: "none",
       }}
     >
       <MechanicalKeyboard interactive typingInteraction />
