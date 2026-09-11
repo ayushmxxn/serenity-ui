@@ -147,8 +147,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/__test",
-        destination: "/test",
+        source: "/test",
+        destination: "/__test",
       },
     ];
   },

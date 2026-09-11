@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Check, Copy, Eye, Terminal } from "lucide-react";
+import { ArrowRight, Check, Copy, Terminal } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCoreAudio } from "../lib/use-core-audio";
@@ -398,20 +398,6 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
               {copiedType === "code" ? "Paste in your project" : "Copy code"}
             </span>
           </button>
-
-          {/* View Preview */}
-          <Link
-            href={previewHref}
-            onClick={() => play("tap")}
-            aria-label={`View ${item.type === "block" ? "block" : "component"} preview for ${item.name}`}
-            className="group/btn relative flex h-7 w-7 items-center justify-center rounded-[10px] bg-[var(--pill-bg)] dark:bg-gradient-to-b dark:from-[#202024] dark:to-[#18181b] border border-[var(--card-border)] dark:border-white/[0.08] text-[var(--pill-text)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_2px_4px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),inset_0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-200 hover:bg-[var(--pill-hover)] dark:hover:from-[#26262b] dark:hover:to-[#1c1c20] dark:hover:border-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70 touch-manipulation active:scale-95"
-          >
-            <Eye className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:scale-110" />
-            {/* UI Tooltip */}
-            <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded-lg bg-[#18181b] text-white border border-white/[0.1] dark:bg-white dark:text-[#09090b] dark:border-black/[0.08] px-2 py-0.5 text-[10px] font-semibold shadow-xl whitespace-nowrap z-30 opacity-0 translate-y-1 group-hover/btn:opacity-100 group-hover/btn:translate-y-0 transition-all duration-200">
-              Preview
-            </span>
-          </Link>
         </div>
       </div>
     </div>
