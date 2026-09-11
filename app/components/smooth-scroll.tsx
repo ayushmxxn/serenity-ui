@@ -10,7 +10,10 @@ interface SmoothScrollProps {
 
 export function SmoothScroll({ children }: SmoothScrollProps) {
   const pathname = usePathname();
-  const isPreviewPage = Boolean(pathname?.startsWith("/components/"));
+  const isPreviewPage =
+    Boolean(pathname?.startsWith("/components/")) ||
+    Boolean(pathname?.startsWith("/__test")) ||
+    Boolean(pathname?.startsWith("/test"));
 
   if (isPreviewPage) {
     return <>{children}</>;

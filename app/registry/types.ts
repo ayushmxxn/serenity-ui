@@ -20,6 +20,7 @@ export interface RegistryEntry {
   dependencies?: string[];
   cliCommand?: string;
   videoPreview?: string;
+  videoPoster?: string;
   variants?: RegistryVariant[];
   defaultVariant?: string;
 }

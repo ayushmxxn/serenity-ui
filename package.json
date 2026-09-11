@@ -15,6 +15,9 @@
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
     "@fontsource/open-runde": "^5.3.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@types/three": "^0.185.4",
     "@vinext/cloudflare": "^1.0.0-beta.6",
     "@web-kits/audio": "^0.1.0",
     "framer-motion": "^13.1.1",
@@ -27,6 +30,7 @@
     "react-icons": "^5.7.0",
     "react-server-dom-webpack": "^19.2.8",
     "shiki": "^4.4.3",
+    "three": "^0.186.0",
     "vinext": "^1.0.0-beta.8"
   },
   "devDependencies": {

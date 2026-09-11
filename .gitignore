@@ -77,3 +77,17 @@ Thumbs.db:encryptable
 lighthouse-report.json
 lighthouse-*.json
 lighthouse-*.html
+
+# test playground
+/app/test/
+/app/__test/
+/app/%5F%5Ftest/
+test_response.html
+
+# AI agents & assistants
+AGENTS.md
+agents.md
+CLAUDE.md
+claude.md
+.agents/
+.claude/

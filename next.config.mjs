@@ -132,6 +132,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/__test",
+        destination: "/test",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

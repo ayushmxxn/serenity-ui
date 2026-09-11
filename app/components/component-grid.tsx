@@ -40,10 +40,19 @@ export const safeCopy = async (text: string): Promise<boolean> => {
   }
 };
 
-function LazyVideoPreview({ src }: { src: string }) {
+function LazyVideoPreview({
+  src,
+  poster,
+}: {
+  src: string;
+  poster?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
+
+  const effectivePoster = poster || src.replace(/\.mp4$/, "-poster.webp");
 
   useEffect(() => {
     const el = containerRef.current;
@@ -52,31 +61,79 @@ function LazyVideoPreview({ src }: { src: string }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setHasLoaded(true);
-          videoRef.current?.play().catch(() => {});
+          setIsInView(true);
         } else {
+          setIsInView(false);
           videoRef.current?.pause();
         }
       },
-      { rootMargin: "250px" },
+      { rootMargin: "300px" },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
+  // Ensure DOM element has muted and defaultMuted explicitly enabled for browser autoplay policies
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+    }
+  }, []);
+
+  // Trigger play when entering viewport and src is bound
+  useEffect(() => {
+    if (isInView && videoRef.current) {
+      const video = videoRef.current;
+      video.defaultMuted = true;
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+  }, [isInView]);
+
   return (
-    <div ref={containerRef} className="w-full h-full">
+    <div ref={containerRef} className="relative w-full h-full overflow-hidden bg-neutral-900/5">
+      {/* Lightweight poster / thumbnail while video loads */}
+      {effectivePoster && (
+        <img
+          src={effectivePoster}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            (e.target as HTMLElement).style.display = "none";
+          }}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none ${
+            hasStartedPlaying ? "opacity-0" : "opacity-100"
+          }`}
+        />
+      )}
+
+      {/* Hardware-accelerated smooth video */}
       <video
         ref={videoRef}
-        src={hasLoaded ? src : undefined}
+        src={isInView ? src : undefined}
+        poster={effectivePoster}
         autoPlay
         loop
         muted
         playsInline
-        preload="none"
+        preload={isInView ? "metadata" : "none"}
         disablePictureInPicture
-        className="w-full h-full object-cover pointer-events-none"
+        onPlaying={() => setHasStartedPlaying(true)}
+        onCanPlay={() => {
+          if (isInView) {
+            videoRef.current?.play().catch(() => {});
+          }
+        }}
+        className={`w-full h-full object-cover pointer-events-none transition-opacity duration-300 ${
+          hasStartedPlaying ? "opacity-100" : "opacity-0"
+        }`}
       />
     </div>
   );
@@ -185,7 +242,10 @@ export function ComponentCard({ item }: { item: RegistryEntry }) {
         {/* Live component preview or video preview */}
         <div className="relative z-10 flex items-center justify-center w-full h-full pointer-events-none select-none">
           {item.videoPreview ? (
-            <LazyVideoPreview src={item.videoPreview} />
+            <LazyVideoPreview
+              src={item.videoPreview}
+              poster={item.videoPoster}
+            />
           ) : (
             <ComponentPreview />
           )}

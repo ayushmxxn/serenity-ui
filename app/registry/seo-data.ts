@@ -250,6 +250,34 @@ export const COMPONENT_SEO_DATA: Record<string, ComponentSeoData> = {
     frameworks: ["React 18 & 19", "Next.js", "Tailwind CSS", "Web Audio API"],
     category: "Blocks & Sections",
   },
+  "mechanical-keyboard": {
+    description:
+      "Photorealistic 3D mechanical keyboard simulator for React with interactive keycaps, synthesized click sounds, live keystroke display, rotary knobs, and a smart LCD display. Built with React Three Fiber and Three.js.",
+    keywords: [
+      "3D Mechanical Keyboard React",
+      "React Three Fiber Keyboard",
+      "Interactive 3D Keyboard Component",
+      "Mechanical Keyboard Simulator",
+      "Three.js Keyboard React",
+      "Keyboard Sound Effects 3D",
+      "Interactive WebGL Keyboard",
+    ],
+    features: [
+      "Photorealistic PBT keycap geometry with sculpted dish and bevel",
+      "Zero-dependency synthesized mechanical key click audio",
+      "Live keystroke display overlay with hardware-accurate key badges",
+      "Interactive rotary knobs, smart LCD display, and USB-C cable",
+    ],
+    frameworks: [
+      "React 18 & 19",
+      "Next.js",
+      "React Three Fiber",
+      "Three.js",
+      "@react-three/drei",
+      "Web Audio API",
+    ],
+    category: "Interactive",
+  },
 };
 
 export function getComponentSeo(slug: string): ComponentSeoData {

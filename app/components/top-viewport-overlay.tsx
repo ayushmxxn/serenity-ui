@@ -9,7 +9,9 @@ export function TopViewportOverlay() {
   const [skipTransition, setSkipTransition] = useState(false);
 
   const isPreviewPage =
-    Boolean(pathname?.startsWith("/components/")) && pathname !== "/components";
+    (Boolean(pathname?.startsWith("/components/")) && pathname !== "/components") ||
+    Boolean(pathname?.startsWith("/__test")) ||
+    Boolean(pathname?.startsWith("/test"));
 
   // Reset scroll state on pathname change
   useEffect(() => {

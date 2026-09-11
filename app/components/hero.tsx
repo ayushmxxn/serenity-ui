@@ -6,8 +6,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useCoreAudio } from "../lib/use-core-audio";
+import { HeroMechanicalKeyboard } from "./hero-mechanical-keyboard";
 import { ProfileStatsTrigger } from "./profile-stats";
-import { VintageKeyboard } from "./vintage-keyboard";
 import { TopSponsorStrip } from "./top-sponsor-strip";
 
 const emptySubscribe = () => () => {};
@@ -121,6 +121,34 @@ function formatAvatarUrl(url: string, size = 64) {
   return url;
 }
 
+function VibingBadge({ className }: { className?: string }) {
+  return (
+    <a
+      href="https://vibing.inc/library/serenity-ui-vg-2141?ref=badge"
+      target="_blank"
+      rel="noopener"
+      className={`inline-block transition-opacity hover:opacity-90 shrink-0 ${className || ""}`}
+    >
+      <img
+        src="https://vibing.inc/api/public/library/badge/serenity-ui-vg-2141.svg?theme=light"
+        alt="Featured in the Vibing Library"
+        height={42}
+        style={{ height: 42, width: "auto" }}
+        loading="lazy"
+        className="h-9 sm:h-[42px] w-auto dark:hidden block"
+      />
+      <img
+        src="https://vibing.inc/api/public/library/badge/serenity-ui-vg-2141.svg?theme=dark"
+        alt="Featured in the Vibing Library"
+        height={42}
+        style={{ height: 42, width: "auto" }}
+        loading="lazy"
+        className="h-9 sm:h-[42px] w-auto hidden dark:block"
+      />
+    </a>
+  );
+}
+
 interface HeroProps {
   stats?: {
     views: string;
@@ -209,7 +237,6 @@ export default function Hero({
     getIsMobileSnapshot,
     getServerMobileSnapshot,
   );
-
 
   const { scrollY } = useScroll();
 
@@ -711,20 +738,30 @@ export default function Hero({
 
           <div className="flex w-full flex-col items-center justify-between gap-10 sm:gap-12 lg:flex-row lg:gap-8">
             {/* Left Side: Headline & Custom Email Signup Form */}
-            <div className="w-full max-w-2xl">
+            <div className="w-full max-w-xl lg:max-w-[510px] xl:max-w-xl 2xl:max-w-2xl shrink-0">
               <h1 className="text-[2.2rem] font-bold leading-[1.1] tracking-tight sm:text-6xl md:text-[3.2rem]">
                 <span className="sm:hidden">
-                  <span className="inline-block whitespace-nowrap">Components that</span>
+                  <span className="inline-block whitespace-nowrap">
+                    Components that
+                  </span>
                   <br />
-                  <span className="inline-block whitespace-nowrap">make the web</span>
+                  <span className="inline-block whitespace-nowrap">
+                    make the web
+                  </span>
                   <br />
-                  <span className="inline-block whitespace-nowrap">feel alive</span>
+                  <span className="inline-block whitespace-nowrap">
+                    feel alive
+                  </span>
                 </span>
 
                 <span className="hidden sm:inline">
-                  <span className="inline-block whitespace-nowrap">Components that make</span>
+                  <span className="inline-block whitespace-nowrap">
+                    Components that make
+                  </span>
                   <br />
-                  <span className="inline-block whitespace-nowrap">the web feel alive</span>
+                  <span className="inline-block whitespace-nowrap">
+                    the web feel alive
+                  </span>
                 </span>
               </h1>
 
@@ -861,21 +898,32 @@ export default function Hero({
                   </div>
                 )}
 
-                {/* 21st.dev Creator Stats Card Trigger (Mobile Only) */}
-                <div className="mt-8 w-full max-w-[360px] block lg:hidden">
+                {/* Desktop: Vibing Library Badge (below avatars, aligned to left with more space) */}
+                <div className="mt-8 hidden lg:flex items-center justify-start">
+                  <VibingBadge />
+                </div>
+
+                {/* Mobile: Stats on Left & Vibing Library Badge on Right in same row */}
+                <div className="mt-8 w-full max-w-xl flex lg:hidden items-center justify-between gap-3">
                   <ProfileStatsTrigger
                     views={stats?.views || "1.2M"}
                     bookmarks={stats?.bookmarks || "8.3K"}
                     align="left"
                   />
+                  <div className="flex items-center justify-end shrink-0">
+                    <VibingBadge />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Vintage Keyboard Displayed on Right 80% Coming From Right Edge */}
-            <div className="relative flex w-full lg:flex-1 items-start justify-start lg:justify-end overflow-visible pointer-events-auto mt-6 sm:mt-8 lg:mt-0 lg:self-end">
-              <div className="relative w-[480px] min-w-[480px] sm:w-[590px] sm:min-w-[590px] md:w-[660px] md:min-w-[660px] lg:w-[680px] lg:min-w-[680px] xl:w-[780px] xl:min-w-[780px] 2xl:w-[860px] 2xl:min-w-[860px] ml-[20%] lg:ml-0 translate-x-0 lg:translate-x-[12%] xl:translate-x-[15%] 2xl:translate-x-[18%] -translate-y-2 sm:-translate-y-4 lg:translate-y-0 xl:translate-y-0 transition-transform duration-300 select-none">
-                <VintageKeyboard embedded />
+            {/* 3D Mechanical Keyboard Displayed on Right (Hero-Customized) */}
+            <div className="relative flex w-full lg:flex-1 items-center justify-center lg:justify-end overflow-visible pointer-events-auto mt-6 sm:mt-8 lg:mt-0 lg:self-end touch-pan-y">
+              <div
+                className="relative w-full max-w-[560px] sm:max-w-[640px] md:max-w-[700px] lg:max-w-[660px] xl:max-w-[820px] 2xl:max-w-[960px] h-[340px] sm:h-[400px] md:h-[450px] lg:h-[440px] xl:h-[520px] 2xl:h-[580px] lg:ml-auto lg:translate-x-[34px] xl:translate-x-[40px] 2xl:translate-x-[44px] translate-y-[12px] lg:translate-y-[60px] xl:translate-y-[64px] 2xl:translate-y-[68px] select-none touch-pan-y"
+                style={{ touchAction: "pan-y" }}
+              >
+                <HeroMechanicalKeyboard interactive typingInteraction />
               </div>
             </div>
           </div>
