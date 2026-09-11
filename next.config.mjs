@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["192.168.29.32"],
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 80],
     remotePatterns: [
       {
         protocol: "https",
