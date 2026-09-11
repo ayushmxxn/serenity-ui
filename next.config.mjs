@@ -1,5 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
+  ...(process.env.NODE_ENV === "development"
+    ? {
+        allowedDevOrigins: [
+          "192.168.29.32",
+          "192.168.29.*",
+          "192.168.*.*",
+          "*.local",
+          "localhost",
+        ],
+      }
+    : {}),
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

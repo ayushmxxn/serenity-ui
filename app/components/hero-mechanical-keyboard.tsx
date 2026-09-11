@@ -18,6 +18,19 @@ import React, {
 } from "react";
 import * as THREE from "three";
 
+if (typeof window !== "undefined") {
+  const origWarn = console.warn;
+  console.warn = (...args: unknown[]) => {
+    if (
+      typeof args[0] === "string" &&
+      args[0].includes("THREE.Clock: This module has been deprecated")
+    ) {
+      return;
+    }
+    origWarn.apply(console, args);
+  };
+}
+
 // ─── Customization Types ───────────────────────────────────────────────────────
 
 interface KeyConfigItem {
@@ -40,8 +53,8 @@ const KEYBOARD_CONFIG = {
     knob: "#18191c", // Machined rotary knobs
     displayBezel: "#08090b", // Smart display outer bezel
     pageBackground: "#ffffff", // Page / canvas background
-    keyLegend: "#2c2e33", // Standard key label text
-    keySubLegend: "#656a74", // Sub-label text
+    keyLegend: "#111215", // Deep high-contrast crisp legend text
+    keySubLegend: "#3f444e", // Rich legible sub-label text
     accentLegend: "#ffffff", // Legend text on accent keys
   },
 
@@ -478,7 +491,7 @@ function getKeyTexture(
   aspectRatio: number,
   hasHomingBump?: boolean,
 ): THREE.CanvasTexture {
-  const cacheKey = `${id}_${label}_${subLabel}_${isAccent}_${accentColor}_${keycapColor}_${aspectRatio.toFixed(2)}_${hasHomingBump}_v12`;
+  const cacheKey = `${id}_${label}_${subLabel}_${isAccent}_${accentColor}_${keycapColor}_${aspectRatio.toFixed(2)}_${hasHomingBump}_v14`;
   if (keyTextureCache.has(cacheKey)) return keyTextureCache.get(cacheKey)!;
 
   const SW = Math.round(512 * Math.max(1, aspectRatio));
@@ -571,7 +584,7 @@ function getKeyTexture(
     ? KEYBOARD_CONFIG.colors.accentLegend
     : KEYBOARD_CONFIG.colors.keyLegend;
   const subColor = isAccent
-    ? "rgba(255,255,255,0.85)"
+    ? "rgba(255,255,255,0.92)"
     : KEYBOARD_CONFIG.colors.keySubLegend;
   ctx.fillStyle = textColor;
   ctx.textAlign = "center";
@@ -583,13 +596,13 @@ function getKeyTexture(
 
   if (isFunctionKey) {
     // Function keys: F-number centered in upper portion, media/system symbol below
-    ctx.font = `500 48px ${fontSans}`;
+    ctx.font = `600 50px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, label, SW / 2, SH * 0.37);
 
     if (label === "F10") {
       // F10 mute speaker with clean coral-red slash matching reference photo
-      ctx.font = `500 38px ${fontSans}`;
+      ctx.font = `600 40px ${fontSans}`;
       ctx.fillStyle = subColor;
       drawVisualCenteredText(ctx, "🔈", SW / 2, SH * 0.64);
       ctx.save();
@@ -602,27 +615,27 @@ function getKeyTexture(
       ctx.stroke();
       ctx.restore();
     } else if (subLabel) {
-      ctx.font = `500 38px ${fontSans}`;
-      ctx.fillStyle = label === "F11" || label === "F12" ? "#557599" : subColor;
+      ctx.font = `600 40px ${fontSans}`;
+      ctx.fillStyle = label === "F11" || label === "F12" ? "#3b6a9e" : subColor;
       drawVisualCenteredText(ctx, subLabel, SW / 2, SH * 0.64);
     }
   } else if (isModifierKey && subLabel) {
     // Mac modifier keys (ctrl ⌃, alt ⌥): word in upper portion, symbol below
-    ctx.font = `400 46px ${fontSans}`;
+    ctx.font = `500 48px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, label, SW / 2, SH * 0.38);
 
-    ctx.font = `500 42px ${fontSans}`;
+    ctx.font = `600 44px ${fontSans}`;
     ctx.fillStyle = subColor;
     drawVisualCenteredText(ctx, subLabel, SW / 2, SH * 0.64);
   } else if (subLabel) {
     // Dual-legend keys (Numbers, Punctuation):
     // Primary characters/numbers centered in the upper portion, secondary symbols centered below
-    ctx.font = `500 58px ${fontSans}`;
+    ctx.font = `600 62px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, label, SW / 2, SH * 0.38);
 
-    ctx.font = `500 46px ${fontSans}`;
+    ctx.font = `600 48px ${fontSans}`;
     ctx.fillStyle = subColor;
     drawVisualCenteredText(ctx, subLabel, SW / 2, SH * 0.64);
   } else if (
@@ -638,34 +651,34 @@ function getKeyTexture(
       "esc",
     ].includes(label.toLowerCase())
   ) {
-    const size = label.length > 5 ? 40 : 44;
-    ctx.font = `400 ${size}px ${fontSans}`;
+    const size = label.length > 5 ? 42 : 46;
+    ctx.font = `500 ${size}px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, label, SW / 2, SH * 0.5);
   } else if (label === "⌘") {
-    ctx.font = `500 72px ${fontSans}`;
+    ctx.font = `600 76px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, "⌘", SW / 2, SH * 0.5);
   } else if (label === "↵") {
-    ctx.font = `500 70px ${fontSans}`;
+    ctx.font = `600 74px ${fontSans}`;
     ctx.fillStyle = textColor;
     drawVisualCenteredText(ctx, "↵", SW / 2, SH * 0.5);
   } else if (label) {
     if (hasHomingBump) {
       // Homing keys (F & J): letter matching standard letter size, tactile bar below
-      ctx.font = `500 70px ${fontSans}`;
+      ctx.font = `600 74px ${fontSans}`;
       ctx.fillStyle = textColor;
       drawVisualCenteredText(ctx, label, SW / 2, SH * 0.44);
 
-      const barW = 50;
-      const barH = 8;
+      const barW = 52;
+      const barH = 9;
       ctx.beginPath();
-      ctx.roundRect(SW / 2 - barW / 2, SH * 0.73 - barH / 2, barW, barH, 4);
+      ctx.roundRect(SW / 2 - barW / 2, SH * 0.73 - barH / 2, barW, barH, 4.5);
       ctx.fillStyle = textColor;
       ctx.fill();
     } else {
       // Standard single-letter keys (Q, W, E, R... A, S... Z...)
-      ctx.font = `500 70px ${fontSans}`;
+      ctx.font = `600 74px ${fontSans}`;
       ctx.fillStyle = textColor;
       drawVisualCenteredText(ctx, label, SW / 2, SH * 0.5);
     }
@@ -675,11 +688,11 @@ function getKeyTexture(
     const barH = 7.5;
     ctx.beginPath();
     ctx.roundRect(SW / 2 - barW / 2, SH * 0.5 - barH / 2, barW, barH, 3.5);
-    ctx.fillStyle = "rgba(0, 0, 0, 0.28)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
     ctx.fill();
     ctx.beginPath();
     ctx.roundRect(SW / 2 - barW / 2, SH * 0.5 + barH / 2 - 1, barW, 2, 1);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.22)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.fill();
   }
 
