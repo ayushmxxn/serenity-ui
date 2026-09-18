@@ -153,6 +153,10 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <head>
+        <meta
+          name="impact-site-verification"
+          {...{ value: "c8c178b8-5f70-426a-9473-109a94c36cb3" }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
